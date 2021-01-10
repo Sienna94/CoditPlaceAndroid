@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/wrap1"
+        android:layout_centerInParent="true"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:text="로그인"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_join"
+            android:text="가입하기"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:layout_toRightOf="@id/tv_login"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etv_email"
+            android:hint="이메일(필수)"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tv_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etv_pw"
+            android:hint="비밀번호(필수)"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/etv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etv_nick"
+            android:hint="닉네임(필수)"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/etv_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_nickinfo"
+            android:text="이 이름으로 작성자명이 표시됩니다"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/etv_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etv_intro"
+            android:hint="자기소개(필수)"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_nickinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_introinfo"
+            android:text="어떤 마인드를 가지고 있고, 어떤 일을 하는지 등의 내용이 있다면 더욱 활발하게 네트워킹할 수 있어요! :)"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/etv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_git"
+            android:text="활동중인 Github 주소"
+            android:textSize="18sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/tv_introinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/btn_git"
+            android:text="추가하기"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:backgroundTint="#EAEAEA"
+            android:layout_below="@id/tv_git"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etv_github"
+            android:hint="github 주소를 입력해주세요 :D"
+            android:layout_marginTop="30sp"
+            android:layout_below="@id/tv_introinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_gitinfo"
+            android:text="Github 채널을 통해 새로운 네트워킹 기회를 창출할 수 있도록, 사용하고 계신 github 주소를 입력하세요 ;)"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/btn_git"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_agr"
+            android:text="'가입하기'버튼을 클릭하면 코드잇(Codit.Place)의 개인정보보호정책 정책을 읽었으며, 이에 동의한 것으로 처리됩니다."
+            android:textColor="#B8B8B8"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_gitinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_join"
+            android:text="가입하기"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/white"
+            android:background="#6c1cff"
+            android:layout_below="@id/tv_agr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</RelativeLayout>
