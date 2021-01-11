@@ -34,7 +34,7 @@ public class BaseFrag extends Fragment {
     }
     public void request(String url, Response.Listener<String> successListener){
         RequestQueue stringRequest = Volley.newRequestQueue(getActivity());
-        url = "http://192.168.7.22:8180/oop/" + url;
+        url = "http://172.20.10.4:8180/oop/" + url;
 //        http://192.168.7.4 (학원)
 //        http://172.20.10.4 (집)
 //        192.168.7.22
