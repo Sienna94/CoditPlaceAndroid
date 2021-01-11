@@ -84,8 +84,10 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
         }else if(v.getId()==R.id.btn_login){//로그인 버튼 누른 경우 DB에 요청
             Log.d("chk", "onClick: 로긴 버튼 클릭됨");
             requestForLogin();
+
         }else if(v.getId()==R.id.tv_forgot){ //비밀번호 찾기
             Log.d("chk", "onClick: 비밀번호 찾기 tv 클릭됨");
+            ((LoginActivity)getActivity()).replaceFragment(ForgotFrag.newInstance());
 
         }else {//프래그먼트가 올라가는 액티비티로 가게 this 말고 getActivity를 쓰자!!!!!!!
             Toast.makeText(getActivity(), "아이디 패스워드를 확인하세요 :(", Toast.LENGTH_SHORT).show();
@@ -106,9 +108,9 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
 
         Log.d("chk", "로그인 통신: start");
         params.clear();
-        params.put("id",id);
-        params.put("pass", pw);
+        params.put("mid",id);
+        params.put("mpw", pw);
         Log.d("loginchk", "id:"+id+"/pass:"+pw);
-        request("androidLogin.do", successListener);
+        request("Login.do", successListener);
     }
 }

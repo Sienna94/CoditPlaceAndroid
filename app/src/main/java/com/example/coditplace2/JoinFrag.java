@@ -74,25 +74,24 @@ public class JoinFrag extends BaseFrag implements View.OnClickListener{
     public void onClick(View v) {
         if(v.getId()==R.id.btn_join){
             Log.d("chk", "onClick: 회원가입 버튼 클릭됨");
-//            requestForJoin();
+            requestForJoin();
 
         }else if(v.getId()==R.id.tv_login){
             ((LoginActivity)getActivity()).replaceFragment(LoginFrag.newInstance());
         }
     }
-//    Response.Listener<String> successListener = new Response.Listener<String>() {
-//        @Override
-//        public void onResponse(String response) {
-//            Log.d("kkk", response);
-//
-//        }
-//    };
+    Response.Listener<String> successListener = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            Log.d("kkk", response);
 
+        }
+    };
     private void requestForJoin(){
         final String email = et_email.getText().toString().trim();
         final String pw = et_pw.getText().toString().trim();
         final String nick = et_nick.getText().toString().trim();
-        final String intro = et_intro.getText().toString().trim();
+        final String info = et_intro.getText().toString().trim();
         final String github = et_git.getText().toString().trim();
 
         Log.d("chk", "회원가입 통신: start");
@@ -100,10 +99,10 @@ public class JoinFrag extends BaseFrag implements View.OnClickListener{
         params.put("email", email);
         params.put("pw", pw);
         params.put("nick", nick);
-        params.put("intro", intro);
+        params.put("intro", info);
         params.put("github", github);
         Log.d("joinchk", "email:"+email+"/pw:"+pw
-                +"/nick:"+nick+"/intro:"+intro+"/github:"+github);
-//        request("androidJogin.do", successListener);
+                +"/nick:"+nick+"/intro:"+info+"/github:"+github);
+        request("Join.do", successListener);
     }
 }
