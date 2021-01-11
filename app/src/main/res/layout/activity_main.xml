@@ -8,9 +8,36 @@
 
     <Button
         android:id="@+id/btn"
-        android:layout_centerInParent="true"
         android:text="login PG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/btn"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_tit"
+            android:text="오늘은 어디에서 할까?"
+            android:layout_centerHorizontal="true"
+            android:textSize="35sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_extra"
+            android:textSize="18sp"
+            android:text="일하거나 공부하기 좋은 공간을 찾고 계신가요? 일과를 시작하기 전, 노마드 워커를 위한 공간 정보를 확인해보세요 :)"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/tv_tit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
 
 </RelativeLayout>
