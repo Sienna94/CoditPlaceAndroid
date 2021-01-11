@@ -5,6 +5,7 @@
 
     <RelativeLayout
         android:id="@+id/wrap"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:layout_width="350dp"
         android:layout_height="300dp">

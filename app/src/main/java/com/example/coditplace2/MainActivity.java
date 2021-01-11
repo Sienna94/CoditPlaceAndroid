@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, com.example.coditplace2.LoginActivity.class);
             startActivity(intent);
         }else if(v.getId()==R.id.btn_search){ //검색 버튼
-
+            Intent intent = new Intent(this, com.example.coditplace2.SearchActivity.class);
+            startActivity(intent);
         }
     }
 
