@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class SearchActivity extends AppCompatActivity {
     SearchFrag searchFrag = new SearchFrag();
@@ -14,6 +15,12 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        String gettype = getIntent().getStringExtra("type");
+        String getsearch = getIntent().getStringExtra("search");
+        searchFrag.get(gettype, getsearch); //프래그먼트에 설정해준 str 받아오는 메소드
+        Log.d("abc", "gettype:"+gettype +"/getsearch:"+getsearch);
+
 
         // 화면 전환 프래그먼트 선언 및 초기 화면 설정
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

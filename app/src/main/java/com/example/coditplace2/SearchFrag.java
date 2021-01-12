@@ -2,6 +2,7 @@ package com.example.coditplace2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 
 public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListener {
     ArrayList<ItemData> arr = new ArrayList<>();
+
     TextView tv_tit;
     ListView lv;
     MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
@@ -39,23 +42,29 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
     }
 
     public SearchFrag() {
-        
+
     }
-    
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.frag_search, container, false);
-        tv_tit=layout.findViewById(R.id.tv_tit);
-        lv=layout.findViewById(R.id.lv);
+
+        tv_tit = layout.findViewById(R.id.tv_tit);
+        lv = layout.findViewById(R.id.lv);
 
         requestForData();
         return layout;
     }
 
-    private void requestForData(){
-        //상속받은 부분
-        Log.d("chk", "장소 리스트 requestForData: start");
+    String str; // 밖으로 빼준다.
+    String str2;
+    public void get(String str, String str2){ // 검색어 받아오는 메소드
+        this.str = str;
+        this.str2 = str2;
+    }
+    private void requestPname(){ //입력값이 장소 이름일 때 출력
+        Log.d("chk", "장소 리스트 전체 requestForData: start");
         params.clear();
         request("PlaceList.do", successListener);
         //어댑터에 적용
@@ -63,13 +72,25 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
     }
+
+    private void requestForData() { //입력값 없이 전체 출력
+        //상속받은 부분
+        Log.d("chk", "장소 리스트 전체 requestForData: start");
+        params.clear();
+        request("PlaceList.do", successListener);
+        //어댑터에 적용
+        adapter = new MyAdapter(getActivity());
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(this);
+    }
+
     Response.Listener<String> successListener = new Response.Listener<String>() {
         //가져온 jsonArray 리스트뷰로 나타내기
         @Override
         public void onResponse(String response) {
             try {
                 JSONArray proArr = new JSONArray(response);
-                Log.d("proArr", "onResponse:"+response);
+                Log.d("proArr", "onResponse:" + response);
                 for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
                     JSONObject proObj = proArr.getJSONObject(i);
                     String pname = proObj.getString("pname");
@@ -82,7 +103,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
                     //리스트에 보여줄 어레이에 추가
                     arr.add(i, new ItemData(pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
 
-                    Log.d("chk1", "arr:"+arr.get(i).pName);
+                    Log.d("chk1", "arr:" + arr.get(i).pName);
                 }
                 //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
                 adapter.notifyDataSetChanged();
@@ -91,11 +112,13 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
             }
         }
     };
+
     // 해당 장소 후기 페이지로 넘어가도록
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getActivity(), "예정", Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent((SearchActivity) getActivity(), com.example.coditplace2.SearchDetailActivity.class);
+        startActivity(intent);
     }
 
     class ItemHolder {
@@ -108,8 +131,10 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         TextView tvPcontentHolder;
         TextView tvPlikeHolder;
     }
-    class  MyAdapter extends ArrayAdapter {
+
+    class MyAdapter extends ArrayAdapter {
         LayoutInflater lnf;
+
         public MyAdapter(Activity context) {
             super(context, R.layout.items, arr);
             lnf = (LayoutInflater) context
@@ -134,7 +159,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ItemHolder viewHolder;
-            if(convertView == null){
+            if (convertView == null) {
                 convertView = lnf.inflate(R.layout.items, parent, false);
                 viewHolder = new ItemHolder();
                 viewHolder.tvPnameHolder = convertView.findViewById(R.id.tv_pname);
@@ -147,7 +172,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
                 viewHolder.tvPlikeHolder = convertView.findViewById(R.id.tv_like);
 
                 convertView.setTag(viewHolder);
-            }else{
+            } else {
                 viewHolder = (ItemHolder) convertView.getTag();
             }
             //가게 이름, 가게방문일, 가게 카테고리, 가게 연락처, 가게설명, 좋아요(사용자)
@@ -160,9 +185,9 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
 
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage)
+                    .load("http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage)
                     .into(viewHolder.ivPimage1Holder);
-            Log.d("img", "http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage);
+            Log.d("img", "http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage);
             //카페 아이
 //            Glide.with(getActivity())
 //                    .load("http://172.20.10.4:8180/oop/img/shoes/"+arr.get(position).pImage)
