@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:src="@drawable/sample1"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <RelativeLayout
+            android:id="@+id/wrap2"
+            android:layout_marginTop="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:src="@mipmap/ic_launcher_round"
+                android:layout_marginRight="20dp"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_pname"
+                android:text="1984"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:layout_below="@id/iv_icon"
+                android:layout_alignStart="@id/iv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_like"
+                android:text="♥ 북마크"
+                android:layout_below="@id/tv_pname"
+                android:layout_alignStart="@id/iv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/wrap3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/wrap2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:text="매장 정보"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_evaluation"
+                android:text="코더의 평가"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_review"
+                android:text="리뷰"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:text="연락처"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/my_layout"
+        android:layout_below="@id/wrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

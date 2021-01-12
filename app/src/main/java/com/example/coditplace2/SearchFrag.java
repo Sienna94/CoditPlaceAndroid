@@ -49,20 +49,10 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         tv_tit=layout.findViewById(R.id.tv_tit);
         lv=layout.findViewById(R.id.lv);
 
-//        test();
         requestForData();
         return layout;
     }
 
-//    private void test(){
-//        arr.add(0, new ItemData("1984", "null", "방문일 : 2020.10.22",
-//                "null", "카페", "02-325-1984", "대체적으로 어두운 분위기로..",
-//                "1"));
-//        adapter = new MyAdapter(getActivity());
-//        lv.setAdapter(adapter);
-//        lv.setOnItemClickListener(this); // 여기서 말하는 this는 리스너를 가지고 있는 애가 누구인가를 물어보니까
-//                                        //리스너를 갖고 있는 현재 frag 즉 this를 써줌 됨.
-//    }
     private void requestForData(){
         //상속받은 부분
         Log.d("chk", "장소 리스트 requestForData: start");
@@ -147,7 +137,6 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
             if(convertView == null){
                 convertView = lnf.inflate(R.layout.items, parent, false);
                 viewHolder = new ItemHolder();
-
                 viewHolder.tvPnameHolder = convertView.findViewById(R.id.tv_pname);
                 viewHolder.ivPimage1Holder = convertView.findViewById(R.id.iv_bg);
                 viewHolder.tvPvisitHolder = convertView.findViewById(R.id.tv_visit);
@@ -171,9 +160,9 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
 
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://172.20.10.4:8180/oop/img/place/"+arr.get(position).pImage)
+                    .load("http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage)
                     .into(viewHolder.ivPimage1Holder);
-            Log.d("img", "http://172.20.10.4:8180/oop/img/place/"+arr.get(position).pImage);
+            Log.d("img", "http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage);
             //카페 아이
 //            Glide.with(getActivity())
 //                    .load("http://172.20.10.4:8180/oop/img/shoes/"+arr.get(position).pImage)
