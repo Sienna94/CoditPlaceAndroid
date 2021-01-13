@@ -109,7 +109,7 @@
             <RelativeLayout
                 android:id="@+id/wrap"
                 android:layout_below="@id/wrap_basic"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView

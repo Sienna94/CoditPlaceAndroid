@@ -13,13 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
-import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
+public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
 
     ImageView iv_bg;
     ImageView iv_icon;
@@ -31,21 +26,21 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
     TextView tv_contact;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
-    public static SearchDetailFrag2 newInstance(){
-        return new SearchDetailFrag2();
+    public static SearchDetailFrag3 newInstance(){
+        return new SearchDetailFrag3();
     }
-    public SearchDetailFrag2(){
+    public SearchDetailFrag3(){
 
     }
 
-    public SearchDetailFrag2(String pidx) {
+    public SearchDetailFrag3(String pidx) {
         this.pidx = pidx;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_searchdetail2, container, false);
+        View layout = inflater.inflate(R.layout.frag_searchdetail3, container, false);
 
         iv_bg=layout.findViewById(R.id.iv_bg);
         iv_icon=layout.findViewById(R.id.iv_icon);
@@ -68,7 +63,7 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
     String pidx;
 
     private void requestForData(){
-        Log.d("chk", "장소 상세 코더평가");
+        Log.d("chk", "장소 상세 리뷰");
         params.clear();
         params.put("pidx", pidx);
 //        request("getPlacebasic.do", successListener);

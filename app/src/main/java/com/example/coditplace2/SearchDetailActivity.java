@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 public class SearchDetailActivity extends BaseActivity{
     SearchDetailFrag searchDetailFrag;
+    SearchDetailFrag2 searchDetailFrag2;
+    SearchDetailFrag3 searchDetailFrag3;
+    SearchDetailFrag4 searchDetailFrag4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,9 @@ public class SearchDetailActivity extends BaseActivity{
         String getpidx = getIntent().getStringExtra("pidx");
         Log.d("pidx", "상세activity pidx: ");
         searchDetailFrag = new SearchDetailFrag(getpidx);
+        searchDetailFrag2 = new SearchDetailFrag2(getpidx);
+        searchDetailFrag3 = new SearchDetailFrag3(getpidx);
+        searchDetailFrag4 = new SearchDetailFrag4(getpidx);
 
         // 화면 전환 프래그먼트 선언 및 초기 화면 설정
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

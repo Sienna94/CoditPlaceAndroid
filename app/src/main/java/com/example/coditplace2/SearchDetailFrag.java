@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
@@ -37,12 +38,21 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
     TextView tv_eval;
     TextView tv_review;
     TextView tv_contact;
+
     TextView tv_visit;
     TextView tv_comment;
     TextView tv_paddress;
 
     GridView gridView;
     MyAdapter adapter;
+
+    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
+    public static SearchDetailFrag newInstance(){
+        return new SearchDetailFrag();
+    }
+    public SearchDetailFrag(){
+
+    }
 
     public SearchDetailFrag(String pidx) {
         this.pidx = pidx;
@@ -78,7 +88,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
         requestForData();
         return layout;
     }
-    //해당 pidx 받아오기 메소드
+    //해당 pidx 받아오기
     String pidx;
 
     @Override
@@ -86,15 +96,25 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
         if(v.getId()==R.id.btn_like){//좋아요 버튼
 
         }else if(v.getId()==R.id.tv_info){ //매장정보
+            Log.d("chk", "onClick: 매장정보 tv 클릭됨");
+            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag.newInstance());
 
         }else if(v.getId()==R.id.tv_evaluation){ //코더 평가
+            Log.d("chk", "onClick: 코더 평가 tv 클릭됨");
+            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag2.newInstance());
 
         }else if(v.getId()==R.id.tv_review) { //리뷰(댓글)
+            Log.d("chk", "onClick: 리뷰 tv 클릭됨");
+            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag3.newInstance());
 
         }else if(v.getId()==R.id.tv_contact){ //연락처
+            Log.d("chk", "onClick: 연락처 tv 클릭됨");
+            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag4.newInstance());
 
         }
     }
+
+
 
     //해당 pidx에 해당하는 detail 화면1
     private void requestForData(){
