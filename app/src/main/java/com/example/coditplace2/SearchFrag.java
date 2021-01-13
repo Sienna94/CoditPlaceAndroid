@@ -50,7 +50,6 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         lv = layout.findViewById(R.id.lv);
         Log.d("abc", "onCreateView: 1");
         request();
-//        requestForData();
         return layout;
     }
 
@@ -68,21 +67,47 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
 
     }
 
-    public void request(){
+    public void request(){ //검색 장소가 있을 때
         Log.d("abc", "request: "+type);
         if(type.equals("pname")){ //장소 이름 검색
             requestPname();
-        }else{                  //리스트 전체출력
+        }else if(type.equals("plocation")){ // 장소 지역 검색
+            requestPlocation(); 
+        }else if(type.equals("paddress")){ // 장소 주소 검색
+            requestPaddress();
+        }else{                  //검색 없으면 리스트 전체출력
             requestForData(); 
         }
     }
 
     private void requestPname(){ //입력값이 장소 이름일 때 출력
-        Log.d("chk", "장소 리스트 전체 requestForData: start");
+        Log.d("chk", "장소 리스트 이름 requestPname: start");
         final String pname = search;
         params.clear();
         params.put("pname", search);
         request("PlaceListName.do", successListener);
+        //어댑터에 적용
+        adapter = new MyAdapter(getActivity());
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(this);
+    }
+    private void requestPlocation(){ //입력값이 장소 지역일 때 출력
+        Log.d("chk", "장소 리스트 지역 requestPlocation: start");
+        final String plocation = search;
+        params.clear();
+        params.put("plocation", search);
+        request("PlaceListLocation.do", successListener);
+        //어댑터에 적용
+        adapter = new MyAdapter(getActivity());
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(this);
+    }
+    private void requestPaddress(){//입력값이 장소 주소일 때 출력
+        Log.d("chk", "주소 리스트 지역 requestPaddress: start");
+        final String paddress = search;
+        params.clear();
+        params.put("paddress", search);
+        request("PlaceListAddress.do", successListener);
         //어댑터에 적용
         adapter = new MyAdapter(getActivity());
         lv.setAdapter(adapter);
