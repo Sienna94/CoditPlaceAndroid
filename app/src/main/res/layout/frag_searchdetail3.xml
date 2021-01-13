@@ -73,7 +73,7 @@
                         android:id="@+id/tv_info"
                         android:text="매장 정보"
                         android:layout_weight="1"
-                        android:textColor="@color/black"
+                        android:textColor="#9A9A9A"
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -91,7 +91,7 @@
                         android:id="@+id/tv_review"
                         android:text="리뷰"
                         android:layout_weight="1"
-                        android:textColor="#9A9A9A"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -104,12 +104,8 @@
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-
                 </LinearLayout>
-
             </RelativeLayout>
-
-
             <RelativeLayout
                 android:id="@+id/wrap"
                 android:layout_below="@id/wrap_basic"
@@ -118,89 +114,46 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_tit"
-                    android:text="에디터가 공간에 방문한 날짜"
+                    android:text="REVIEW 추가하기"
+                    android:textSize="18sp"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/tv_visit"
-                    android:text="2020년 10월 22일 1:10 오후"
+                    android:id="@+id/tv_score"
+                    android:text="☆☆☆☆☆"
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
                     android:layout_below="@id/tv_tit"
-                    android:layout_margin="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/wrap2"
-                android:layout_below="@id/wrap"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_tit2"
-                    android:text="코딧 에디터 코멘트"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_comment"
-                    android:text="대체적으로 어두운 분위기로 제가 여기에서 일한 경험으로는 집중하기 좋았습니다. 콘센트도 충분하고, 1~2인 테이블이 다수 배치되어 있어 혼자 가도 좋은 공간이었습니다. 6인 이상 테이블과 회의도 가능한 실내 공간이 있어 활용하면 좋을 것 같습니다. 일하다가 잠시 쉬는 동안 진열되어 있는 다양한 굿즈를 살펴보는 재미도 있었어요. (지갑 도둑들이에요 ㅜㅜ)"
-                    android:layout_below="@id/tv_tit2"
-                    android:layout_margin="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/wrap3"
-                android:layout_below="@id/wrap2"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_tit3"
-                    android:text="공간 이미지"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <GridView
-                    android:id="@+id/grid"
-                    android:layout_below="@id/tv_tit3"
-                    android:numColumns="3"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/wrap4"
-                android:layout_below="@id/wrap3"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_tit4"
-                    android:text="위치"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:id="@+id/iv_map"
-                    android:layout_margin="20dp"
-                    android:layout_below="@id/tv_tit4"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/map"
-                    android:scaleType="fitXY"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"/>
-                <TextView
-                    android:id="@+id/tv_paddress"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_below="@id/iv_map"
-                    android:text="주소주소주소"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_coderfriendly"
+                    android:text="코더들을 위한 공간이었나요?"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/tv_score"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/et_coderfriendly"
+                    android:hint="Enter message"
+                    android:layout_below="@id/tv_coderfriendly"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"/>
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:text="등록하기"
+                    android:layout_alignRight="@id/et_coderfriendly"
+                    android:layout_below="@+id/et_coderfriendly"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"/>
             </RelativeLayout>
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 

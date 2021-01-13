@@ -39,7 +39,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
     TextView tv_contact;
     TextView tv_visit;
     TextView tv_comment;
-
+    TextView tv_paddress;
 
     GridView gridView;
     MyAdapter adapter;
@@ -64,7 +64,8 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
 
         tv_visit=layout.findViewById(R.id.tv_visit); //방문 날짜
         tv_comment=layout.findViewById(R.id.tv_comment); // 코멘트
-
+        tv_paddress=layout.findViewById(R.id.tv_paddress); // 주소
+        
         btn_like.setOnClickListener(this);
         tv_info.setOnClickListener(this);
         tv_eval.setOnClickListener(this);
@@ -121,6 +122,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
                     String pvisit = proObj.getString("pvisit");
                     String picon = proObj.getString("picon");
                     String pcontent = proObj.getString("pcontent");
+                    String paddress = proObj.getString("paddress");
 
                     //response에 맞게 이미지 바꿔주기 (그리드)
                     arr.add(new ImgArr(pimage1));
@@ -137,6 +139,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
                     tv_pname.setText(pname);
                     tv_visit.setText(pvisit);
                     tv_comment.setText(pcontent);
+                    tv_paddress.setText(paddress);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -194,7 +197,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
             }
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage)
+                    .load("http://172.20.10.4:8180/oop/img/place/"+arr.get(position).pImage)
                     .into(viewHolder.ivHolder);
 
             Log.d("chk", "글라이드: 완료 "+position+",  size"+arr.size());
