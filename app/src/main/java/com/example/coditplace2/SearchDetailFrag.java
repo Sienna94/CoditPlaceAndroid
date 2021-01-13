@@ -2,6 +2,7 @@ package com.example.coditplace2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +17,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -31,17 +37,15 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
     TextView tv_eval;
     TextView tv_review;
     TextView tv_contact;
+    TextView tv_visit;
+    TextView tv_comment;
+
 
     GridView gridView;
     MyAdapter adapter;
 
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
-    public static SearchDetailFrag newInstance() {
-        return new SearchDetailFrag();
-    }
-
-    public SearchDetailFrag() {
-
+    public SearchDetailFrag(String pidx) {
+        this.pidx = pidx;
     }
 
     @Nullable
@@ -58,6 +62,9 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
         tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
         tv_contact=layout.findViewById(R.id.tv_contact);//연락처
 
+        tv_visit=layout.findViewById(R.id.tv_visit); //방문 날짜
+        tv_comment=layout.findViewById(R.id.tv_comment); // 코멘트
+
         btn_like.setOnClickListener(this);
         tv_info.setOnClickListener(this);
         tv_eval.setOnClickListener(this);
@@ -66,9 +73,12 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
         Log.d("chk", "dfsdf");
         gridView=layout.findViewById(R.id.grid); //그리드뷰
 
-        test();
+
+        requestForData();
         return layout;
     }
+    //해당 pidx 받아오기 메소드
+    String pidx;
 
     @Override
     public void onClick(View v) {
@@ -84,18 +94,56 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
 
         }
     }
-    public void test(){ //이미지 넣어보기
-        arr.add(new ImgArr("2.jpeg"));
-        arr.add(new ImgArr("2.jpeg"));
-        arr.add(new ImgArr("3.jpeg"));
 
-//        Log.d("chk", arr.get(0).pImage);
-//        Log.d("chk", arr.get(1).pImage);
-//        Log.d("chk", arr.get(2).pImage);
-
-        adapter = new MyAdapter(getActivity());
-        gridView.setAdapter(adapter);
+    //해당 pidx에 해당하는 detail 화면1
+    private void requestForData(){
+        Log.d("chk", "장소 상세");
+        params.clear();
+        params.put("pidx", pidx);
+        request("getPlacebasic.do", successListener);
     }
+    Response.Listener<String> successListener = new Response.Listener<String>() {
+        //가져온 jsonArray 리스트뷰로 나타내기
+        @Override
+        public void onResponse(String response) {
+            Log.d("res11", "onResponse: response" + response);
+            try {
+                JSONArray proArr = new JSONArray(response);
+                Log.d("proArr", "onResponse:" + response);
+                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
+                    JSONObject proObj = proArr.getJSONObject(i);
+                    //장소 상세 이미지 1, 2
+                    String pimage2 = proObj.getString("pimage2");
+                    String pimage3 = proObj.getString("pimage3");
+                    //장소 기본
+                    String pimage1 = proObj.getString("pimage1");
+                    String pname = proObj.getString("pname");
+                    String pvisit = proObj.getString("pvisit");
+                    String picon = proObj.getString("picon");
+                    String pcontent = proObj.getString("pcontent");
+
+                    //response에 맞게 이미지 바꿔주기 (그리드)
+                    arr.add(new ImgArr(pimage1));
+                    arr.add(new ImgArr(pimage2));
+                    arr.add(new ImgArr(pimage3));
+
+                    adapter = new MyAdapter(getActivity());
+                    gridView.setAdapter(adapter);
+
+                    //response에 맞게 화면 변화시켜주기
+                    //대표이미지
+                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                                            .into(iv_bg);
+                    tv_pname.setText(pname);
+                    tv_visit.setText(pvisit);
+                    tv_comment.setText(pcontent);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
     class ImgArr{ //그리드뷰 arr
         String pImage;
 

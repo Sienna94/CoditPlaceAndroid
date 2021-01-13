@@ -1,6 +1,7 @@
 package com.example.coditplace2;
 
 public class ItemData {
+    String pIdx;
     String pName;
     String pImage;
     String pVisit;
@@ -10,7 +11,8 @@ public class ItemData {
     String pContent;
     String pLike;
 
-    public ItemData(String pName, String pImage, String pVisit, String pIcon, String pCategory, String pPhone, String pContent, String pLike) {
+    public ItemData(String pIdx, String pName, String pImage, String pVisit, String pIcon, String pCategory, String pPhone, String pContent, String pLike) {
+        this.pIdx = pIdx;
         this.pName = pName;
         this.pImage = pImage;
         this.pVisit = pVisit;

@@ -134,6 +134,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
                 Log.d("proArr", "onResponse:" + response);
                 for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
                     JSONObject proObj = proArr.getJSONObject(i);
+                    String pidx = proObj.getString("pidx");
                     String pname = proObj.getString("pname");
                     String pimage1 = proObj.getString("pimage1");
                     String pvisit = proObj.getString("pvisit");
@@ -142,7 +143,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
                     String pphone = proObj.getString("pphone");
                     String pcontent = proObj.getString("pcontent");
                     //리스트에 보여줄 어레이에 추가
-                    arr.add(i, new ItemData(pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
+                    arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
 
                     Log.d("chk1", "arr:" + arr.get(i).pName);
                 }
@@ -154,11 +155,13 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         }
     };
 
-    // 해당 장소 후기 페이지로 넘어가도록
+    // 해당 장소 후기 페이지로 넘어가도록 pIDX 넘겨주기(position), 상세페이지
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getActivity(), "예정", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent((SearchActivity) getActivity(), com.example.coditplace2.SearchDetailActivity.class);
+        intent.putExtra("pidx", arr.get(position).pIdx);
+        Log.d("chk", "onItemClick: pidx="+arr.get(position).pIdx);
         startActivity(intent);
     }
 
