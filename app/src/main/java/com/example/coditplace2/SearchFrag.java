@@ -36,13 +36,9 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
     ListView lv;
     MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
 
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
-    public static SearchFrag newInstance() {
-        return new SearchFrag();
-    }
-
-    public SearchFrag() {
-
+    public SearchFrag(String type, String search) {
+        this.type = type;
+        this.search = search;
     }
 
     @Nullable
@@ -52,21 +48,41 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
 
         tv_tit = layout.findViewById(R.id.tv_tit);
         lv = layout.findViewById(R.id.lv);
-
-        requestForData();
+        Log.d("abc", "onCreateView: 1");
+        request();
+//        requestForData();
         return layout;
     }
 
-    String str; // 밖으로 빼준다.
-    String str2;
-    public void get(String str, String str2){ // 검색어 받아오는 메소드
-        this.str = str;
-        this.str2 = str2;
+    String type; //타입 // 밖으로 빼준다.
+    String search; //검색어
+    public void get(String type, String search){ // 검색어 받아오는 메소드
+        Log.d("abc", "get(): 1"+getActivity());
+        this.type = type;
+        this.search = search;
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+    }
+
+    public void request(){
+        Log.d("abc", "request: "+type);
+        if(type.equals("pname")){ //장소 이름 검색
+            requestPname();
+        }else{                  //리스트 전체출력
+            requestForData(); 
+        }
+    }
+
     private void requestPname(){ //입력값이 장소 이름일 때 출력
         Log.d("chk", "장소 리스트 전체 requestForData: start");
+        final String pname = search;
         params.clear();
-        request("PlaceList.do", successListener);
+        params.put("pname", search);
+        request("PlaceListName.do", successListener);
         //어댑터에 적용
         adapter = new MyAdapter(getActivity());
         lv.setAdapter(adapter);
