@@ -30,13 +30,16 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
     TextView tv_review;
     TextView tv_contact;
 
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
-    public static SearchDetailFrag2 newInstance(){
-        return new SearchDetailFrag2();
-    }
-    public SearchDetailFrag2(){
-
-    }
+    TextView tv_comment;
+    TextView tv_pspace;
+    TextView tv_pplug;
+    TextView tv_ptable;
+    TextView tv_wifi;
+    TextView tv_wifibreak;
+    TextView tv_pnoise;
+    TextView tv_pmusic;
+    TextView tv_pbright;
+    TextView tv_plight;
 
     public SearchDetailFrag2(String pidx) {
         this.pidx = pidx;
@@ -56,12 +59,24 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
         tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
         tv_contact=layout.findViewById(R.id.tv_contact);//연락처
 
+        tv_comment=layout.findViewById(R.id.tv_comment);
+        tv_pspace=layout.findViewById(R.id.tv_pspace);
+        tv_pplug=layout.findViewById(R.id.tv_pplug);
+        tv_ptable=layout.findViewById(R.id.tv_ptable);
+        tv_wifi=layout.findViewById(R.id.tv_wifi);
+        tv_wifibreak=layout.findViewById(R.id.tv_wifibreak);
+        tv_pnoise=layout.findViewById(R.id.tv_pnoise);
+        tv_pmusic=layout.findViewById(R.id.tv_pmusic);
+        tv_pbright=layout.findViewById(R.id.tv_pbright);
+        tv_plight=layout.findViewById(R.id.tv_plight);
+
         btn_like.setOnClickListener(this);
         tv_info.setOnClickListener(this);
         tv_eval.setOnClickListener(this);
         tv_review.setOnClickListener(this);
         tv_contact.setOnClickListener(this);
 
+        requestForData();
         return layout;
     }
     //해당 pidx 받아오기
@@ -69,51 +84,59 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
 
     private void requestForData(){
         Log.d("chk", "장소 상세 코더평가");
+        Log.d("chk", "pidx :" +pidx);
         params.clear();
         params.put("pidx", pidx);
-//        request("getPlacebasic.do", successListener);
+        request("getPlaceDetailList.do", successListener);
     }
     Response.Listener<String> successListener = new Response.Listener<String>() {
         //가져온 jsonArray 리스트뷰로 나타내기
         @Override
         public void onResponse(String response) {
-//            Log.d("res11", "onResponse: response" + response);
-//            try {
-//                JSONArray proArr = new JSONArray(response);
-//                Log.d("proArr", "onResponse:" + response);
-//                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
-//                    JSONObject proObj = proArr.getJSONObject(i);
-//                    //장소 상세 이미지 1, 2
-//                    String pimage2 = proObj.getString("pimage2");
-//                    String pimage3 = proObj.getString("pimage3");
-//                    //장소 기본
-//                    String pimage1 = proObj.getString("pimage1");
-//                    String pname = proObj.getString("pname");
-//                    String pvisit = proObj.getString("pvisit");
+            Log.d("123", "onResponse: response" + response);
+            try {
+                JSONArray proArr = new JSONArray(response);
+                Log.d("proArr", "onResponse:" + response);
+                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
+                    JSONObject proObj = proArr.getJSONObject(i);
+                    //장소 기본
+                    String pimage1 = proObj.getString("pimage1");
+                    String pname = proObj.getString("pname");
 //                    String picon = proObj.getString("picon");
 //                    String pcontent = proObj.getString("pcontent");
 //                    String paddress = proObj.getString("paddress");
-//
-//                    //response에 맞게 이미지 바꿔주기 (그리드)
-//                    arr.add(new SearchDetailFrag.ImgArr(pimage1));
-//                    arr.add(new SearchDetailFrag.ImgArr(pimage2));
-//                    arr.add(new SearchDetailFrag.ImgArr(pimage3));
-//
-//                    adapter = new SearchDetailFrag.MyAdapter(getActivity());
-//                    gridView.setAdapter(adapter);
-//
-//                    //response에 맞게 화면 변화시켜주기
-//                    //대표이미지
-//                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
-//                            .into(iv_bg);
-//                    tv_pname.setText(pname);
-//                    tv_visit.setText(pvisit);
-//                    tv_comment.setText(pcontent);
-//                    tv_paddress.setText(paddress);
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+                    //에디터 평가 척도
+                    String pval = proObj.getString("pval");
+                    String pspace = proObj.getString("pspace");
+                    String pplug = proObj.getString("pplug");
+                    String ptable = proObj.getString("ptable");
+                    String wifi = proObj.getString("wifi");
+                    String wifi_break = proObj.getString("wifi_break");
+                    String pnoise = proObj.getString("pnoise");
+                    String pmusic = proObj.getString("pmusic");
+                    String pbright = proObj.getString("pbright");
+                    String plight = proObj.getString("plight");
+
+                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                            .into(iv_bg);
+                    tv_pname.setText(pname);
+                    tv_comment.setText(pval);
+                    tv_pspace.setText(pspace);
+                    tv_pplug.setText(pplug);
+                    tv_ptable.setText(ptable);
+                    tv_wifi.setText(wifi);
+                    tv_wifibreak.setText(wifi_break);
+                    tv_pnoise.setText(pnoise);
+                    tv_pmusic.setText(pmusic);
+                    tv_pbright.setText(pbright);
+                    tv_plight.setText(plight);
+
+                    // 에디터 평가
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -123,19 +146,18 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
 
         }else if(v.getId()==R.id.tv_info){ //매장정보
             Log.d("chk", "onClick: 매장정보 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag.newInstance());
-
+            ((SearchDetailActivity)getActivity()).replaceFragment(1);
         }else if(v.getId()==R.id.tv_evaluation){ //코더 평가
             Log.d("chk", "onClick: 코더 평가 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag2.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(2);
 
         }else if(v.getId()==R.id.tv_review) { //리뷰(댓글)
             Log.d("chk", "onClick: 리뷰 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag3.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(3);
 
         }else if(v.getId()==R.id.tv_contact){ //연락처
             Log.d("chk", "onClick: 연락처 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag4.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(4);
 
         }
     }

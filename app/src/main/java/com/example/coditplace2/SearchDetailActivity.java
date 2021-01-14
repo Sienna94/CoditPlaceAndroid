@@ -34,11 +34,28 @@ public class SearchDetailActivity extends BaseActivity{
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.my_layout, searchDetailFrag).commit();
     }
-    public void replaceFragment(Fragment fragment){ //프래그먼트 전환해주는 메소드
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        fragmentTransaction.replace(R.id.my_layout, fragment);
-        fragmentTransaction.commit();
+    public void replaceFragment(int type){ //프래그먼트 전환해주는 메소드
+        if(type==1){
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            fragmentTransaction.replace(R.id.my_layout, searchDetailFrag);
+            fragmentTransaction.commit();
+        }else if(type==2){
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            fragmentTransaction.replace(R.id.my_layout, searchDetailFrag2);
+            fragmentTransaction.commit();
+        }else if(type==3){
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            fragmentTransaction.replace(R.id.my_layout, searchDetailFrag3);
+            fragmentTransaction.commit();
+        }else if(type==4){
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            fragmentTransaction.replace(R.id.my_layout, searchDetailFrag4);
+            fragmentTransaction.commit();
+        }
     }
 
 

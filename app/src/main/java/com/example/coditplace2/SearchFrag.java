@@ -229,9 +229,9 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
 
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://172.20.10.4:8180/oop/img/place/" + arr.get(position).pImage)
+                    .load("http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage)
                     .into(viewHolder.ivPimage1Holder);
-            Log.d("img", "http://172.20.10.4:8180/oop/img/place/" + arr.get(position).pImage);
+            Log.d("img", "http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage);
             //카페 아이
 //            Glide.with(getActivity())
 //                    .load("http://172.20.10.4:8180/oop/img/shoes/"+arr.get(position).pImage)

@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/tv_eval"
+                    android:id="@+id/tv_comment"
                     android:text="집중이 잘 되는 공간이었어요, 책이 잘 읽혀요, 눈치 보이지 않았어요, 자주 방문할 것 같아요, 중간 중간 휴식할 꺼리가 있었어요, 사람들이 많이 방문하는 곳이에요"
                     android:layout_below="@id/tv_tit"
                     android:layout_margin="20dp"
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/tv_pcontent"
+                    android:id="@+id/tv_pplug"
                     android:text="많음"
                     android:layout_below="@id/tv_tit3"
                     android:layout_margin="20dp"

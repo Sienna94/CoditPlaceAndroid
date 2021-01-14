@@ -25,14 +25,6 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
     TextView tv_review;
     TextView tv_contact;
 
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
-    public static SearchDetailFrag4 newInstance(){
-        return new SearchDetailFrag4();
-    }
-    public SearchDetailFrag4(){
-
-    }
-
     public SearchDetailFrag4(String pidx) {
         this.pidx = pidx;
     }
@@ -118,19 +110,18 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
 
         }else if(v.getId()==R.id.tv_info){ //매장정보
             Log.d("chk", "onClick: 매장정보 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag.newInstance());
-
+            ((SearchDetailActivity)getActivity()).replaceFragment(1);
         }else if(v.getId()==R.id.tv_evaluation){ //코더 평가
             Log.d("chk", "onClick: 코더 평가 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag2.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(2);
 
         }else if(v.getId()==R.id.tv_review) { //리뷰(댓글)
             Log.d("chk", "onClick: 리뷰 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag3.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(3);
 
         }else if(v.getId()==R.id.tv_contact){ //연락처
             Log.d("chk", "onClick: 연락처 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag4.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(4);
 
         }
     }

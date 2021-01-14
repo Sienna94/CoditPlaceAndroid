@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
@@ -46,13 +48,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
     GridView gridView;
     MyAdapter adapter;
 
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
-    public static SearchDetailFrag newInstance(){
-        return new SearchDetailFrag();
-    }
-    public SearchDetailFrag(){
-
-    }
+    private Object SearchDetailFrag2;
 
     public SearchDetailFrag(String pidx) {
         this.pidx = pidx;
@@ -61,7 +57,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_searchdetail, container, false);
+        View layout = inflater.inflate(R.layout.frag_searchdetail, null);
 
         iv_bg=layout.findViewById(R.id.iv_bg);
         iv_icon=layout.findViewById(R.id.iv_icon);
@@ -97,23 +93,21 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
 
         }else if(v.getId()==R.id.tv_info){ //매장정보
             Log.d("chk", "onClick: 매장정보 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag.newInstance());
-
+            ((SearchDetailActivity)getActivity()).replaceFragment(1);
         }else if(v.getId()==R.id.tv_evaluation){ //코더 평가
             Log.d("chk", "onClick: 코더 평가 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag2.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(2);
 
         }else if(v.getId()==R.id.tv_review) { //리뷰(댓글)
             Log.d("chk", "onClick: 리뷰 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag3.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(3);
 
         }else if(v.getId()==R.id.tv_contact){ //연락처
             Log.d("chk", "onClick: 연락처 tv 클릭됨");
-            ((SearchDetailActivity)getActivity()).replaceFragment(SearchDetailFrag4.newInstance());
+            ((SearchDetailActivity)getActivity()).replaceFragment(4);
 
         }
     }
-
 
 
     //해당 pidx에 해당하는 detail 화면1
@@ -217,7 +211,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
             }
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://172.20.10.4:8180/oop/img/place/"+arr.get(position).pImage)
+                    .load("http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage)
                     .into(viewHolder.ivHolder);
 
             Log.d("chk", "글라이드: 완료 "+position+",  size"+arr.size());

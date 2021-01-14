@@ -26,7 +26,6 @@ public class SearchActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.my_layout, searchFrag).commit();
 
-
         //searchFrag.request();
         Log.d("abc", "gettype:" + gettype + "/getsearch:" + getsearch);
     }
