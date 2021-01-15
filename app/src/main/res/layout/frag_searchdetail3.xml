@@ -117,6 +117,7 @@
 
             <TextView
                 android:id="@+id/tv_score"
+                android:visibility="gone"
                 android:text="☆☆☆☆☆"
                 android:layout_below="@id/spinner_score"
                 android:textSize="20sp"
@@ -135,7 +136,7 @@
                 android:id="@+id/btn_submit"
                 android:text="reply"
                 android:textColor="@color/white"
-                android:backgroundTint="#B3B3B3"
+                android:backgroundTint="@color/purple_200"
                 android:layout_alignRight="@id/et_coderfriendly"
                 android:layout_below="@+id/et_coderfriendly"
                 android:layout_width="100dp"

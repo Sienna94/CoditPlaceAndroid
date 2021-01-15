@@ -59,6 +59,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
 
     int ridx;
     String mid;
+    int star;
 
     @Nullable
     @Override
@@ -87,6 +88,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         btn_submit=layout.findViewById(R.id.btn_submit);
 
         btn_like.setOnClickListener(this);
+        btn_submit.setOnClickListener(this);
         tv_info.setOnClickListener(this);
         tv_eval.setOnClickListener(this);
         tv_review.setOnClickListener(this);
@@ -98,22 +100,28 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
                     tv_rscore.setText("☆☆☆☆☆");
-                    insertReply(0);
+                    star=0;
+//                    insertReply(0);
                 }else if(position ==1){
                     tv_rscore.setText("★☆☆☆☆");
-                    insertReply(1);
+                    star=1;
+//                    insertReply(1);
                 }else if(position ==2){
                     tv_rscore.setText("★★☆☆☆");
-                    insertReply(2);
+                    star=2;
+//                    insertReply(2);
                 }else if(position ==3){
                     tv_rscore.setText("★★★☆☆");
-                    insertReply(3);
+                    star=3;
+//                    insertReply(3);
                 }else if(position ==4){
                     tv_rscore.setText("★★★★☆");
-                    insertReply(4);
+                    star=4;
+//                    insertReply(4);
                 }else if(position ==5){
                     tv_rscore.setText("★★★★★");
-                    insertReply(5);
+                    star=5;
+//                    insertReply(5);
                 }
             }
 
@@ -225,7 +233,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         request("ReplyDelete.do", successListener);
     }
     //댓글 입력하기
-    private void insertReply(int score){
+    private void insertReply(){
         Response.Listener<String> successListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -270,10 +278,12 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         //입력 버튼 클릭시 댓글 등록하기create
         Log.d("chk", "댓글 등록 통신 start");
         final String rcontent = et_reply.getText().toString().trim();
+        final String rscore = tv_rscore.getText().toString().trim();
+        Log.d("rcontent", "insertReply: " + rcontent);
         params.clear();
         params.put("pidx", pidx);
         params.put("rwriter", "tester");
-        params.put("rscore", Integer.toString(score));
+        params.put("rscore", String.valueOf(star));
         params.put("rcontent", rcontent);
         request("ReplyInsert.do", successListener);
 
@@ -299,6 +309,9 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
             Log.d("chk", "onClick: 연락처 tv 클릭됨");
             ((SearchDetailActivity)getActivity()).replaceFragment(4);
 
+        }else if(v.getId()==R.id.btn_submit){
+            Log.d("chk", "onClick: 댓글달기 버튼 클릭됨");
+            insertReply();
         }
     }
     //리스트에 출력될 아이템들 (삭제 tv 포함)
