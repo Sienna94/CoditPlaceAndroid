@@ -13,6 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
 
@@ -24,6 +29,7 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
     TextView tv_eval;
     TextView tv_review;
     TextView tv_contact;
+    TextView tv_phone;
 
     public SearchDetailFrag4(String pidx) {
         this.pidx = pidx;
@@ -42,6 +48,7 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
         tv_eval=layout.findViewById(R.id.tv_evaluation);//코더의 평가
         tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
         tv_contact=layout.findViewById(R.id.tv_contact);//연락처
+        tv_phone=layout.findViewById(R.id.tv_phone);//전화번호
 
         btn_like.setOnClickListener(this);
         tv_info.setOnClickListener(this);
@@ -49,6 +56,7 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
         tv_review.setOnClickListener(this);
         tv_contact.setOnClickListener(this);
 
+        requestForData();
         return layout;
     }
     //해당 pidx 받아오기
@@ -58,49 +66,33 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
         Log.d("chk", "장소 상세 연락처");
         params.clear();
         params.put("pidx", pidx);
-//        request("getPlacebasic.do", successListener);
+        request("getPlacebasic.do", successListener);
     }
     Response.Listener<String> successListener = new Response.Listener<String>() {
         //가져온 jsonArray 리스트뷰로 나타내기
         @Override
         public void onResponse(String response) {
-//            Log.d("res11", "onResponse: response" + response);
-//            try {
-//                JSONArray proArr = new JSONArray(response);
-//                Log.d("proArr", "onResponse:" + response);
-//                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
-//                    JSONObject proObj = proArr.getJSONObject(i);
-//                    //장소 상세 이미지 1, 2
-//                    String pimage2 = proObj.getString("pimage2");
-//                    String pimage3 = proObj.getString("pimage3");
-//                    //장소 기본
-//                    String pimage1 = proObj.getString("pimage1");
-//                    String pname = proObj.getString("pname");
-//                    String pvisit = proObj.getString("pvisit");
-//                    String picon = proObj.getString("picon");
-//                    String pcontent = proObj.getString("pcontent");
-//                    String paddress = proObj.getString("paddress");
-//
-//                    //response에 맞게 이미지 바꿔주기 (그리드)
-//                    arr.add(new SearchDetailFrag.ImgArr(pimage1));
-//                    arr.add(new SearchDetailFrag.ImgArr(pimage2));
-//                    arr.add(new SearchDetailFrag.ImgArr(pimage3));
-//
-//                    adapter = new SearchDetailFrag.MyAdapter(getActivity());
-//                    gridView.setAdapter(adapter);
-//
-//                    //response에 맞게 화면 변화시켜주기
-//                    //대표이미지
-//                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
-//                            .into(iv_bg);
-//                    tv_pname.setText(pname);
-//                    tv_visit.setText(pvisit);
-//                    tv_comment.setText(pcontent);
-//                    tv_paddress.setText(paddress);
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            Log.d("res11", "onResponse: response" + response);
+            try {
+                JSONArray proArr = new JSONArray(response);
+                Log.d("proArr", "onResponse:" + response);
+                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
+                    JSONObject proObj = proArr.getJSONObject(i);
+                    //장소 기본
+                    String pimage1 = proObj.getString("pimage1");
+                    String pname = proObj.getString("pname");
+                    String picon = proObj.getString("picon");
+                    String pphone = proObj.getString("pphone");
+
+                    //대표이미지
+                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                            .into(iv_bg);
+                    tv_pname.setText(pname);
+                    tv_phone.setText(pphone);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     };
 

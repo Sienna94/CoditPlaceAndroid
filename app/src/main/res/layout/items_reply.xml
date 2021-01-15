@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:text="★★★★★"
+            android:textColor="#F44336"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@id/tv_writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_score"
+            android:layout_alignStart="@id/tv_writer"
+            android:layout_marginTop="5dp"
+            android:text="괜찮아욤. 콘센트도 널널하고 눈치싸움 안해도 됩니당! :)" />
+
+        <TextView
+            android:id="@+id/tv_writer"
+            android:text="작성자"
+            android:layout_below="@id/tv_comment"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:text="2021.1.4"
+            android:layout_below="@id/tv_comment"
+            android:layout_toRightOf="@+id/tv_writer"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_del"
+            android:text="DELETE"
+            android:textStyle="bold"
+            android:layout_below="@id/tv_comment"
+            android:layout_alignRight="@id/tv_comment"
+            android:layout_alignBaseline="@id/tv_date"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

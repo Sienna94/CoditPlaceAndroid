@@ -4,158 +4,146 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
+            android:id="@+id/wrap_basic"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:src="@drawable/sample1"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
             <RelativeLayout
-                android:id="@+id/wrap_basic"
-                android:layout_marginBottom="10dp"
+                android:id="@+id/wrap_basic2"
+                android:layout_marginTop="150dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_bg"
-                    android:src="@drawable/sample1"
-                    android:scaleType="fitXY"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"/>
-
-                <RelativeLayout
-                    android:id="@+id/wrap_basic2"
-                    android:layout_marginTop="150dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_icon"
-                        android:src="@mipmap/ic_launcher_round"
-                        android:layout_marginRight="20dp"
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/tv_pname"
-                        android:text="1984"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:layout_below="@id/iv_icon"
-                        android:layout_alignStart="@id/iv_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <Button
-                        android:id="@+id/btn_like"
-                        android:text="♥ 북마크"
-                        android:layout_below="@id/tv_pname"
-                        android:layout_alignStart="@id/iv_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/wrap_basic3"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@id/wrap_basic2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_info"
-                        android:text="매장 정보"
-                        android:layout_weight="1"
-                        android:textColor="#9A9A9A"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/tv_evaluation"
-                        android:text="코더의 평가"
-                        android:layout_weight="1"
-                        android:textColor="#9A9A9A"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/tv_review"
-                        android:text="리뷰"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/tv_contact"
-                        android:text="연락처"
-                        android:layout_weight="1"
-                        android:textColor="#9A9A9A"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/wrap"
-                android:layout_below="@id/wrap_basic"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_tit"
-                    android:text="REVIEW 추가하기"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_score"
-                    android:text="☆☆☆☆☆"
-                    android:textSize="20sp"
-                    android:layout_margin="5dp"
-                    android:layout_below="@id/tv_tit"
+                    android:id="@+id/iv_icon"
+                    android:src="@mipmap/ic_launcher_round"
+                    android:layout_marginRight="20dp"
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
                 <TextView
-                    android:id="@+id/tv_coderfriendly"
-                    android:text="코더들을 위한 공간이었나요?"
-                    android:layout_marginLeft="5dp"
-                    android:layout_below="@id/tv_score"
+                    android:id="@+id/tv_pname"
+                    android:text="1984"
                     android:textColor="@color/black"
-                    android:layout_width="match_parent"
+                    android:textSize="30sp"
+                    android:layout_below="@id/iv_icon"
+                    android:layout_alignStart="@id/iv_icon"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/et_coderfriendly"
-                    android:hint="Enter message"
-                    android:textSize="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_below="@id/tv_coderfriendly"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+
                 <Button
-                    android:id="@+id/btn_submit"
-                    android:text="등록하기"
-                    android:layout_alignRight="@id/et_coderfriendly"
-                    android:layout_below="@+id/et_coderfriendly"
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"/>
+                    android:id="@+id/btn_like"
+                    android:text="♥ 북마크"
+                    android:layout_below="@id/tv_pname"
+                    android:layout_alignStart="@id/iv_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
             </RelativeLayout>
-            <ListView
-                android:id="@+id/lv"
+
+            <LinearLayout
+                android:id="@+id/wrap_basic3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/wrap_basic2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:text="매장 정보"
+                    android:layout_weight="1"
+                    android:textColor="#9A9A9A"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_evaluation"
+                    android:text="코더의 평가"
+                    android:layout_weight="1"
+                    android:textColor="#9A9A9A"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_review"
+                    android:text="리뷰"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_contact"
+                    android:text="연락처"
+                    android:layout_weight="1"
+                    android:textColor="#9A9A9A"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wrap"
+            android:layout_below="@id/wrap_basic"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spinner_score"
+                android:entries="@array/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </ScrollView>
 
+            <TextView
+                android:id="@+id/tv_score"
+                android:text="☆☆☆☆☆"
+                android:layout_below="@id/spinner_score"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/et_coderfriendly"
+                android:hint="Enter message"
+                android:textSize="14dp"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@id/tv_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btn_submit"
+                android:text="reply"
+                android:textColor="@color/white"
+                android:backgroundTint="#B3B3B3"
+                android:layout_alignRight="@id/et_coderfriendly"
+                android:layout_below="@+id/et_coderfriendly"
+                android:layout_width="100dp"
+                android:layout_height="40dp"/>
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
