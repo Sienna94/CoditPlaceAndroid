@@ -3,6 +3,7 @@
     package="com.example.coditplace2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -20,9 +21,9 @@
             android:value="AIzaSyCXjvbPDeOWtNR_5z4Aqw5_bkCYrHOXN1k" />
 
         <activity android:name=".SearchDetailActivity"></activity>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".SearchActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".BaseActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

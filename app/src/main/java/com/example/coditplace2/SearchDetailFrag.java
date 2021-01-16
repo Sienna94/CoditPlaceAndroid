@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,25 +27,32 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, OnMapReadyCallback {
+public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     //googleMap
     private MapView mapView = null;
+    private GoogleApiClient mGoogleApiClient;
 
     public SearchDetailFrag(){
         //required
@@ -100,7 +110,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
         mapView = (MapView)layout.findViewById(R.id.map);
         mapView.getMapAsync(this);
         requestForData();
-        
+
         return layout;
     }
     //map
@@ -159,9 +169,34 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
         markerOptions.title("서울");
         markerOptions.snippet("수도");
         googleMap.addMarker(markerOptions);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(16)); //지도 크게 작게 (ZOOM 정도)
     }
+
+    public static LocationSource addrToPoint(Context context){
+        Location location = new Location("");
+        Geocoder geocoder = new Geocoder(context);
+        List<Address> addresses= null;
+        try{
+            addresses = geocoder.getFromLocationName("서울",3);
+        }catch (IOException e){
+            e.printStackTrace();
+        }if(addresses != null){
+            for(int i = 0; i<addresses.size(); i++){
+                Address lating = addresses.get(i);
+                location.setLatitude(lating.getLatitude());
+                location.setLongitude(lating.getLongitude());
+            }
+        }
+        return (LocationSource) location;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
 
     //해당 pidx 받아오기
     String pidx;
@@ -239,7 +274,6 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
             }
         }
     };
-
 
     class ImgArr{ //그리드뷰 arr
         String pImage;
