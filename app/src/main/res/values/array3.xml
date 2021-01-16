@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eval_pplug">
+        <item>부족함(경쟁 필요)</item>
+        <item>보통(눈치 싸움)</item>
+        <item>많음(편한 마음으로)</item>
+    </string-array>
+</resources>

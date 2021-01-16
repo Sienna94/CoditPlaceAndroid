@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eval_ptable">
+        <item>1~2인용 테이블만</item>
+        <item>1~2인용, 4인용 테이블</item>
+        <item>1~2인용, 4인용 테이블, 6인용 테이블 이상</item>
+    </string-array>
+</resources>

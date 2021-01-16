@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eval_pwifi_break">
+        <item>자주 끊김(3회 이상)</item>
+        <item>보통 (0~1회)</item>
+        <item>안정적 (여러번 방문했을 때 아주 가끔 끊긴적 있음)</item>
+    </string-array>
+</resources>

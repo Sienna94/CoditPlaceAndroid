@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eval_pwifi">
+        <item>비공개형(비밀번호 필요)</item>
+        <item>공개형(비밀번호 없음)</item>
+    </string-array>
+</resources>
