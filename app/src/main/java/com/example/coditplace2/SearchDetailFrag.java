@@ -1,9 +1,7 @@
 package com.example.coditplace2;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -21,9 +19,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
@@ -31,11 +26,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -109,6 +101,9 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
         // map
         mapView = (MapView)layout.findViewById(R.id.map);
         mapView.getMapAsync(this);
+        //geocoder
+        Geocoder geocoder = new Geocoder(getActivity());
+
         requestForData();
 
         return layout;
@@ -161,25 +156,13 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng SEOUL = new LatLng(37.56, 126.97);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
-        markerOptions.snippet("수도");
-        googleMap.addMarker(markerOptions);
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(16)); //지도 크게 작게 (ZOOM 정도)
-    }
 
     public static LocationSource addrToPoint(Context context){
         Location location = new Location("");
         Geocoder geocoder = new Geocoder(context);
         List<Address> addresses= null;
         try{
-            addresses = geocoder.getFromLocationName("서울",3);
+            addresses = geocoder.getFromLocationName("대한민국 제주특별자치도 제주시 이도일동 관덕로8길 31",3);
         }catch (IOException e){
             e.printStackTrace();
         }if(addresses != null){
@@ -192,15 +175,68 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
         return (LocationSource) location;
     }
 
+    String test;
+    String str = "대한민국 제주특별자치도 제주시 이도일동 관덕로8길 31";
+//    33.51061868971669, 126.5234356160584
+    Double lat_changed =33.51061868971669;
+    Double lon_changed =126.5234356160584;
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        Log.d("addressChanger", "changer test: " +test);
+        LatLng CAFE = new LatLng(lat_changed, lon_changed);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(CAFE);
+        markerOptions.title("cafe_test");
+        markerOptions.snippet("cafe_test_snippet");
+        googleMap.addMarker(markerOptions);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(CAFE));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(17)); //지도 크게 작게 (ZOOM 정도)
+
+//        LatLng CAFE = new LatLng(37.56, 126.97);
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(CAFE);
+//        markerOptions.title("cafe_test");
+//        markerOptions.snippet("cafe_test_snippet");
+//        googleMap.addMarker(markerOptions);
+//        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(CAFE));
+//        googleMap.animateCamera(CameraUpdateFactory.zoomTo(16)); //지도 크게 작게 (ZOOM 정도)
+
+
+    }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
     }
 
+//    //지오 메소드
+//    Geocoder geocoder;
+//    String addr_changed;
+//    public String addressChanger(String str){
+//        List<Address> list = null;
+//        try{
+//            list = geocoder.getFromLocationName(str, 1);
+//        }catch(IOException e){
+//            e.printStackTrace();
+//            Log.d("addressChange", "addressChanger: 주소 변환 오류");
+//        }
+//        if (list != null){
+//            if(list.size()==0){
+//                Toast.makeText(getActivity(), "예정", Toast.LENGTH_SHORT).show();
+//            }else { // 해당 주소로 지도 보여주기
+//                Address addr = list.get(0);
+//                String lat = String.valueOf(addr.getLatitude());
+//                String lon = String.valueOf(addr.getLongitude());
+//                addr_changed = lat +"/"+lon;
+//            }
+//        }return addr_changed;
+//    }
 
     //해당 pidx 받아오기
     String pidx;
-
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn_like){//좋아요 버튼

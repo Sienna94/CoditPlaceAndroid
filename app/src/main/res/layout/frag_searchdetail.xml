@@ -119,6 +119,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_tit"
+                    android:textSize="17sp"
                     android:text="에디터가 공간에 방문한 날짜"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
@@ -139,6 +140,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_tit2"
+                    android:textSize="17sp"
                     android:text="코딧 에디터 코멘트"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
@@ -160,6 +162,7 @@
                 <TextView
                     android:id="@+id/tv_tit3"
                     android:text="공간 이미지"
+                    android:textSize="17sp"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -183,6 +186,7 @@
                 <TextView
                     android:id="@+id/tv_tit4"
                     android:text="위치"
+                    android:textSize="17sp"
                     android:layout_margin="10dp"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
