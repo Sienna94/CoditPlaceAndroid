@@ -192,7 +192,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
 
                         //response에 맞게 화면 변화시켜주기
                         //대표이미지
-                        Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                        Glide.with(getActivity()).load("http://172.20.10.4:8180/oop/img/place/"+pimage1)
                                 .into(iv_bg);
                         tv_pname.setText(pname);
 

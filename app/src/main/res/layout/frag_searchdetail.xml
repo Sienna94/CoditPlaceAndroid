@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -183,23 +184,24 @@
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-                <ImageView
-                    android:id="@+id/iv_map"
-                    android:layout_margin="20dp"
-                    android:layout_below="@id/tv_tit4"
+
+                <!-- Activity에서는 fragment로 구현해야되지만 Fragment로 구현하기위해서는 MapView를 사용해야함-->
+                <com.google.android.gms.maps.MapView
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/map"
-                    android:scaleType="fitXY"
+                    android:layout_below="@+id/tv_tit4"
+                    android:id="@+id/map"
                     android:layout_width="300dp"
-                    android:layout_height="300dp"/>
+                    android:layout_height="300dp"
+                    android:name="com.google.android.gms.maps.MapFragment" />
                 <TextView
                     android:id="@+id/tv_paddress"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
-                    android:layout_below="@id/iv_map"
+                    android:layout_below="@id/map"
                     android:text="주소주소주소"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

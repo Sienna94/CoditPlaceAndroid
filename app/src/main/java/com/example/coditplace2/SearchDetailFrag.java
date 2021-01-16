@@ -1,6 +1,7 @@
 package com.example.coditplace2;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +14,25 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +40,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
+public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, OnMapReadyCallback {
+    //googleMap
+    private MapView mapView = null;
+
+    public SearchDetailFrag(){
+        //required
+    }
+
     ArrayList<ImgArr> arr = new ArrayList<>();
 
     ImageView iv_bg;
@@ -47,8 +65,6 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
 
     GridView gridView;
     MyAdapter adapter;
-
-    private Object SearchDetailFrag2;
 
     public SearchDetailFrag(String pidx) {
         this.pidx = pidx;
@@ -80,10 +96,73 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
         Log.d("chk", "dfsdf");
         gridView=layout.findViewById(R.id.grid); //그리드뷰
 
-
+        // map
+        mapView = (MapView)layout.findViewById(R.id.map);
+        mapView.getMapAsync(this);
         requestForData();
+        
         return layout;
     }
+    //map
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //액티비티가 처음 생성될 때 실행되는 함수
+        if(mapView!=null){
+            mapView.onCreate(savedInstanceState);
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng SEOUL = new LatLng(37.56, 126.97);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(SEOUL);
+        markerOptions.title("서울");
+        markerOptions.snippet("수도");
+        googleMap.addMarker(markerOptions);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+    }
+
     //해당 pidx 받아오기
     String pidx;
 
@@ -148,7 +227,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
 
                     //response에 맞게 화면 변화시켜주기
                     //대표이미지
-                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                    Glide.with(getActivity()).load("http://172.20.10.4:8180/oop/img/place/"+pimage1)
                                             .into(iv_bg);
                     tv_pname.setText(pname);
                     tv_visit.setText(pvisit);
@@ -160,6 +239,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
             }
         }
     };
+
 
     class ImgArr{ //그리드뷰 arr
         String pImage;
@@ -211,7 +291,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener{
             }
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://192.168.7.31:8180/oop/img/place/"+arr.get(position).pImage)
+                    .load("http://172.20.10.4:8180/oop/img/place/"+arr.get(position).pImage)
                     .into(viewHolder.ivHolder);
 
             Log.d("chk", "글라이드: 완료 "+position+",  size"+arr.size());
