@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eval_plight">
+        <item>형광등(하얀색 계열)</item>
+        <item>백열전구(노란색 계열)</item>
+    </string-array>
+</resources>

@@ -3,25 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_centerInParent="true"
-        android:id="@+id/wrap"
+    <TextView
+        android:id="@+id/tv_tit"
+        android:text="공간 정보를 작성하세요"
+        android:layout_centerHorizontal="true"
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_below="@id/tv_tit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_tit"
-            android:layout_centerHorizontal="true"
-            android:text="공간 정보를 작성하세요"
-            android:textSize="23sp"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
         <LinearLayout
             android:layout_margin="10dp"
-            android:layout_below="@id/tv_tit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -29,6 +28,7 @@
             <TextView
                 android:id="@+id/tv_pname"
                 android:text="공간 이름"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -44,6 +44,7 @@
             <TextView
                 android:id="@+id/tv_pvisit"
                 android:text="공간 방문 날짜"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -59,6 +60,7 @@
             <TextView
                 android:id="@+id/tv_psize"
                 android:text="공간 사이즈"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
@@ -74,6 +76,7 @@
             <TextView
                 android:id="@+id/tv_pplug"
                 android:text="콘센트 환경"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
@@ -89,6 +92,7 @@
             <TextView
                 android:id="@+id/tv_ptable"
                 android:text="보유한 테이블 옵션"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
@@ -104,6 +108,7 @@
             <TextView
                 android:id="@+id/tv_pwifi"
                 android:text="무선 인터넷 종류"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
@@ -119,6 +124,7 @@
             <TextView
                 android:id="@+id/tv_pwifibreak"
                 android:text="무선 인터넷 안정성"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
@@ -131,15 +137,238 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/tv_pnoise"
+                android:text="방문객 대화 소리 크기"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinner6"
+                android:entries="@array/eval_pnoise"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_pmusic"
+                android:text="음악 소리 크기"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinner7"
+                android:entries="@array/eval_pmusic"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_pbright"
+                android:text="공간 밝기"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinner8"
+                android:entries="@array/eval_pbright"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_plight"
+                android:text="조명 색상"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinner9"
+                android:entries="@array/eval_plight"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_finaleval"
+                android:text="코더로서 어땠나요?"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_finaleval2"
+                android:text="해당하는 모든 항목을 선택하세요 :D"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/wrap2"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/chkbox1"
+                    android:text="집중이 잘되는 공간이었어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox2"
+                    android:text="눈치보이지 않았어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox3"
+                    android:text="자주 방문할 것 같아요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox4"
+                    android:text="서비스가 좋았어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox5"
+                    android:text="음료가 맛있어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox6"
+                    android:text="디저트가 맛있어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox7"
+                    android:text="코딩이 잘되는 느낌이예요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox8"
+                    android:text="오랫동안 앉아있어도 허리 아프지 않았어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox9"
+                    android:text="화장실이 괜찮았어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox10"
+                    android:text="사람들이 많이 방문하는 곳이예요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkbox11"
+                    android:text="흡연할 공간이 있어요"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:text="에디터 코멘트"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_comment2"
+                android:text="노마드 워커로써 느낀 공간에 대한 평을 적어주세요. (반말체 안돼요 🙅🏻‍♀️, 높임말을 사용해주세요 🙆🏻‍♂️) "
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/et_comment"
+                android:hint="공간에 대한 코멘트를 남겨주세요"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <TextView
+                android:id="@+id/tv_plocation"
+                android:text="로케이션 정보"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinner10"
+                android:entries="@array/eval_plocation"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_pimage1"
+                android:text="이미지 등록"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_pimage2"
+                android:text="촬영한 이미지를 업로드해주세요 (가로형 사진 우선, 공간을 충분히 연상할 수 있도록 3장의 사진을 등록해주세요"
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/icon_upload"
+                android:src="@drawable/upload"
+                android:layout_margin="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <GridView
+                android:id="@+id/grid"
+                android:numColumns="3"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"/>
+
             <Button
                 android:id="@+id/btn_save"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:text="저장하기"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
-    </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
