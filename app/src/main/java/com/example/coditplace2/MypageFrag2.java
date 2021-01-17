@@ -2,6 +2,7 @@ package com.example.coditplace2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class MypageFrag2 extends BaseFrag implements View.OnClickListener{ //북마크 페이지
+public class MypageFrag2 extends BaseFrag { //북마크 페이지
     ArrayList<ItemDataBk> arr = new ArrayList<>();
     TextView tv;
     ListView lv;
@@ -54,12 +55,6 @@ public class MypageFrag2 extends BaseFrag implements View.OnClickListener{ //북
         arr.remove(position);
         adapter.notifyDataSetChanged();
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
 
     class ItemHolder {
         TextView tvPnameHolder;
@@ -109,6 +104,18 @@ public class MypageFrag2 extends BaseFrag implements View.OnClickListener{ //북
             }
             //가게 아이콘, 가게 이름,
             viewHolder.tvPnameHolder.setText(arr.get(position).pName);
+            //해당 포스팅으로 이동
+            viewHolder.tvGetpostHolder.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Log.d("chk", "북마크 포스팅으로 이동 클릭");
+                    MypageFrag2.this.position = position;
+                    Intent intent = new Intent(getActivity(), com.example.coditplace2.SearchDetailActivity.class);
+                    intent.putExtra("pidx", arr.get(position).pIdx);
+                    Log.d("chk", "포스팅으로 이동 클릭: pidx="+arr.get(position).pIdx);
+                    startActivity(intent);
+                }
+            });
             //북마크 삭제 클릭
             viewHolder.tvDelbkHolder.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -120,20 +127,6 @@ public class MypageFrag2 extends BaseFrag implements View.OnClickListener{ //북
                     test_del(bKidx);
                 }
             });
-
-////            카페 사진
-//            Glide.with(getActivity())
-//                    .load("http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage)
-//                    .into(viewHolder.ivPimage1Holder);
-//            Log.d("img", "http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage);
-            //카페 아이
-//            Glide.with(getActivity())
-//                    .load("http://172.20.10.4:8180/oop/img/shoes/"+arr.get(position).pImage)
-//                    .into(viewHolder.ivPiconHolder);
-//            Log.d("img", "http://172.20.10.4/oop/img/shoes/"+arr.get(position).pImage);
-
-//        http://192.168.7.26
-//        http://172.20.10.4
             return convertView;
         }
     }

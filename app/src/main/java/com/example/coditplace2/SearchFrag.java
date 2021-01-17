@@ -159,7 +159,6 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
     // 해당 장소 후기 페이지로 넘어가도록 pIDX 넘겨주기(position), 상세페이지
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(), "예정", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent((SearchActivity) getActivity(), com.example.coditplace2.SearchDetailActivity.class);
         intent.putExtra("pidx", arr.get(position).pIdx);
         Log.d("chk", "onItemClick: pidx="+arr.get(position).pIdx);
