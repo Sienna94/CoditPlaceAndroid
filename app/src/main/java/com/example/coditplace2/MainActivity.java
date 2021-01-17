@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn;
+    Button btn2;
     TextView tv_tit;
     TextView tv_extra;
     TextView tv_tit2;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn = findViewById(R.id.btn);
-
+        btn2 = findViewById(R.id.btn2);
         tv_tit=findViewById(R.id.tv_tit);
         tv_extra=findViewById(R.id.tv_extra);
         tv_tit2=findViewById(R.id.tv_tit2);
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_paddress=findViewById(R.id.et_paddress);
 
         btn.setOnClickListener(this);
+        btn2.setOnClickListener(this);
         btn_search.setOnClickListener(this);
     }
 
@@ -48,7 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v.getId()==R.id.btn){ //로긴 버튼
             Intent intent = new Intent(this, com.example.coditplace2.LoginActivity.class);
             startActivity(intent);
-        }else if(v.getId()==R.id.btn_search){ //검색 버튼
+        }else if(v.getId()==R.id.btn2){ //마이페이지 버튼
+            Intent intent = new Intent(this, com.example.coditplace2.MypageActivity.class);
+            startActivity(intent);
+        }else if(v.getId()==R.id.btn_search) { //검색 버튼
             searchset();
             Intent intent = new Intent(this, com.example.coditplace2.SearchActivity.class);
             intent.putExtra("type", type);

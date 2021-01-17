@@ -6,7 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".SearchDetailActivity">
 
+    <LinearLayout
+        android:id="@+id/wrap"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_tit"
+            android:text="공간정보 추가"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_tit2"
+            android:text="북마크"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_tit3"
+            android:text="회원정보 변경"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <FrameLayout
+        android:layout_below="@id/wrap"
         android:id="@+id/my_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
