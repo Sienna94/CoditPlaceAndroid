@@ -24,7 +24,7 @@ public class SearchDetailActivity extends BaseActivity{
         setContentView(R.layout.activity_search_detail);
 
         String getpidx = getIntent().getStringExtra("pidx");
-        Log.d("pidx", "상세activity pidx: ");
+        Log.d("pidx", "상세activity pidx: "+getpidx);
         searchDetailFrag = new SearchDetailFrag(getpidx);
         searchDetailFrag2 = new SearchDetailFrag2(getpidx);
         searchDetailFrag3 = new SearchDetailFrag3(getpidx);

@@ -3,161 +3,169 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_centerInParent="true"
-        android:id="@+id/wrap"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_tit"
-            android:layout_centerHorizontal="true"
-            android:text="계정 상세"
-            android:textSize="23sp"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
         <LinearLayout
-            android:layout_margin="20dp"
-            android:layout_below="@id/tv_tit"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:id="@+id/wrap"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_email"
-                android:text="계정 이메일"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_email2"
-                android:textStyle="bold"
-                android:text="test@gmail.com"
+                android:id="@+id/tv_tit"
+                android:layout_gravity="center_horizontal"
+                android:text="계정 상세"
+                android:textSize="23sp"
                 android:textColor="@color/black"
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_nick"
-                android:text="닉네임(필수)"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_email"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:text="사쿠맘"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_self"
-                android:text="자기소개(필수)"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_self"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:text="사쿠맘이다 고양이가 네마리다 =육아전쟁 죽겠다 사료값 벌어야지 넘 졸려 왜 하루종일 코딩했는데 이것밖에 안된거지 지오코딩 네 이놈 대체 오늘 몇시간 동안 뺑이친거야ㅠㅠㅠ"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_git"
-                android:text="활동 중인 깃헙 주소"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_github"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:text="https://github.com/Sienna94"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_pw"
-                android:text="비밀번호 변경"
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tv_pw1"
-                android:text="현재 비밀번호(빈칸으로 두면 변경되지 않습니다)_"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_pw1"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:hint="******"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_pw2"
-                android:text="새로운 비밀번호 입력"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_pw2"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_pw3"
-                android:text="다시 한번 새로운 비밀번호 입력"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_pw3"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btn_save"
                 android:layout_margin="10dp"
-                android:text="저장하기"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_below="@id/tv_tit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:text="계정 이메일"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_email2"
+                    android:textStyle="bold"
+                    android:text="test@gmail.com"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_nick"
+                    android:text="닉네임(필수)"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="사쿠맘"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_self"
+                    android:text="자기소개(필수)"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_self"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="사쿠맘이다 고양이가 네마리다 =육아전쟁 죽겠다 사료값 벌어야지 넘 졸려 왜 하루종일 코딩했는데 이것밖에 안된거지 지오코딩 네 이놈 대체 오늘 몇시간 동안 뺑이친거야ㅠㅠㅠ"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_git"
+                    android:text="활동 중인 깃헙 주소"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_github"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="https://github.com/Sienna94"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_pw"
+                    android:text="비밀번호 변경"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_pw1"
+                    android:text="현재 비밀번호(빈칸으로 두면 변경되지 않습니다)_"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_pw1"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:hint="******"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_pw2"
+                    android:text="새로운 비밀번호 입력"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_pw2"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_pw3"
+                    android:text="다시 한번 새로운 비밀번호 입력"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_pw3"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_margin="10dp"
+                    android:text="저장하기"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -164,7 +164,23 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         }
         return score_changed;
     }
-    //스피너 테스트
+    //북마크 추가하기
+    private void bkInsert(){
+        Response.Listener<String> successListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("kkk", "북마크 추가 성공" + response);
+            }
+        };
+        //좋아요 버튼 클릭시 북마크 등록하기
+        Log.d("chk", "북마크 등록 통신 start");
+        params.clear();
+        params.put("pidx", pidx);
+        params.put("mid", Storage.USER);
+        Log.d("bk", "bkInsert pidx: "+pidx);
+        Log.d("bk", "bkInsert mid: "+Storage.USER);
+        request("BkInsert.do", successListener);
+    }
 
     //댓글 리스트 전체 출력
     private void requestForData(){
@@ -293,7 +309,13 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn_like){//좋아요 버튼
-
+            Log.d("chk", "onClick: 북마크 클릭됨");
+            if(Storage.USER.equals("")){
+                Toast.makeText(getActivity(), "로그인 후 이용 가능합니다 :(", Toast.LENGTH_SHORT).show();
+            }else{
+                bkInsert();
+                Toast.makeText(getActivity(), "북마크에 추가! 마이페이지에서 확인하세요 :)", Toast.LENGTH_SHORT).show();
+            }
         }else if(v.getId()==R.id.tv_info){ //매장정보
             Log.d("chk", "onClick: 매장정보 tv 클릭됨");
             ((SearchDetailActivity)getActivity()).replaceFragment(1);

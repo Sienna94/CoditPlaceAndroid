@@ -1,5 +1,6 @@
 package com.example.coditplace2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,18 +94,25 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
             Toast.makeText(getActivity(), "아이디 패스워드를 확인하세요 :(", Toast.LENGTH_SHORT).show();
         }
     }
-
+    String id;
+    String pw;
     Response.Listener<String> successListener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
             Log.d("login", response);
+            //로그인 성공시 storage 값 바꿔줌
+            Storage.USER = id;
+            Log.d("chk", "onResponse: 로그인 success 아이디값 저장:" + id);
+            //이동
+            Intent intent = new Intent((LoginActivity) getActivity(), com.example.coditplace2.MainActivity.class);
+            startActivity(intent);
         }
     };
     private void requestForLogin(){
         //로그인 버튼 누르면 1. 통신 2. 값 받아오기 3. alert 띄우기 4. 리스트뷰로 이동
         //로그인 시도
-        final String id = et_id.getText().toString().trim();
-        final String pw = et_pw.getText().toString().trim();
+        id = et_id.getText().toString().trim();
+        pw = et_pw.getText().toString().trim();
 
         Log.d("chk", "로그인 통신: start");
         params.clear();

@@ -102,7 +102,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
 
         // map
         mapView = (MapView)layout.findViewById(R.id.map);
-        mapView.getMapAsync(this);
+
         //geocoder
         Geocoder geocoder = new Geocoder(getActivity());
 
@@ -207,7 +207,13 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn_like){//좋아요 버튼
-
+            Log.d("chk", "onClick: 북마크 클릭됨");
+            if(Storage.USER.equals("")){
+                Toast.makeText(getActivity(), "로그인 후 이용 가능합니다 :(", Toast.LENGTH_SHORT).show();
+            }else{
+                bkInsert();
+                Toast.makeText(getActivity(), "북마크에 추가! 마이페이지에서 확인하세요 :)", Toast.LENGTH_SHORT).show();
+            }
         }else if(v.getId()==R.id.tv_info){ //매장정보
             Log.d("chk", "onClick: 매장정보 tv 클릭됨");
             ((SearchDetailActivity)getActivity()).replaceFragment(1);
@@ -223,6 +229,23 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
             Log.d("chk", "onClick: 연락처 tv 클릭됨");
             ((SearchDetailActivity)getActivity()).replaceFragment(4);
         }
+    }
+    //북마크 추가하기
+    private void bkInsert(){
+        Response.Listener<String> successListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("kkk", "북마크 추가 성공" + response);
+            }
+        };
+        //좋아요 버튼 클릭시 북마크 등록하기
+        Log.d("chk", "북마크 등록 통신 start");
+        params.clear();
+        params.put("pidx", pidx);
+        params.put("mid", Storage.USER);
+        Log.d("bk", "bkInsert pidx: "+pidx);
+        Log.d("bk", "bkInsert mid: "+Storage.USER);
+        request("BkInsert.do", successListener);
     }
 
     //해당 pidx에 해당하는 detail 화면1
@@ -272,6 +295,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
                     tv_comment.setText(pcontent);
                     tv_paddress.setText(paddress);
                 }
+                mapView.getMapAsync(SearchDetailFrag.this);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -328,7 +352,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
             }
 //            카페 사진
             Glide.with(getActivity())
-                    .load("http://172.20.10.4:8180/oop/img/place/"+arr.get(position).pImage)
+                    .load(Storage.HOME_URL+":8180/oop/img/place/"+arr.get(position).pImage)
                     .into(viewHolder.ivHolder);
 
             Log.d("chk", "글라이드: 완료 "+position+",  size"+arr.size());

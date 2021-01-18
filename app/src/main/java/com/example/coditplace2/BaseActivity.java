@@ -32,10 +32,8 @@ public class BaseActivity extends AppCompatActivity {
 
     public void request(String url, Response.Listener<String> successListener){
         RequestQueue stringRequest = Volley.newRequestQueue(this);
-        url = "http://172.20.10.4:8180/oop/" + url;
-//        http://192.168.7.22 (학원)
-//        http://172.20.10.4 (집)
-//        192.168.7.22
+        url = Storage.HOME_URL+":8180/oop/" + url;
+
 
         StringRequest myReq = new StringRequest(Request.Method.POST, url,
                 successListener, errorListener){

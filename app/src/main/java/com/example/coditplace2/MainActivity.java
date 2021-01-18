@@ -2,6 +2,7 @@ package com.example.coditplace2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn;
@@ -51,8 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, com.example.coditplace2.LoginActivity.class);
             startActivity(intent);
         }else if(v.getId()==R.id.btn2){ //마이페이지 버튼
-            Intent intent = new Intent(this, com.example.coditplace2.MypageActivity.class);
-            startActivity(intent);
+            if(Storage.USER.equals("")){
+                Toast.makeText(getApplicationContext(), "로그인 후 이용가능합니다", Toast.LENGTH_LONG).show();
+            }else{
+                Intent intent = new Intent(this, com.example.coditplace2.MypageActivity.class);
+                startActivity(intent);
+            }
+
         }else if(v.getId()==R.id.btn_search) { //검색 버튼
             searchset();
             Intent intent = new Intent(this, com.example.coditplace2.SearchActivity.class);

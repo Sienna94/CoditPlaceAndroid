@@ -35,7 +35,9 @@ public class MypageActivity extends BaseActivity implements View.OnClickListener
         tv2.setOnClickListener(this);
         tv3.setOnClickListener(this);
 
+        mypageFrag1 = new MypageFrag1();
         mypageFrag2 = new MypageFrag2();
+        mypageFrag3 = new MypageFrag3();
 
        // 화면 전환 프래그먼트 선언 및 초기 화면 설정 * 북마크 페이지로 *
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -67,7 +69,7 @@ public class MypageActivity extends BaseActivity implements View.OnClickListener
             replaceFragment(1);
         }else if(v.getId()==R.id.tv_tit2){ //북마크
             replaceFragment(2);
-        }else if(v.getId()==R.id.tv_tit2){ //회원정보 변경
+        }else if(v.getId()==R.id.tv_tit3){ //회원정보 변경
             replaceFragment(3);
         }
     }

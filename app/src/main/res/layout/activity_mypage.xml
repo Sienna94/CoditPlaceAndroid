@@ -7,10 +7,11 @@
     tools:context=".SearchDetailActivity">
 
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/wrap"
-        android:layout_margin="20dp"
+        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="70dp">
 
         <TextView
             android:id="@+id/tv_tit"
