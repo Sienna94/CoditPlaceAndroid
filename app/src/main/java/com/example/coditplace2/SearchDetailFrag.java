@@ -47,12 +47,6 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
     String address_changed;
     Double mLat_changed;
     Double mLng_changed;
-/*    public SearchDetailFrag(){
-        //required
-        왜 두버ㅏㄴ째 부터는 앱이ㅓ 종료되는가! 와이! 왜죠?
-        난 진짜 잘못한 게 ㄹ없어
-        잘못이ㅏ라곤 열심히 한 죄ㅏ 밖에 없 ㅣㄹㄴ알., ㅋㅊㅌ..
-    }*/
     ArrayList<ImgArr> arr = new ArrayList<>();
     ImageView iv_bg;
     ImageView iv_icon;
