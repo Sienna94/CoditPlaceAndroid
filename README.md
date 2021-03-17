@@ -66,62 +66,62 @@
 >
 >- Activity의 경우 구글맵 출력시 xml에서 fragment를 사용한다. 또한 Activity에서는 GoogleMap을 import하여 사용하는데 이와 동일하게 했음.
 >
->  ```java
->  //예시 xml
->  <fragment
->          android:layout_width="match_parent"
->          android:layout_height="match_parent"
->          android:id="@+id/map"
->          tools:context=".MapsActivity"
->          android:name="com.google.android.gms.maps.SupportMapFragment" />
->  ```
+> ```java
+> //예시 xml
+> <fragment
+>         android:layout_width="match_parent"
+>         android:layout_height="match_parent"
+>         android:id="@+id/map"
+>         tools:context=".MapsActivity"
+>         android:name="com.google.android.gms.maps.SupportMapFragment" />
+> ```
 >
->  ```java
->  //예시 Activity
->  import com.google.android.gms.maps.GoogleMap;
->  ...
->      public class MainActivity extends AppCompatActivity
->          implements OnMapReadyCallback {
->  
->      private GoogleMap mMap;
->          ...
->  ```
+> ```java
+> //예시 Activity
+> import com.google.android.gms.maps.GoogleMap;
+> ...
+>     public class MainActivity extends AppCompatActivity
+>         implements OnMapReadyCallback {
 >
->  
+>     private GoogleMap mMap;
+>         ...
+> ```
+>
+>
 >
 >**Fragment에서 MapView 사용**
 >
 >- xml과 Fragment를 아래와 같이 변경했다. :point_right:[코드확인](https://github.com/Sienna94/CoditPlaceAndroid/blob/4d60f4381cbfcaf0200c91439031d55b33866449/app/src/main/java/com/example/coditplace2/SearchDetailFrag.java#L98)
 >
->  - GoogleMap을 MapView로 변환한 것 외의 다른 것들 (ex_ LocationSource, OnMapReadyCallback, LatLng, Marker, MarkerOptions)는 모두 동일하게 사용할 수 있다.
+> - GoogleMap을 MapView로 변환한 것 외의 다른 것들 (ex_ LocationSource, OnMapReadyCallback, LatLng, Marker, MarkerOptions)는 모두 동일하게 사용할 수 있다.
 >
->  ```java
->  <com.google.android.gms.maps.MapView
->           android:layout_centerHorizontal="true"
->           android:layout_below="@+id/tv_paddress"
->           android:layout_margin="10dp"
->           android:id="@+id/map"
->           android:layout_width="match_parent"
->           android:layout_height="match_parent"
->                      android:name="com.google.android.gms.maps.MapFragment" />
->  ```
+> ```java
+> <com.google.android.gms.maps.MapView
+>          android:layout_centerHorizontal="true"
+>          android:layout_below="@+id/tv_paddress"
+>          android:layout_margin="10dp"
+>          android:id="@+id/map"
+>          android:layout_width="match_parent"
+>          android:layout_height="match_parent"
+>                     android:name="com.google.android.gms.maps.MapFragment" />
+> ```
 >
->  ```java
->  import com.google.android.gms.maps.MapView;
->  ...
->      public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
->      //googleMap
->      private MapView mapView = null;
->          ...
->                  
->      @Nullable
->      @Override
->      public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
->          View layout = inflater.inflate(R.layout.frag_searchdetail, null);
->  		...
->              // map
->          mapView = (MapView)layout.findViewById(R.id.map);
->  ```
+> ```java
+> import com.google.android.gms.maps.MapView;
+> ...
+>     public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+>     //googleMap
+>     private MapView mapView = null;
+>         ...
+>
+>     @Nullable
+>     @Override
+>     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+>         View layout = inflater.inflate(R.layout.frag_searchdetail, null);
+> 		...
+>             // map
+>         mapView = (MapView)layout.findViewById(R.id.map);
+> ```
 
 
 
@@ -131,7 +131,7 @@
 
 첫 개인프로젝트인 점, 하고 싶었던 주제였던 점 때문에 더 애착이 간다. 획기적인 기능보다는  이전에 다룬 기능들을 복습하는 차원에서 진행했다. 
 
-또한 클론프로젝트임에도 웹사이트를 모바일 어플리케이션으로 바꿔야했다. 출시된 어플리케이션이 없어서 크롬으로 모바일 버전을 띄워놓고 참고하면서 만들었는데 **상상력을 최대한 발휘하려고 노력했다.**
+또한 클론프로젝트임에도 웹사이트를 모바일 어플리케이션으로 바꿔야했다. 출시된 어플리케이션이 없어서 크롬으로 모바일 버전을 띄워놓고 참고하면서 만들었는데 **상상력을 최대한 발휘하려고 노력했다. **
 
 ![다운로드](https://user-images.githubusercontent.com/69448123/110580968-03eb2700-81ad-11eb-89fb-bc1cca343440.jpg)
 
@@ -163,4 +163,45 @@
 
 
 
-6.3. 회원가입시 확인 이메일 보내기, 토큰 활용, 여전히 로컬 서버를 사용했다는 것, 글 등록 기능을 완성하지 못한 것...
+6.3. 회원가입시 확인 이메일 보내기, 토큰 활용, 여전히 로컬 서버를 사용했다는 것, 글 등록 기능을 완성하지 못한 것 등 아쉬움이 너무 많다.
+
+
+
+### 그래서 :tada: 나는, 할 것이다, 업데이트를!
+
+다음과 같은 업데이트를 계획하고 있습니다.
+
+자세한 업데이트 계획 및 진척 상황은 [:notebook_with_decorative_cover:Click!](https://www.notion.so/17c987bdef654bab90e981e251ac1475?v=924d849ee6e0451fa5362a393d7f27be)
+
+### 1. Firebase 활용 :fire:
+
+>  `Authentication`을 통한 회원관리
+>
+> `Realtime Database` 활용 (미정)
+>
+> `Cloud Messaging` 
+>
+> `AdMob`
+
+### 2. AWS 활용 :palm_tree:
+
+> localhost는 이제 그만
+
+### 3. 미완성 기능 추가
+
+> - 검색어 추천
+> - 후기 등록 기능
+> - 검색 리스트에서 북마크 여부 표시되도록
+
+### 4. 기존 기능 개선
+
+> - 별점 기능 ``RatingBar`` 활용으로 수정
+> - Listview :point_right: **Recycler View**
+> - Volley :point_right: **Retrofit**
+> - No 하드코딩 :no_good_woman:
+> - package 통한 클래스 정리
+
+### 5.  Git Flow :cactus:
+
+> ``master`` 브랜치 이외  ``develop`` 브랜치를 사용해서 merge하는 방식으로 
+
