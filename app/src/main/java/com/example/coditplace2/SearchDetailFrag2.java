@@ -140,15 +140,15 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
                             .into(iv_bg);
                     tv_pname.setText(pname);
                     tv_comment.setText(pval);
-                    tv_pspace.setText(pspace);
-                    tv_pplug.setText(pplug);
-                    tv_ptable.setText(ptable);
-                    tv_wifi.setText(wifi);
-                    tv_wifibreak.setText(wifi_break);
-                    tv_pnoise.setText(pnoise);
-                    tv_pmusic.setText(pmusic);
-                    tv_pbright.setText(pbright);
-                    tv_plight.setText(plight);
+                    tv_pspace.setText(evalChanger(pspace));
+                    tv_pplug.setText(evalChanger(pplug));
+                    tv_ptable.setText(evalChanger(ptable));
+                    tv_wifi.setText(evalChanger4(wifi));
+                    tv_wifibreak.setText(evalChanger3(wifi_break));
+                    tv_pnoise.setText(evalChanger(pnoise));
+                    tv_pmusic.setText(evalChanger(pmusic));
+                    tv_pbright.setText(evalChanger(pbright));
+                    tv_plight.setText(evalChanger2(plight));
 
                     // 에디터 평가
 
@@ -158,6 +158,47 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
             }
         }
     };
+    //eval changer()
+    public String evalChanger(String str){
+        String eval_changed="";
+        if(str.equals("0")){
+            eval_changed = "★☆☆☆☆";
+        }else if(str.equals("1")){
+            eval_changed = "★★★☆☆";
+        }else if(str.equals("2")) {
+            eval_changed = "★★★★★";
+        }
+        return eval_changed;
+    }
+    public String evalChanger2(String str){
+        String eval_changed="";
+        if(str.equals("0")){
+            eval_changed = "형광등(하얀색 계열)";
+        }else if(str.equals("1")){
+            eval_changed = "백열등(노란색 계열)";
+        }
+        return eval_changed;
+    }
+    public String evalChanger3(String str){
+        String eval_changed="";
+        if(str.equals("0")){
+            eval_changed = "자주 끊김";
+        }else if(str.equals("1")){
+            eval_changed = "보통(0~1회)";
+        }else if(str.equals("2")) {
+            eval_changed = "원활(없음)";
+        }
+        return eval_changed;
+    }
+    public String evalChanger4(String str){
+        String eval_changed="";
+        if(str.equals("0")){
+            eval_changed = "비번 없음";
+        }else if(str.equals("1")){
+            eval_changed = "있음";
+        }
+        return eval_changed;
+    }
 
     @Override
     public void onClick(View v) {

@@ -12,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn;
     Button btn2;
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText et_paddress;
 
     Button btn_search;
-
+    //광고
+    AdView ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn_search.setOnClickListener(this);
+
+        //광고
+        ad=findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        ad.loadAd(adRequest);
     }
 
     @Override
