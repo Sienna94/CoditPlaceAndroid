@@ -59,7 +59,7 @@
                     android:id="@+id/et_email"
                     android:textStyle="bold"
                     android:textSize="14sp"
-                    android:text="사쿠맘"
+                    android:hint="사쿠맘"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -103,18 +103,22 @@
                     android:layout_marginBottom="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
                 <TextView
                     android:id="@+id/tv_pw1"
-                    android:text="현재 비밀번호(빈칸으로 두면 변경되지 않습니다)_"
+                    android:text="비밀번호 일치여부"
+                    android:visibility="invisible"
+                    android:textColor="#F44336"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
 
                 <EditText
                     android:id="@+id/et_pw1"
                     android:textStyle="bold"
                     android:textSize="14sp"
-                    android:hint="******"
+                    android:hint="기존 비밀번호 입력"
                     android:textColor="@color/black"
                     android:inputType="textPassword"
                     android:layout_marginBottom="10dp"
@@ -141,6 +145,15 @@
                 <TextView
                     android:id="@+id/tv_pw3"
                     android:text="다시 한번 새로운 비밀번호 입력"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_pwchk"
+                    android:text="비밀번호 일치여부2"
+                    android:visibility="invisible"
+                    android:textColor="#3F51B5"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

@@ -6,36 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/wrap"
-        android:layout_centerInParent="true"
-        android:layout_width="370dp"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id_for_test"/>
+
+    <LinearLayout
+        android:id="@+id/wrap1"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btn"
             android:text="Login PG"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btn2"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/btn"
             android:text="mypage PG"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_below="@id/wrap1"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/tv_tit"
             android:text="오늘은 어디에서 할까?"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/btn"
             android:textSize="35sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/tv_extra"
             android:textSize="18sp"
-            android:text="일하거나 공부하기 좋은 공간을 찾고 계신가요? 일과를 시작하기 전, 노마드 워커를 위한 공간 정보를 확인해보세요 :)"
-            android:layout_marginLeft="5dp"
+            android:text="일하거나 공부하기 좋은 공간을 찾고 계신가요? 일과를 시작하기 전, 코더를 위한 공간 정보를 확인해보세요 :)"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_below="@id/tv_tit"
             android:layout_width="wrap_content"
@@ -43,6 +71,7 @@
 
         <RelativeLayout
             android:id="@+id/wrap2"
+            android:padding="20dp"
             android:background="#F3F3F3"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
@@ -83,7 +112,7 @@
                 android:id="@+id/btn_search"
                 android:text="검색하기"
                 android:textColor="@android:color/white"
-                android:background="#6c1cff"
+                android:backgroundTint="@color/black"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"

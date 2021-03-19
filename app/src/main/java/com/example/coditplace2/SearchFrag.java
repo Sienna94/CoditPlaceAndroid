@@ -53,7 +53,6 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         return layout;
     }
 
-
     String type; //타입 // 밖으로 빼준다.
     String search; //검색어
     public void get(String type, String search){ // 검색어 받아오는 메소드

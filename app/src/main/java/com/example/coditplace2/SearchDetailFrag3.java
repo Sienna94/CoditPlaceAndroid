@@ -398,17 +398,17 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
 
             //삭제 클릭
             viewHolder.tvDelHolder.setOnClickListener(new View.OnClickListener(){
-                @Override //작성글만 지울 수 있도록
+                @Override //작성 댓글만 지울 수 있도록
                 public void onClick(View v) {
                     Log.d("tv_del", "ridx:"+ridx);
-//                    if(arr.get(position).rwriter.equals(mid)){
+                    if(arr.get(position).rwriter.equals(Storage.USER)){
                         SearchDetailFrag3.this.position = position;
                         int ridx = arr.get(position).ridx;
                         Log.d("btndel", "btndel, ridx:" + ridx);
                         deleteReply(ridx);
-//                    }else{
-//                        Toast.makeText(getActivity(), "자신이 작성한 글만 지울 수 있습니다 :(", Toast.LENGTH_SHORT).show();
-//                    }
+                    }else{
+                        Toast.makeText(getActivity(), "자신이 작성한 글만 지울 수 있습니다 :(", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

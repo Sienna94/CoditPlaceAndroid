@@ -44,7 +44,7 @@
             android:id="@+id/btn_login"
             android:text="로그인"
             android:textColor="@android:color/white"
-            android:background="#6c1cff"
+            android:backgroundTint="@color/black"
             android:layout_marginTop="20dp"
             android:layout_below="@id/etv_pw"
             android:layout_width="match_parent"
