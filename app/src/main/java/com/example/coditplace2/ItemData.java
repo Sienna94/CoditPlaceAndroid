@@ -22,4 +22,40 @@ public class ItemData {
         this.pContent = pContent;
         this.pLike = pLike;
     }
+
+    public String getpIdx() {
+        return pIdx;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public String getpImage() {
+        return pImage;
+    }
+
+    public String getpVisit() {
+        return pVisit;
+    }
+
+    public String getpIcon() {
+        return pIcon;
+    }
+
+    public String getpCategory() {
+        return pCategory;
+    }
+
+    public String getpPhone() {
+        return pPhone;
+    }
+
+    public String getpContent() {
+        return pContent;
+    }
+
+    public String getpLike() {
+        return pLike;
+    }
 }
