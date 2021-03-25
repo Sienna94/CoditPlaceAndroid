@@ -19,9 +19,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.example.coditplace2.adapter.MyAdapter;
+import com.example.coditplace2.util.ItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,12 +33,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListener {
+public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     ArrayList<ItemData> arr = new ArrayList<>();
 
     TextView tv_tit;
-    ListView lv;
+    RecyclerView rv;
     MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
+
+    int total;
 
     public SearchFrag(String type, String search) {
         this.type = type;
@@ -47,8 +53,8 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         View layout = inflater.inflate(R.layout.frag_search, container, false);
 
         tv_tit = layout.findViewById(R.id.tv_tit);
-        lv = layout.findViewById(R.id.lv);
-        Log.d("abc", "onCreateView: 1");
+        //recyclervview 초기화
+        rv = layout.findViewById(R.id.rv);
         request();
         return layout;
     }
@@ -87,9 +93,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         params.put("pname", search);
         request("PlaceListName.do", successListener);
         //어댑터에 적용
-        adapter = new MyAdapter(getActivity());
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        initRecyclerView();
     }
     private void requestPlocation(){ //입력값이 장소 지역일 때 출력
         Log.d("chk", "장소 리스트 지역 requestPlocation: start");
@@ -98,9 +102,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         params.put("plocation", search);
         request("PlaceListLocation.do", successListener);
         //어댑터에 적용
-        adapter = new MyAdapter(getActivity());
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        initRecyclerView();
     }
     private void requestPaddress(){//입력값이 장소 주소일 때 출력
         Log.d("chk", "주소 리스트 지역 requestPaddress: start");
@@ -109,9 +111,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         params.put("paddress", search);
         request("PlaceListAddress.do", successListener);
         //어댑터에 적용
-        adapter = new MyAdapter(getActivity());
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        initRecyclerView();
     }
 
     private void requestForData() { //입력값 없이 전체 출력
@@ -120,9 +120,7 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
         params.clear();
         request("PlaceList.do", successListener);
         //어댑터에 적용
-        adapter = new MyAdapter(getActivity());
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        initRecyclerView();
     }
 
     Response.Listener<String> successListener = new Response.Listener<String>() {
@@ -149,97 +147,31 @@ public class SearchFrag extends BaseFrag implements AdapterView.OnItemClickListe
                 }
                 //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
                 adapter.notifyDataSetChanged();
+                total=arr.size();
+                tv_tit.setText(total+"개의 결과가 있습니다");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     };
+    //recyclerview!
+    private void initRecyclerView(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(linearLayoutManager);
+//        ItemDecoration itemDecorator = new ItemDecoration(10); //리사이클러뷰 아이템 간격
+//        rv.addItemDecoration(itemDecorator);
+        adapter = new MyAdapter(arr, this);
+        rv.setAdapter(adapter);
+    }
+
 
     // 해당 장소 후기 페이지로 넘어가도록 pIDX 넘겨주기(position), 상세페이지
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void myClick(int position) {
+        Log.d("myClick", "myClick: Clicked");
         Intent intent = new Intent((SearchActivity) getActivity(), com.example.coditplace2.SearchDetailActivity.class);
         intent.putExtra("pidx", arr.get(position).pIdx);
         Log.d("chk", "onItemClick: pidx="+arr.get(position).pIdx);
         startActivity(intent);
-    }
-
-    class ItemHolder {
-        TextView tvPnameHolder;
-        ImageView ivPimage1Holder;
-        TextView tvPvisitHolder;
-        ImageView ivPiconHolder;
-        TextView tvPcategoryHolder;
-        TextView tvPphoneHolder;
-        TextView tvPcontentHolder;
-        TextView tvPlikeHolder;
-    }
-
-    class MyAdapter extends ArrayAdapter {
-        LayoutInflater lnf;
-
-        public MyAdapter(Activity context) {
-            super(context, R.layout.items, arr);
-            lnf = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return arr.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return arr.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ItemHolder viewHolder;
-            if (convertView == null) {
-                convertView = lnf.inflate(R.layout.items, parent, false);
-                viewHolder = new ItemHolder();
-                viewHolder.tvPnameHolder = convertView.findViewById(R.id.tv_pname);
-                viewHolder.ivPimage1Holder = convertView.findViewById(R.id.iv_bg);
-                viewHolder.tvPvisitHolder = convertView.findViewById(R.id.tv_visit);
-                viewHolder.ivPiconHolder = convertView.findViewById(R.id.iv_icon);
-                viewHolder.tvPcategoryHolder = convertView.findViewById(R.id.tv_category);
-                viewHolder.tvPphoneHolder = convertView.findViewById(R.id.tv_pphone);
-                viewHolder.tvPcontentHolder = convertView.findViewById(R.id.tv_pcontent);
-                viewHolder.tvPlikeHolder = convertView.findViewById(R.id.tv_like);
-
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ItemHolder) convertView.getTag();
-            }
-            //가게 이름, 가게방문일, 가게 카테고리, 가게 연락처, 가게설명, 좋아요(사용자)
-            viewHolder.tvPnameHolder.setText(arr.get(position).pName);
-            viewHolder.tvPvisitHolder.setText(arr.get(position).pVisit);
-            viewHolder.tvPcategoryHolder.setText(arr.get(position).pCategory);
-            viewHolder.tvPphoneHolder.setText(arr.get(position).pPhone);
-            viewHolder.tvPcontentHolder.setText(arr.get(position).pContent);
-            viewHolder.tvPlikeHolder.setText(arr.get(position).pLike);
-
-//            카페 사진
-            Glide.with(getActivity())
-                    .load("http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage)
-                    .into(viewHolder.ivPimage1Holder);
-            Log.d("img", "http://192.168.7.31:8180/oop/img/place/" + arr.get(position).pImage);
-            //카페 아이
-//            Glide.with(getActivity())
-//                    .load("http://172.20.10.4:8180/oop/img/shoes/"+arr.get(position).pImage)
-//                    .into(viewHolder.ivPiconHolder);
-//            Log.d("img", "http://172.20.10.4/oop/img/shoes/"+arr.get(position).pImage);
-
-//        http://192.168.7.26
-//        http://172.20.10.4
-            return convertView;
-        }
     }
 }

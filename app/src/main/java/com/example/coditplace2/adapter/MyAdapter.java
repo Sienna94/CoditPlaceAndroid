@@ -23,9 +23,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private ArrayList<ItemData> arr = new ArrayList<>();
     private MyListener myListener; // 클릭리스너
 
-    public MyAdapter(ArrayList<ItemData> arr, MyListener myListener){
+    public MyAdapter(ArrayList<ItemData> arr, MyListener myListener2){
         this.arr = arr;
-        this.myListener = myListener;
+        this.myListener = myListener2;
     }
 
     // 리사이클러뷰에 들어갈 뷰 홀더를 할당하는 함수
@@ -49,7 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             viewHolder.tvPcontentHolder.setText(arr.get(position).getpContent());
             viewHolder.tvPlikeHolder.setText(arr.get(position).getpLike());
 
-//            카페 사진
+            //카페 사진
             Glide.with(viewHolder.itemView.getContext())
                     .load(Storage.IMG_URL + arr.get(position).getpImage())
                     .into(viewHolder.ivPimage1Holder);
@@ -76,17 +76,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
         MyListener myListener;
 
-        public ViewHolder(@NonNull View itemView, MyListener myListener) {
+        public ViewHolder(@NonNull View itemView, MyListener myListener2) {
             super(itemView);
             tvPnameHolder = itemView.findViewById(R.id.tv_pname);
             ivPimage1Holder = itemView.findViewById(R.id.iv_bg);
             tvPvisitHolder = itemView.findViewById(R.id.tv_visit);
             ivPiconHolder = itemView.findViewById(R.id.iv_icon);
-            tvPcategoryHolder = itemView.findViewById(R.id.iv_icon);
+            tvPcategoryHolder = itemView.findViewById(R.id.tv_category);
             tvPphoneHolder = itemView.findViewById(R.id.tv_pphone);
             tvPcontentHolder = itemView.findViewById(R.id.tv_pcontent);
             tvPlikeHolder = itemView.findViewById(R.id.tv_like);
 
+            myListener = myListener2;
             itemView.setOnClickListener(this);
         }
 
