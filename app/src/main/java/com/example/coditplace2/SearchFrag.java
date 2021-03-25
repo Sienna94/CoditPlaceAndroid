@@ -40,6 +40,8 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     RecyclerView rv;
     MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
 
+    int total;
+
     public SearchFrag(String type, String search) {
         this.type = type;
         this.search = search;
@@ -145,6 +147,8 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 }
                 //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
                 adapter.notifyDataSetChanged();
+                total=arr.size();
+                tv_tit.setText(total+"개의 결과가 있습니다");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -154,17 +158,17 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(linearLayoutManager);
-        ItemDecoration itemDecorator = new ItemDecoration(10); //리사이클러뷰 아이템 간격
-        rv.addItemDecoration(itemDecorator);
+//        ItemDecoration itemDecorator = new ItemDecoration(10); //리사이클러뷰 아이템 간격
+//        rv.addItemDecoration(itemDecorator);
         adapter = new MyAdapter(arr, this);
         rv.setAdapter(adapter);
-        tv_tit.setText(adapter.getItemCount()+"개의 결과가 있습니다 :D");
     }
 
 
     // 해당 장소 후기 페이지로 넘어가도록 pIDX 넘겨주기(position), 상세페이지
     @Override
     public void myClick(int position) {
+        Log.d("myClick", "myClick: Clicked");
         Intent intent = new Intent((SearchActivity) getActivity(), com.example.coditplace2.SearchDetailActivity.class);
         intent.putExtra("pidx", arr.get(position).pIdx);
         Log.d("chk", "onItemClick: pidx="+arr.get(position).pIdx);
