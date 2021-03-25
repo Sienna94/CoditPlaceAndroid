@@ -82,7 +82,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             ivPimage1Holder = itemView.findViewById(R.id.iv_bg);
             tvPvisitHolder = itemView.findViewById(R.id.tv_visit);
             ivPiconHolder = itemView.findViewById(R.id.iv_icon);
-            tvPcategoryHolder = itemView.findViewById(R.id.iv_icon);
+            tvPcategoryHolder = itemView.findViewById(R.id.tv_category);
             tvPphoneHolder = itemView.findViewById(R.id.tv_pphone);
             tvPcontentHolder = itemView.findViewById(R.id.tv_pcontent);
             tvPlikeHolder = itemView.findViewById(R.id.tv_like);
