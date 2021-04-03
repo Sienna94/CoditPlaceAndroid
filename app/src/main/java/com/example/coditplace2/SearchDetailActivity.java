@@ -57,6 +57,4 @@ public class SearchDetailActivity extends BaseActivity{
             fragmentTransaction.commit();
         }
     }
-
-
 }
