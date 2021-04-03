@@ -19,7 +19,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import retrofit2.Callback;
 
 public class BaseActivity extends AppCompatActivity {
     Map<String, String> params = new HashMap<String, String>();

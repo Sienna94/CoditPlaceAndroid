@@ -1,6 +1,5 @@
 package com.example.coditplace2;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
-import com.bumptech.glide.Glide;
 import com.example.coditplace2.adapter.MyAdapter;
-import com.example.coditplace2.util.ItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +30,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     RecyclerView rv;
     MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
 
+    String search; //검색어
     int total;
 
     public SearchFrag(String type, String search) {
@@ -55,17 +46,14 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         tv_tit = layout.findViewById(R.id.tv_tit);
         //recyclervview 초기화
         rv = layout.findViewById(R.id.rv);
+        //Retrofit
+        requestR(type, search, arr);
+        //Volley
         request();
         return layout;
     }
 
     String type; //타입 // 밖으로 빼준다.
-    String search; //검색어
-    public void get(String type, String search){ // 검색어 받아오는 메소드
-        Log.d("abc", "get(): 1"+getActivity());
-        this.type = type;
-        this.search = search;
-    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -124,7 +112,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     }
 
     Response.Listener<String> successListener = new Response.Listener<String>() {
-        //가져온 jsonArray 리스트뷰로 나타내기
+        //가져온 jsonArray arr에 추가
         @Override
         public void onResponse(String response) {
             try {
@@ -163,8 +151,6 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         adapter = new MyAdapter(arr, this);
         rv.setAdapter(adapter);
     }
-
-
     // 해당 장소 후기 페이지로 넘어가도록 pIDX 넘겨주기(position), 상세페이지
     @Override
     public void myClick(int position) {
@@ -174,4 +160,6 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         Log.d("chk", "onItemClick: pidx="+arr.get(position).pIdx);
         startActivity(intent);
     }
+    //Retrofit 메서드
+
 }
