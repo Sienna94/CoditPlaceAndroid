@@ -12,7 +12,8 @@ import com.example.coditplace2.R;
 
 public class SearchActivity extends AppCompatActivity {
     SearchFrag searchFrag;
-
+    //For package organizing!!
+    //laaalaaalllaalalaaallll
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,6 @@ public class SearchActivity extends AppCompatActivity {
         String getsearch = getIntent().getStringExtra("search");
         searchFrag = new SearchFrag(gettype, getsearch);
         //searchFrag.get(gettype, getsearch); //프래그먼트에 설정해준 str 받아오는 메소드
-
 
         // 화면 전환 프래그먼트 선언 및 초기 화면 설정
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
