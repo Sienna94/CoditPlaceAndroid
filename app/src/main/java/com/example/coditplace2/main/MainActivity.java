@@ -1,17 +1,20 @@
-package com.example.coditplace2;
+package com.example.coditplace2.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
+import com.example.coditplace2.join.LoginActivity;
+import com.example.coditplace2.mypage.MypageActivity;
+import com.example.coditplace2.place_list.SearchActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -59,19 +62,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn){ //로긴 버튼
-            Intent intent = new Intent(this, com.example.coditplace2.LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }else if(v.getId()==R.id.btn2){ //마이페이지 버튼
             if(Storage.USER.equals("")){
                 Toast.makeText(getApplicationContext(), "로그인 후 이용가능합니다", Toast.LENGTH_LONG).show();
             }else{
-                Intent intent = new Intent(this, com.example.coditplace2.MypageActivity.class);
+                Intent intent = new Intent(this, MypageActivity.class);
                 startActivity(intent);
             }
 
         }else if(v.getId()==R.id.btn_search) { //검색 버튼
             searchset();
-            Intent intent = new Intent(this, com.example.coditplace2.SearchActivity.class);
+            Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("type", type);
             intent.putExtra("search", search_final);
             startActivity(intent);

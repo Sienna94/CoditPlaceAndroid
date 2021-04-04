@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.dto;
 
 public class ItemData {
     String pIdx;

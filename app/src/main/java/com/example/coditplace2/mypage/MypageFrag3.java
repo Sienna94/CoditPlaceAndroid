@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.mypage;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,10 +1,9 @@
-package com.example.coditplace2;
+package com.example.coditplace2.place_detail;
 
 import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +21,11 @@ import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;

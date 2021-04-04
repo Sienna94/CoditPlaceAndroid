@@ -1,7 +1,6 @@
-package com.example.coditplace2;
+package com.example.coditplace2.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,11 +14,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Response;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
+import com.example.coditplace2.join.JoinFrag;
+import com.example.coditplace2.join.LoginActivity;
+import com.example.coditplace2.main.MainActivity;
 
 public class LoginFrag extends BaseFrag implements View.OnClickListener{
     TextView tv_titLogin;
@@ -104,7 +106,7 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
             Storage.USER = id;
             Log.d("chk", "onResponse: 로그인 success 아이디값 저장:" + id);
             //이동
-            Intent intent = new Intent((LoginActivity) getActivity(), com.example.coditplace2.MainActivity.class);
+            Intent intent = new Intent((LoginActivity) getActivity(), MainActivity.class);
             startActivity(intent);
         }
     };

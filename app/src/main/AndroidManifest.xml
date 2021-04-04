@@ -18,7 +18,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id"/>
 
-        <activity android:name=".MypageActivity"></activity>
+        <activity android:name=".mypage.MypageActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -27,11 +27,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCXjvbPDeOWtNR_5z4Aqw5_bkCYrHOXN1k" />
 
-        <activity android:name=".SearchDetailActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".place_detail.SearchDetailActivity" />
+        <activity android:name=".place_list.SearchActivity" />
+        <activity android:name=".join.LoginActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

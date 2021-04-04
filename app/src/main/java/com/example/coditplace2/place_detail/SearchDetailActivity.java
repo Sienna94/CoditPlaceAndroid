@@ -1,18 +1,19 @@
-package com.example.coditplace2;
+package com.example.coditplace2.place_detail;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-public class SearchDetailActivity extends BaseActivity{
+import com.example.coditplace2.BaseActivity;
+import com.example.coditplace2.R;
+import com.example.coditplace2.place_detail.SearchDetailFrag;
+import com.example.coditplace2.place_detail.SearchDetailFrag2;
+import com.example.coditplace2.place_detail.SearchDetailFrag3;
+import com.example.coditplace2.place_detail.SearchDetailFrag4;
+
+public class SearchDetailActivity extends BaseActivity {
     SearchDetailFrag searchDetailFrag;
     SearchDetailFrag2 searchDetailFrag2;
     SearchDetailFrag3 searchDetailFrag3;

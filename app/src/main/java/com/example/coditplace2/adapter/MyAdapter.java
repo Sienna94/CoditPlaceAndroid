@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coditplace2.ItemData;
+import com.example.coditplace2.dto.ItemData;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
 
@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private static final String TAG = "MyAdapter";
     //뷰 홀더에 들어갈 arr
-    private ArrayList<ItemData> arr = new ArrayList<>();
-    private MyListener myListener; // 클릭리스너
+    public ArrayList<ItemData> arr = new ArrayList<>();
+    public MyListener myListener; // 클릭리스너
 
     public MyAdapter(ArrayList<ItemData> arr, MyListener myListener2){
         this.arr = arr;

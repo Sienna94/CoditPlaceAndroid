@@ -1,14 +1,14 @@
-package com.example.coditplace2;
+package com.example.coditplace2.mypage;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.coditplace2.BaseActivity;
+import com.example.coditplace2.R;
 
 public class MypageActivity extends BaseActivity implements View.OnClickListener {
     MypageFrag1 mypageFrag1; //공간정보 추가
