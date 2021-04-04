@@ -50,7 +50,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         View layout = inflater.inflate(R.layout.frag_search, container, false);
 
         tv_tit = layout.findViewById(R.id.tv_tit);
-        //recyclervview 초기화
+        //recyclerView 초기화
         rv = layout.findViewById(R.id.rv);
         //Retrofit
         request();
