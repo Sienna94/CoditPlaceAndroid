@@ -9,7 +9,14 @@
 :hand: 잠깐! 현재는 이런 것들이 업데이트 됐습니다.
 
 > - ListView를 **RecyclerView**로 교체하였습니다 - Mar 25
+>
 > - 장소 출력시의 통신 라이브러리가 Volley에서 **Retrofit**로 교체됐습니다 (in ``SearchFrag.java``) - Apr 4
+>
+> - **도메인** 중심으로 패키지를 정리하여 기능 구분이 쉽도록 하였습니다 - Apr4
+>
+>   ![image](https://user-images.githubusercontent.com/69448123/113508293-2abd3300-958a-11eb-82ce-be6697d6f9fa.png)
+
+
 
 
 
@@ -207,7 +214,7 @@
 > - Listview :point_right: **Recycler View** (완료)
 > - Volley :point_right: **Retrofit** (진행중)
 > - No 하드코딩 :no_good_woman:
-> - package 통한 클래스 정리
+> - package 통한 클래스 정리(완료)
 
 ### 5.  Git Flow :cactus:
 
