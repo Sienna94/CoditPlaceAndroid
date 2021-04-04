@@ -6,9 +6,16 @@
 
 
 
+:hand: 잠깐! 현재는 이런 것들이 업데이트 됐습니다.
+
+> - ListView를 **RecyclerView**로 교체하였습니다 - Mar 25
+> - 장소 출력시의 통신 라이브러리가 Volley에서 **Retrofit**로 교체됐습니다 (in ``SearchFrag.java``) - Apr 4
+
+
+
 ## 1. 제작 기간
 
-- 2021.01.08 - 2021.01.18
+- 2021.01.08 - 2021.01.18 (& 업데이트 중)
 - 개인프로젝트
 
 
@@ -127,6 +134,8 @@
 
 
 
+
+
 ## 6. 회고/ 느낀 점
 
 첫 개인프로젝트인 점, 하고 싶었던 주제였던 점 때문에 더 애착이 간다. 획기적인 기능보다는  이전에 다룬 기능들을 복습하는 차원에서 진행했다. 
@@ -171,17 +180,17 @@
 
 다음과 같은 업데이트를 계획하고 있습니다.
 
-자세한 업데이트 계획 및 진척 상황은 [:notebook_with_decorative_cover:Click!](https://www.notion.so/17c987bdef654bab90e981e251ac1475?v=924d849ee6e0451fa5362a393d7f27be)
+자세한 업데이트 계획, reference,  진척 상황은 [:notebook_with_decorative_cover:Click!](https://www.notion.so/17c987bdef654bab90e981e251ac1475?v=924d849ee6e0451fa5362a393d7f27be)
 
 ### 1. Firebase 활용 :fire:
 
 >  `Authentication`을 통한 회원관리
 >
-> `Realtime Database` 활용 (미정)
+>  `Realtime Database` 활용 (미정)
 >
-> `Cloud Messaging` 
+>  `Cloud Messaging` 
 >
-> `AdMob`
+>  `AdMob`
 
 ### 2. AWS 활용 :palm_tree:
 
@@ -190,18 +199,17 @@
 ### 3. 미완성 기능 추가
 
 > - 검색어 추천
-> - 후기 등록 기능
 > - 검색 리스트에서 북마크 여부 표시되도록
 
 ### 4. 기존 기능 개선
 
 > - 별점 기능 ``RatingBar`` 활용으로 수정
-> - Listview :point_right: **Recycler View**
-> - Volley :point_right: **Retrofit**
+> - Listview :point_right: **Recycler View** (완료)
+> - Volley :point_right: **Retrofit** (진행중)
 > - No 하드코딩 :no_good_woman:
 > - package 통한 클래스 정리
 
 ### 5.  Git Flow :cactus:
 
-> ``master`` 브랜치 이외  ``develop`` 브랜치를 사용해서 merge하는 방식으로 
+> ``master`` 브랜치 이외  ``develop`` 브랜치를 사용해서 merge하는 방식으로 (진행중)
 
