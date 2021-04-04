@@ -16,12 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.example.coditplace2.adapter.MyAdapter;
+import com.example.coditplace2.retrofit.RetroClient;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     ArrayList<ItemData> arr = new ArrayList<>();
@@ -47,8 +54,6 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         //recyclervview 초기화
         rv = layout.findViewById(R.id.rv);
         //Retrofit
-        requestR(type, search, arr);
-        //Volley
         request();
         return layout;
     }
@@ -62,86 +67,16 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     }
 
     public void request(){ //검색 장소가 있을 때
-        Log.d("abc", "request: "+type);
         if(type.equals("pname")){ //장소 이름 검색
-            requestPname();
+            requestRname(type, search, arr);
         }else if(type.equals("plocation")){ // 장소 지역 검색
-            requestPlocation(); 
+            requestRlocation(type, search, arr);
         }else if(type.equals("paddress")){ // 장소 주소 검색
-            requestPaddress();
+            requestRaddress(type, search, arr);
         }else{                  //검색 없으면 리스트 전체출력
-            requestForData(); 
+            requestRplace(arr);
         }
     }
-
-    private void requestPname(){ //입력값이 장소 이름일 때 출력
-        Log.d("chk", "장소 리스트 이름 requestPname: start");
-        final String pname = search;
-        params.clear();
-        params.put("pname", search);
-        request("PlaceListName.do", successListener);
-        //어댑터에 적용
-        initRecyclerView();
-    }
-    private void requestPlocation(){ //입력값이 장소 지역일 때 출력
-        Log.d("chk", "장소 리스트 지역 requestPlocation: start");
-        final String plocation = search;
-        params.clear();
-        params.put("plocation", search);
-        request("PlaceListLocation.do", successListener);
-        //어댑터에 적용
-        initRecyclerView();
-    }
-    private void requestPaddress(){//입력값이 장소 주소일 때 출력
-        Log.d("chk", "주소 리스트 지역 requestPaddress: start");
-        final String paddress = search;
-        params.clear();
-        params.put("paddress", search);
-        request("PlaceListAddress.do", successListener);
-        //어댑터에 적용
-        initRecyclerView();
-    }
-
-    private void requestForData() { //입력값 없이 전체 출력
-        //상속받은 부분
-        Log.d("chk", "장소 리스트 전체 requestForData: start");
-        params.clear();
-        request("PlaceList.do", successListener);
-        //어댑터에 적용
-        initRecyclerView();
-    }
-
-    Response.Listener<String> successListener = new Response.Listener<String>() {
-        //가져온 jsonArray arr에 추가
-        @Override
-        public void onResponse(String response) {
-            try {
-                JSONArray proArr = new JSONArray(response);
-                Log.d("proArr", "onResponse:" + response);
-                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
-                    JSONObject proObj = proArr.getJSONObject(i);
-                    String pidx = proObj.getString("pidx");
-                    String pname = proObj.getString("pname");
-                    String pimage1 = proObj.getString("pimage1");
-                    String pvisit = proObj.getString("pvisit");
-                    String picon = proObj.getString("picon");
-                    String pcategory = proObj.getString("pcategory");
-                    String pphone = proObj.getString("pphone");
-                    String pcontent = proObj.getString("pcontent");
-                    //리스트에 보여줄 어레이에 추가
-                    arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
-
-                    Log.d("chk1", "arr:" + arr.get(i).pName);
-                }
-                //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
-                adapter.notifyDataSetChanged();
-                total=arr.size();
-                tv_tit.setText(total+"개의 결과가 있습니다");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    };
     //recyclerview!
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -161,5 +96,130 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         startActivity(intent);
     }
     //Retrofit 메서드
-
+    public void requestRplace(ArrayList<ItemData> arr){
+        RetroClient.getRetroBaseApiService().rPlaceList().enqueue(new Callback<List<ResponseGet>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet>> call, retrofit2.Response<List<ResponseGet>>  response) {
+                List<ResponseGet> result = response.body();
+                Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
+                Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
+                for(int i = 0; i<result.size(); i++){
+                    String pidx = String.valueOf(result.get(i).getPidx());
+                    String pname = result.get(i).getPname();
+                    String pimage1 = result.get(i).getPimage1();
+                    String pvisit = result.get(i).getPvisit();
+                    String picon = (String) result.get(i).getPicon();
+                    String pcategory = String.valueOf(result.get(i).getPcategory());
+                    String pphone = result.get(i).getPphone();
+                    String pcontent = result.get(i).getPcontent();
+                    arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
+                    Log.d("retrofit", "arr:" + arr.get(i).getpName());
+                }
+                adapter.notifyDataSetChanged();
+                total=arr.size();
+                tv_tit.setText(total+"개의 결과가 있습니다");
+            }
+            @Override
+            public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
+                Log.d("retrofit", "onResponse: failed");
+            }
+        });
+        initRecyclerView();
+    }
+    public void requestRlocation(String type, String search, ArrayList<ItemData> arr){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put(type, search);
+        RetroClient.getRetroBaseApiService().rPlocation(params2).enqueue(new Callback<List<ResponseGet>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet>> call, retrofit2.Response<List<ResponseGet>>  response) {
+                List<ResponseGet> result = response.body();
+                Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
+                Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
+                for(int i = 0; i<result.size(); i++){
+                    String pidx = String.valueOf(result.get(i).getPidx());
+                    String pname = result.get(i).getPname();
+                    String pimage1 = result.get(i).getPimage1();
+                    String pvisit = result.get(i).getPvisit();
+                    String picon = (String) result.get(i).getPicon();
+                    String pcategory = String.valueOf(result.get(i).getPcategory());
+                    String pphone = result.get(i).getPphone();
+                    String pcontent = result.get(i).getPcontent();
+                    arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
+                    Log.d("retrofit", "arr:" + arr.get(i).getpName());
+                }
+                adapter.notifyDataSetChanged();
+                total=arr.size();
+                tv_tit.setText(total+"개의 결과가 있습니다");
+            }
+            @Override
+            public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
+                Log.d("retrofit", "onResponse: failed");
+            }
+        });
+        initRecyclerView();
+    }
+    public void requestRname(String type, String search, ArrayList<ItemData> arr){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put(type, search);
+        RetroClient.getRetroBaseApiService().rPname(params2).enqueue(new Callback<List<ResponseGet>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet>> call, retrofit2.Response<List<ResponseGet>>  response) {
+                List<ResponseGet> result = response.body();
+                Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
+                Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
+                for(int i = 0; i<result.size(); i++){
+                    String pidx = String.valueOf(result.get(i).getPidx());
+                    String pname = result.get(i).getPname();
+                    String pimage1 = result.get(i).getPimage1();
+                    String pvisit = result.get(i).getPvisit();
+                    String picon = (String) result.get(i).getPicon();
+                    String pcategory = String.valueOf(result.get(i).getPcategory());
+                    String pphone = result.get(i).getPphone();
+                    String pcontent = result.get(i).getPcontent();
+                    arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
+                    Log.d("retrofit", "arr:" + arr.get(i).getpName());
+                }
+                adapter.notifyDataSetChanged();
+                total=arr.size();
+                tv_tit.setText(total+"개의 결과가 있습니다");
+            }
+            @Override
+            public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
+                Log.d("retrofit", "onResponse: failed");
+            }
+        });
+        initRecyclerView();
+    }
+    public void requestRaddress(String type, String search, ArrayList<ItemData> arr){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put(type, search);
+        RetroClient.getRetroBaseApiService().rPaddress(params2).enqueue(new Callback<List<ResponseGet>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet>> call, retrofit2.Response<List<ResponseGet>>  response) {
+                List<ResponseGet> result = response.body();
+                Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
+                Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
+                for(int i = 0; i<result.size(); i++){
+                    String pidx = String.valueOf(result.get(i).getPidx());
+                    String pname = result.get(i).getPname();
+                    String pimage1 = result.get(i).getPimage1();
+                    String pvisit = result.get(i).getPvisit();
+                    String picon = (String) result.get(i).getPicon();
+                    String pcategory = String.valueOf(result.get(i).getPcategory());
+                    String pphone = result.get(i).getPphone();
+                    String pcontent = result.get(i).getPcontent();
+                    arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
+                    Log.d("retrofit", "arr:" + arr.get(i).getpName());
+                }
+                adapter.notifyDataSetChanged();
+                total=arr.size();
+                tv_tit.setText(total+"개의 결과가 있습니다");
+            }
+            @Override
+            public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
+                Log.d("retrofit", "onResponse: failed");
+            }
+        });
+        initRecyclerView();
+    }
 }
