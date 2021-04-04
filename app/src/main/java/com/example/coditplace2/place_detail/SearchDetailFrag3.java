@@ -1,11 +1,10 @@
-package com.example.coditplace2;
+package com.example.coditplace2.place_detail;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +22,10 @@ import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
+import com.example.coditplace2.dto.ReplyData;
 
 import org.json.JSONArray;
 import org.json.JSONException;

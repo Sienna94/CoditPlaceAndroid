@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.place_list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Response;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
 import com.example.coditplace2.adapter.MyAdapter;
+import com.example.coditplace2.dto.ItemData;
+import com.example.coditplace2.place_detail.SearchDetailActivity;
 import com.example.coditplace2.retrofit.RetroClient;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,9 +89,9 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     @Override
     public void myClick(int position) {
         Log.d("myClick", "myClick: Clicked");
-        Intent intent = new Intent((SearchActivity) getActivity(), com.example.coditplace2.SearchDetailActivity.class);
-        intent.putExtra("pidx", arr.get(position).pIdx);
-        Log.d("chk", "onItemClick: pidx="+arr.get(position).pIdx);
+        Intent intent = new Intent((SearchActivity) getActivity(), SearchDetailActivity.class);
+        intent.putExtra("pidx", arr.get(position).getpIdx());
+        Log.d("chk", "onItemClick: pidx="+arr.get(position).getpIdx());
         startActivity(intent);
     }
     //Retrofit 메서드

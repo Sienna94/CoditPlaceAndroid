@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.place_detail;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,12 +15,15 @@ import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
+public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
 
     ImageView iv_bg;
     ImageView iv_icon;
@@ -30,26 +33,16 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
     TextView tv_eval;
     TextView tv_review;
     TextView tv_contact;
+    TextView tv_phone;
 
-    TextView tv_comment;
-    TextView tv_pspace;
-    TextView tv_pplug;
-    TextView tv_ptable;
-    TextView tv_wifi;
-    TextView tv_wifibreak;
-    TextView tv_pnoise;
-    TextView tv_pmusic;
-    TextView tv_pbright;
-    TextView tv_plight;
-
-    public SearchDetailFrag2(String pidx) {
+    public SearchDetailFrag4(String pidx) {
         this.pidx = pidx;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_searchdetail2, container, false);
+        View layout = inflater.inflate(R.layout.frag_searchdetail4, container, false);
 
         iv_bg=layout.findViewById(R.id.iv_bg);
         iv_icon=layout.findViewById(R.id.iv_icon);
@@ -59,17 +52,7 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
         tv_eval=layout.findViewById(R.id.tv_evaluation);//코더의 평가
         tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
         tv_contact=layout.findViewById(R.id.tv_contact);//연락처
-
-        tv_comment=layout.findViewById(R.id.tv_comment);
-        tv_pspace=layout.findViewById(R.id.tv_pspace);
-        tv_pplug=layout.findViewById(R.id.tv_pplug);
-        tv_ptable=layout.findViewById(R.id.tv_ptable);
-        tv_wifi=layout.findViewById(R.id.tv_wifi);
-        tv_wifibreak=layout.findViewById(R.id.tv_wifibreak);
-        tv_pnoise=layout.findViewById(R.id.tv_pnoise);
-        tv_pmusic=layout.findViewById(R.id.tv_pmusic);
-        tv_pbright=layout.findViewById(R.id.tv_pbright);
-        tv_plight=layout.findViewById(R.id.tv_plight);
+        tv_phone=layout.findViewById(R.id.tv_phone);//전화번호
 
         btn_like.setOnClickListener(this);
         tv_info.setOnClickListener(this);
@@ -80,7 +63,8 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
         requestForData();
         return layout;
     }
-
+    //해당 pidx 받아오기
+    String pidx;
     //북마크 추가하기
     private void bkInsert(){
         Response.Listener<String> successListener = new Response.Listener<String>() {
@@ -98,21 +82,17 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
         Log.d("bk", "bkInsert mid: "+Storage.USER);
         request("BkInsert.do", successListener);
     }
-    //해당 pidx 받아오기
-    String pidx;
-
     private void requestForData(){
-        Log.d("chk", "장소 상세 코더평가");
-        Log.d("chk", "pidx :" +pidx);
+        Log.d("chk", "장소 상세 연락처");
         params.clear();
         params.put("pidx", pidx);
-        request("getPlaceDetailList.do", successListener);
+        request("getPlacebasic.do", successListener);
     }
     Response.Listener<String> successListener = new Response.Listener<String>() {
         //가져온 jsonArray 리스트뷰로 나타내기
         @Override
         public void onResponse(String response) {
-            Log.d("123", "onResponse: response" + response);
+            Log.d("res11", "onResponse: response" + response);
             try {
                 JSONArray proArr = new JSONArray(response);
                 Log.d("proArr", "onResponse:" + response);
@@ -121,84 +101,20 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
                     //장소 기본
                     String pimage1 = proObj.getString("pimage1");
                     String pname = proObj.getString("pname");
-//                    String picon = proObj.getString("picon");
-//                    String pcontent = proObj.getString("pcontent");
-//                    String paddress = proObj.getString("paddress");
-                    //에디터 평가 척도
-                    String pval = proObj.getString("pval");
-                    String pspace = proObj.getString("pspace");
-                    String pplug = proObj.getString("pplug");
-                    String ptable = proObj.getString("ptable");
-                    String wifi = proObj.getString("wifi");
-                    String wifi_break = proObj.getString("wifi_break");
-                    String pnoise = proObj.getString("pnoise");
-                    String pmusic = proObj.getString("pmusic");
-                    String pbright = proObj.getString("pbright");
-                    String plight = proObj.getString("plight");
+                    String picon = proObj.getString("picon");
+                    String pphone = proObj.getString("pphone");
 
+                    //대표이미지
                     Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
                             .into(iv_bg);
                     tv_pname.setText(pname);
-                    tv_comment.setText(pval);
-                    tv_pspace.setText(evalChanger(pspace));
-                    tv_pplug.setText(evalChanger(pplug));
-                    tv_ptable.setText(evalChanger(ptable));
-                    tv_wifi.setText(evalChanger4(wifi));
-                    tv_wifibreak.setText(evalChanger3(wifi_break));
-                    tv_pnoise.setText(evalChanger(pnoise));
-                    tv_pmusic.setText(evalChanger(pmusic));
-                    tv_pbright.setText(evalChanger(pbright));
-                    tv_plight.setText(evalChanger2(plight));
-
-                    // 에디터 평가
-
+                    tv_phone.setText(pphone);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     };
-    //eval changer()
-    public String evalChanger(String str){
-        String eval_changed="";
-        if(str.equals("0")){
-            eval_changed = "★☆☆☆☆";
-        }else if(str.equals("1")){
-            eval_changed = "★★★☆☆";
-        }else if(str.equals("2")) {
-            eval_changed = "★★★★★";
-        }
-        return eval_changed;
-    }
-    public String evalChanger2(String str){
-        String eval_changed="";
-        if(str.equals("0")){
-            eval_changed = "형광등(하얀색 계열)";
-        }else if(str.equals("1")){
-            eval_changed = "백열등(노란색 계열)";
-        }
-        return eval_changed;
-    }
-    public String evalChanger3(String str){
-        String eval_changed="";
-        if(str.equals("0")){
-            eval_changed = "자주 끊김";
-        }else if(str.equals("1")){
-            eval_changed = "보통(0~1회)";
-        }else if(str.equals("2")) {
-            eval_changed = "원활(없음)";
-        }
-        return eval_changed;
-    }
-    public String evalChanger4(String str){
-        String eval_changed="";
-        if(str.equals("0")){
-            eval_changed = "비번 없음";
-        }else if(str.equals("1")){
-            eval_changed = "있음";
-        }
-        return eval_changed;
-    }
 
     @Override
     public void onClick(View v) {

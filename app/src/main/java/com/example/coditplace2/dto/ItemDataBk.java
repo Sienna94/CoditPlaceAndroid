@@ -1,10 +1,10 @@
-package com.example.coditplace2;
+package com.example.coditplace2.dto;
 
 public class ItemDataBk {
-    int bKidx;
-    int pIdx;
-    String pName;
-    String pIcon;
+    public int bKidx;
+    public int pIdx;
+    public String pName;
+    public String pIcon;
 
     public ItemDataBk(int bKidx, int pIdx, String pName, String pIcon) {
         this.bKidx = bKidx;

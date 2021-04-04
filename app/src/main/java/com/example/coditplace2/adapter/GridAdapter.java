@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

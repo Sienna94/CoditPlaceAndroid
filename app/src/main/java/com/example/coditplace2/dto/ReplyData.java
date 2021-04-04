@@ -1,11 +1,11 @@
-package com.example.coditplace2;
+package com.example.coditplace2.dto;
 
 public class ReplyData {
-    int ridx;
-    String rwriter;
-    int rscore;
-    String rdate;
-    String rcontent;
+    public int ridx;
+    public String rwriter;
+    public int rscore;
+    public String rdate;
+    public String rcontent;
 
     public ReplyData(int ridx, String rwriter, int rscore, String rdate, String rcontent) {
         this.ridx = ridx;

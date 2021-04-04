@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.mypage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.volley.Response;
-import com.bumptech.glide.Glide;
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
+import com.example.coditplace2.Storage;
+import com.example.coditplace2.dto.ItemDataBk;
+import com.example.coditplace2.place_detail.SearchDetailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -170,7 +174,7 @@ public class MypageFrag2 extends BaseFrag { //북마크 페이지
                 public void onClick(View v) {
                     Log.d("chk", "북마크 포스팅으로 이동 클릭");
                     MypageFrag2.this.position = position;
-                    Intent intent = new Intent(getActivity(), com.example.coditplace2.SearchDetailActivity.class);
+                    Intent intent = new Intent(getActivity(), SearchDetailActivity.class);
                     intent.putExtra("pidx", String.valueOf(arr.get(position).pIdx));
                     Log.d("chk", "포스팅으로 이동 클릭: pidx="+arr.get(position).pIdx);
                     startActivity(intent);

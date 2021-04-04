@@ -1,4 +1,4 @@
-package com.example.coditplace2;
+package com.example.coditplace2.login;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.coditplace2.BaseFrag;
+import com.example.coditplace2.R;
 
 public class ForgotFrag extends BaseFrag implements View.OnClickListener{
     TextView tv_tit;

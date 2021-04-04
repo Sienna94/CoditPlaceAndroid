@@ -34,7 +34,7 @@ import retrofit2.Callback;
 
 public class BaseFrag extends Fragment {
     //Volley
-    Map<String, String> params = new HashMap<String, String>();
+    public static Map<String, String> params = new HashMap<String, String>();
 
     public BaseFrag() {
     }
