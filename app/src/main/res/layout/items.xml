@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/wrap"
-        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:layout_width="350dp"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_bg"
@@ -16,7 +15,6 @@
             android:scaleType="fitXY"
             android:layout_width="350dp"
             android:layout_height="260dp"/>
-
         <TextView
             android:id="@+id/tv_visit"
             android:text="방문일 : 2020년 10월 22일 1:10 오후"
@@ -24,14 +22,12 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
         <RelativeLayout
             android:id="@+id/wrap2"
             android:layout_marginTop="100dp"
             android:layout_below="@id/tv_visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageView
                 android:id="@+id/iv_icon"
                 android:src="@mipmap/ic_launcher_round"
@@ -39,7 +35,6 @@
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
             <TextView
                 android:id="@+id/tv_pname"
                 android:text="1984"
@@ -49,7 +44,6 @@
                 android:layout_toRightOf="@id/iv_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
             <TextView
                 android:id="@+id/tv_category"
                 android:text="카페"
@@ -58,7 +52,6 @@
                 android:layout_toRightOf="@id/iv_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
             <TextView
                 android:id="@+id/tv_pphone"
                 android:text="02-325-1984"
@@ -68,16 +61,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/wrap3"
             android:background="@color/white"
             android:layout_below="@id/wrap2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <TextView
                 android:id="@+id/tv_pcontent"
                 android:textColor="@color/black"
@@ -85,14 +75,12 @@
                 android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"/>
-
             <TextView
                 android:id="@+id/tv_line"
                 android:background="#EAEAEA"
                 android:layout_below="@id/tv_pcontent"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"/>
-
             <TextView
                 android:id="@+id/tv_like"
                 android:text="♥"
@@ -102,7 +90,5 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"/>
         </RelativeLayout>
-
     </RelativeLayout>
-
 </RelativeLayout>
