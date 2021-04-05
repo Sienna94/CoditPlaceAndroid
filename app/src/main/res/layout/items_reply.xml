@@ -8,21 +8,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_score"
-            android:text="★★★★★"
-            android:textColor="#F44336"
-            android:textSize="20sp"
+        <RatingBar
+            android:id="@+id/ratingbar_reply"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_alignStart="@id/tv_writer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:progressTint="#F44336" />
 
         <TextView
             android:id="@+id/tv_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_score"
+            android:layout_below="@id/ratingbar_reply"
             android:layout_alignStart="@id/tv_writer"
             android:layout_marginTop="5dp"
             android:text="괜찮아욤. 콘센트도 널널하고 눈치싸움 안해도 됩니당! :)" />

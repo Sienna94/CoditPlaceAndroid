@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,9 +53,10 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
     ListView lv;
     //댓글 추가창
     TextView tv_rtit;
-    TextView tv_rscore;
     EditText et_reply;
     Button btn_submit;
+    //RatingBar
+    RatingBar ratingBar;
 
     public SearchDetailFrag3(String pidx) {
         this.pidx = pidx;
@@ -83,13 +85,12 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         lv =layout.findViewById(R.id.lv);
         //댓글 추가창
         tv_rtit=layout.findViewById(R.id.tv_tit);
-        //별점 스피너
-        spinner_score = layout.findViewById(R.id.spinner_score);
-        tv_rscore=layout.findViewById(R.id.tv_score);
+        //별점 RatingBar
+        ratingBar = layout.findViewById(R.id.ratingbar);
+        ratingBar.setOnRatingBarChangeListener(new ratingListener());
 
         et_reply=layout.findViewById(R.id.et_coderfriendly);
         btn_submit=layout.findViewById(R.id.btn_submit);
-
         btn_like.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
         tv_info.setOnClickListener(this);
@@ -97,59 +98,24 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         tv_review.setOnClickListener(this);
         tv_contact.setOnClickListener(this);
 
-        //스피너.set
-        spinner_score.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
-                    tv_rscore.setText("☆☆☆☆☆");
-                    star=0;
-//                    insertReply(0);
-                }else if(position ==1){
-                    tv_rscore.setText("★☆☆☆☆");
-                    star=1;
-//                    insertReply(1);
-                }else if(position ==2){
-                    tv_rscore.setText("★★☆☆☆");
-                    star=2;
-//                    insertReply(2);
-                }else if(position ==3){
-                    tv_rscore.setText("★★★☆☆");
-                    star=3;
-//                    insertReply(3);
-                }else if(position ==4){
-                    tv_rscore.setText("★★★★☆");
-                    star=4;
-//                    insertReply(4);
-                }else if(position ==5){
-                    tv_rscore.setText("★★★★★");
-                    star=5;
-//                    insertReply(5);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-//        test();
         requestForData();
 
         return layout;
     }
+
+    //RatingBar
+    class ratingListener implements RatingBar.OnRatingBarChangeListener{
+
+        @Override
+        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            star=Integer.parseInt(String.valueOf(Math.round(rating)));
+
+        }
+    }
+
     //해당 pidx 받아오기ㄷ
     String pidx;
 
-    private void test(){
-        arr.add(0, new ReplyData(1,"사쿠맘", 4, "2020.12.8", "괜찮아욤. 콘센트 널널함"));
-        arr.add(1, new ReplyData(2,"소다짱", 5, "2020.12.8", "조용하고 짱임"));
-        arr.add(2, new ReplyData(3,"모카모카해", 5, "2020.12.8", "집중 짱 잘됨"));
-        arr.add(3, new ReplyData(4,"나향단쓰", 3, "2020.12.8", "제가 까칠해서 그런가 소음 좀 있어염"));
-        adapter = new MyAdapter(getActivity());
-        lv.setAdapter(adapter);
-    }
     public String scoreChanger(int score){
         String score_changed ="";
         if(score==0){
@@ -167,6 +133,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         }
         return score_changed;
     }
+
     //북마크 추가하기
     private void bkInsert(){
         Response.Listener<String> successListener = new Response.Listener<String>() {
@@ -297,7 +264,6 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         //입력 버튼 클릭시 댓글 등록하기create
         Log.d("chk", "댓글 등록 통신 start");
         final String rcontent = et_reply.getText().toString().trim();
-        final String rscore = tv_rscore.getText().toString().trim();
         Log.d("rcontent", "insertReply: " + rcontent);
         params.clear();
         params.put("pidx", pidx);
@@ -341,11 +307,11 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
     }
     //리스트에 출력될 아이템들 (삭제 tv 포함)
     class ItemHolder{
-        TextView tvScoreHolder;
         TextView tvWriterHolder;
         TextView tvReplyHolder;
         TextView tvDateHolder;
         TextView tvDelHolder;
+        RatingBar ratingHolder;
     }
 
     int position; // 액티비티 안의 position을 말한다! myadapter안의 position이 아니라 액티비티 포지션을 찾아서 지워줘야되니까.
@@ -380,24 +346,21 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
             if(convertView == null){
                 convertView = lnf.inflate(R.layout.items_reply, parent, false);
                 viewHolder = new ItemHolder();
-                viewHolder.tvScoreHolder = convertView.findViewById(R.id.tv_score);
                 viewHolder.tvWriterHolder = convertView.findViewById(R.id.tv_writer);
                 viewHolder.tvReplyHolder = convertView.findViewById(R.id.tv_comment);
                 viewHolder.tvDateHolder = convertView.findViewById(R.id.tv_date);
-                //삭제 텍스트
                 viewHolder.tvDelHolder=convertView.findViewById(R.id.tv_del);
-                //삭제 position 받아오게
+                viewHolder.ratingHolder=convertView.findViewById(R.id.ratingbar_reply);
                 viewHolder.tvDelHolder.setTag(position);
 
                 convertView.setTag(viewHolder);
             }else{
                 viewHolder = (ItemHolder) convertView.getTag();
             }
-
-            viewHolder.tvScoreHolder.setText(scoreChanger(arr.get(position).rscore));
+            viewHolder.ratingHolder.setRating(arr.get(position).rscore);
             viewHolder.tvWriterHolder.setText(arr.get(position).rwriter);
             viewHolder.tvReplyHolder.setText(arr.get(position).rcontent);
-            viewHolder.tvDateHolder.setText(arr.get(position).rdate);//수정도 textview랑 같은 내용
+            viewHolder.tvDateHolder.setText(arr.get(position).rdate);//수정도 textview랑 같은 내
 
             //삭제 클릭
             viewHolder.tvDelHolder.setOnClickListener(new View.OnClickListener(){
