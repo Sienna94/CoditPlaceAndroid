@@ -15,6 +15,8 @@
 > - **도메인** 중심으로 패키지를 정리하여 기능 구분이 쉽도록 하였습니다 - Apr4
 >
 >   ![image](https://user-images.githubusercontent.com/69448123/113508293-2abd3300-958a-11eb-82ce-be6697d6f9fa.png)
+>
+> - 장소 상세페이지의 별점기능을 Spinner에서 편리한 **RatingBar**로 교체하였습니다 - Apr 5 
 
 <br>
 
@@ -210,7 +212,7 @@
 
 ### 4. 기존 기능 개선
 
-> - 별점 기능 ``RatingBar`` 활용으로 수정
+> - 별점 기능 ``RatingBar`` 활용으로 수정 (완료)
 > - Listview :point_right: **Recycler View** (완료)
 > - Volley :point_right: **Retrofit** (진행중)
 > - No 하드코딩 :no_good_woman:
