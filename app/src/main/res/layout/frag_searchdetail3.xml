@@ -110,27 +110,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Spinner
-                android:id="@+id/spinner_score"
-                android:entries="@array/score"
+            <RatingBar
+                android:id="@+id/ratingbar"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:progressTint="#F44336"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1"
+                android:isIndicator="false"/>
 
-            <TextView
-                android:id="@+id/tv_score"
-                android:visibility="gone"
-                android:text="☆☆☆☆☆"
-                android:layout_below="@id/spinner_score"
-                android:textSize="20sp"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/et_coderfriendly"
                 android:hint="Enter message"
                 android:textSize="14dp"
                 android:layout_marginLeft="5dp"
-                android:layout_below="@id/tv_score"
+                android:layout_below="@id/ratingbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
