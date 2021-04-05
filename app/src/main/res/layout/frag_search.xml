@@ -8,22 +8,17 @@
         android:layout_centerHorizontal="true"
         android:text="1개의 결과가 검색되었습니다"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <RelativeLayout
-        android:layout_centerHorizontal="true"
-        android:id="@+id/wrap"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/tv_tit"
+            android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rv"
             android:scrollbars="vertical">
         </androidx.recyclerview.widget.RecyclerView>
-
-    </RelativeLayout>
 
 </RelativeLayout>

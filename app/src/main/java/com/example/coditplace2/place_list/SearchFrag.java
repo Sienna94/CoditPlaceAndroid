@@ -21,6 +21,7 @@ import com.example.coditplace2.dto.ItemData;
 import com.example.coditplace2.place_detail.SearchDetailActivity;
 import com.example.coditplace2.retrofit.RetroClient;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet;
+import com.example.coditplace2.util.ItemDecoration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +38,9 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
 
     String search; //검색어
+    String type; //타입
     int total;
+
 
     public SearchFrag(String type, String search) {
         this.type = type;
@@ -57,7 +60,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
         return layout;
     }
 
-    String type; //타입 // 밖으로 빼준다.
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -80,8 +83,8 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(linearLayoutManager);
-//        ItemDecoration itemDecorator = new ItemDecoration(10); //리사이클러뷰 아이템 간격
-//        rv.addItemDecoration(itemDecorator);
+        ItemDecoration itemDecorator = new ItemDecoration(50); //리사이클러뷰 아이템 간격
+        rv.addItemDecoration(itemDecorator);
         adapter = new MyAdapter(arr, this);
         rv.setAdapter(adapter);
     }
@@ -89,7 +92,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     @Override
     public void myClick(int position) {
         Log.d("myClick", "myClick: Clicked");
-        Intent intent = new Intent((SearchActivity) getActivity(), SearchDetailActivity.class);
+        Intent intent = new Intent(getActivity(), SearchDetailActivity.class);
         intent.putExtra("pidx", arr.get(position).getpIdx());
         Log.d("chk", "onItemClick: pidx="+arr.get(position).getpIdx());
         startActivity(intent);

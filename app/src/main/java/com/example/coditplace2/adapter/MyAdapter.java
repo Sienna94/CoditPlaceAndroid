@@ -57,6 +57,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             Log.d(TAG, "onBindViewHolder: "+ e.getMessage());
         }
     }
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public int getItemCount() {
