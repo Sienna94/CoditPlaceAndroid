@@ -14,7 +14,7 @@
             android:src="@drawable/sample1"
             android:scaleType="fitXY"
             android:layout_width="350dp"
-            android:layout_height="260dp"/>
+            android:layout_height="250dp"/>
         <TextView
             android:id="@+id/tv_visit"
             android:text="방문일 : 2020년 10월 22일 1:10 오후"
@@ -81,14 +81,6 @@
                 android:layout_below="@id/tv_pcontent"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"/>
-            <TextView
-                android:id="@+id/tv_like"
-                android:text="♥"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/tv_line"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"/>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

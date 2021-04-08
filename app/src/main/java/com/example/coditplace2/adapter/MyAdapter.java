@@ -41,13 +41,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, int position) {
         try{
-            //가게 이름, 가게방문일, 가게 카테고리, 가게 연락처, 가게설명, 좋아요(사용자)
+            //가게 이름, 가게방문일, 가게 카테고리, 가게 연락처, 가게설명
             viewHolder.tvPnameHolder.setText(arr.get(position).getpName());
             viewHolder.tvPvisitHolder.setText(arr.get(position).getpVisit());
             viewHolder.tvPcategoryHolder.setText(arr.get(position).getpCategory());
             viewHolder.tvPphoneHolder.setText(arr.get(position).getpPhone());
             viewHolder.tvPcontentHolder.setText(arr.get(position).getpContent());
-            viewHolder.tvPlikeHolder.setText(arr.get(position).getpLike());
 
             //카페 사진
             Glide.with(viewHolder.itemView.getContext())
@@ -76,7 +75,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         TextView tvPcategoryHolder;
         TextView tvPphoneHolder;
         TextView tvPcontentHolder;
-        TextView tvPlikeHolder;
 
         MyListener myListener;
 
@@ -89,7 +87,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             tvPcategoryHolder = itemView.findViewById(R.id.tv_category);
             tvPphoneHolder = itemView.findViewById(R.id.tv_pphone);
             tvPcontentHolder = itemView.findViewById(R.id.tv_pcontent);
-            tvPlikeHolder = itemView.findViewById(R.id.tv_like);
 
             myListener = myListener2;
             itemView.setOnClickListener(this);

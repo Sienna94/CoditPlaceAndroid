@@ -9,7 +9,6 @@ public class ItemData {
     String pCategory;
     String pPhone;
     String pContent;
-    String pLike;
 
     public ItemData(String pIdx, String pName, String pImage, String pVisit, String pIcon, String pCategory, String pPhone, String pContent, String pLike) {
         this.pIdx = pIdx;
@@ -20,7 +19,6 @@ public class ItemData {
         this.pCategory = pCategory;
         this.pPhone = pPhone;
         this.pContent = pContent;
-        this.pLike = pLike;
     }
 
     public String getpIdx() {
@@ -53,9 +51,5 @@ public class ItemData {
 
     public String getpContent() {
         return pContent;
-    }
-
-    public String getpLike() {
-        return pLike;
     }
 }
