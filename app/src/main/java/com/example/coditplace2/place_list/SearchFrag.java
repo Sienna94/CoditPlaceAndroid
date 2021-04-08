@@ -106,12 +106,18 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
                 Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
                 for(int i = 0; i<result.size(); i++){
+                    //카테고리 표시
+                    String pcategory;
+                    if(result.get(i) .getPcategory()==0){
+                        pcategory= "카페";
+                    }else{
+                        pcategory = "공간대여";
+                    }
                     String pidx = String.valueOf(result.get(i).getPidx());
                     String pname = result.get(i).getPname();
                     String pimage1 = result.get(i).getPimage1();
                     String pvisit = result.get(i).getPvisit();
                     String picon = (String) result.get(i).getPicon();
-                    String pcategory = String.valueOf(result.get(i).getPcategory());
                     String pphone = result.get(i).getPphone();
                     String pcontent = result.get(i).getPcontent();
                     arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
@@ -138,12 +144,18 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
                 Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
                 for(int i = 0; i<result.size(); i++){
+                    //카테고리 표시
+                    String pcategory;
+                    if(result.get(i) .getPcategory()==0){
+                        pcategory= "카페";
+                    }else{
+                        pcategory = "공간대여";
+                    }
                     String pidx = String.valueOf(result.get(i).getPidx());
                     String pname = result.get(i).getPname();
                     String pimage1 = result.get(i).getPimage1();
                     String pvisit = result.get(i).getPvisit();
                     String picon = (String) result.get(i).getPicon();
-                    String pcategory = String.valueOf(result.get(i).getPcategory());
                     String pphone = result.get(i).getPphone();
                     String pcontent = result.get(i).getPcontent();
                     arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
@@ -170,12 +182,18 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
                 Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
                 for(int i = 0; i<result.size(); i++){
+                    //카테고리 표시
+                    String pcategory;
+                    if(result.get(i) .getPcategory()==0){
+                        pcategory= "카페";
+                    }else{
+                        pcategory = "공간대여";
+                    }
                     String pidx = String.valueOf(result.get(i).getPidx());
                     String pname = result.get(i).getPname();
                     String pimage1 = result.get(i).getPimage1();
                     String pvisit = result.get(i).getPvisit();
                     String picon = (String) result.get(i).getPicon();
-                    String pcategory = String.valueOf(result.get(i).getPcategory());
                     String pphone = result.get(i).getPphone();
                     String pcontent = result.get(i).getPcontent();
                     arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
@@ -202,12 +220,18 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 Log.d("retrofit", "onResponse: success1" + result); //200 정상통신
                 Log.d("retrofit", "onResponse: success2"+ result.get(0)+"/"+result.get(1));
                 for(int i = 0; i<result.size(); i++){
+                    //카테고리 표시
+                    String pcategory;
+                    if(result.get(i) .getPcategory()==0){
+                        pcategory= "카페";
+                    }else{
+                        pcategory = "공간대여";
+                    }
                     String pidx = String.valueOf(result.get(i).getPidx());
                     String pname = result.get(i).getPname();
                     String pimage1 = result.get(i).getPimage1();
                     String pvisit = result.get(i).getPvisit();
                     String picon = (String) result.get(i).getPicon();
-                    String pcategory = String.valueOf(result.get(i).getPcategory());
                     String pphone = result.get(i).getPphone();
                     String pcontent = result.get(i).getPcontent();
                     arr.add(i, new ItemData(pidx, pname, pimage1, pvisit, picon, pcategory, pphone, pcontent, "0"));
