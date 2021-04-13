@@ -116,24 +116,6 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
     //해당 pidx 받아오기ㄷ
     String pidx;
 
-    public String scoreChanger(int score){
-        String score_changed ="";
-        if(score==0){
-            score_changed = "☆☆☆☆☆";
-        }else if(score==1){
-            score_changed = "★☆☆☆☆";
-        }else if(score==2){
-            score_changed = "★★☆☆☆";
-        }else if(score==3){
-            score_changed = "★★★☆☆";
-        }else if(score==4){
-            score_changed = "★★★★☆";
-        }else if(score==5){
-            score_changed = "★★★★★";
-        }
-        return score_changed;
-    }
-
     //북마크 추가하기
     private void bkInsert(){
         Response.Listener<String> successListener = new Response.Listener<String>() {

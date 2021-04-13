@@ -18,10 +18,19 @@ import com.bumptech.glide.Glide;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
+import com.example.coditplace2.retrofit.RetroClient;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_Review;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_bkinsert;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
 
@@ -80,66 +89,49 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
         tv_review.setOnClickListener(this);
         tv_contact.setOnClickListener(this);
 
-        requestForData();
+        requestR();
         return layout;
     }
-
-    //북마크 추가하기
-    private void bkInsert(){
-        Response.Listener<String> successListener = new Response.Listener<String>() {
+    String pidx;
+    //Retrofit
+    private void rBkInsert(){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        params2.put("mid", Storage.USER);
+        RetroClient.getRetroBaseApiService().rBk_insert(params2).enqueue(new Callback<List<ResponseGet_bkinsert>>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(Call<List<ResponseGet_bkinsert>> call, retrofit2.Response<List<ResponseGet_bkinsert>> response) {
                 Log.d("kkk", "북마크 추가 성공" + response);
             }
-        };
-        //좋아요 버튼 클릭시 북마크 등록하기
-        Log.d("chk", "북마크 등록 통신 start");
-        params.clear();
-        params.put("pidx", pidx);
-        params.put("mid", Storage.USER);
-        Log.d("bk", "bkInsert pidx: "+pidx);
-        Log.d("bk", "bkInsert mid: "+Storage.USER);
-        request("BkInsert.do", successListener);
-    }
-    //해당 pidx 받아오기
-    String pidx;
 
-    private void requestForData(){
-        Log.d("chk", "장소 상세 코더평가");
-        Log.d("chk", "pidx :" +pidx);
-        params.clear();
-        params.put("pidx", pidx);
-        request("getPlaceDetailList.do", successListener);
+            @Override
+            public void onFailure(Call<List<ResponseGet_bkinsert>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: bkinsert failed");
+            }
+        });
     }
-    Response.Listener<String> successListener = new Response.Listener<String>() {
-        //가져온 jsonArray 리스트뷰로 나타내기
-        @Override
-        public void onResponse(String response) {
-            Log.d("123", "onResponse: response" + response);
-            try {
-                JSONArray proArr = new JSONArray(response);
-                Log.d("proArr", "onResponse:" + response);
-                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
-                    JSONObject proObj = proArr.getJSONObject(i);
-                    //장소 기본
-                    String pimage1 = proObj.getString("pimage1");
-                    String pname = proObj.getString("pname");
-//                    String picon = proObj.getString("picon");
-//                    String pcontent = proObj.getString("pcontent");
-//                    String paddress = proObj.getString("paddress");
-                    //에디터 평가 척도
-                    String pval = proObj.getString("pval");
-                    String pspace = proObj.getString("pspace");
-                    String pplug = proObj.getString("pplug");
-                    String ptable = proObj.getString("ptable");
-                    String wifi = proObj.getString("wifi");
-                    String wifi_break = proObj.getString("wifi_break");
-                    String pnoise = proObj.getString("pnoise");
-                    String pmusic = proObj.getString("pmusic");
-                    String pbright = proObj.getString("pbright");
-                    String plight = proObj.getString("plight");
+    private void requestR() {
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        RetroClient.getRetroBaseApiService().rPreview(params2).enqueue(new Callback<List<ResponseGet_Review>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet_Review>> call, retrofit2.Response<List<ResponseGet_Review>> response) {
+                List<ResponseGet_Review> result = response.body();
+                for (int i = 0; i < result.size(); i++) {
+                    String pimage1 = result.get(i).getPimage1();
+                    String pname = result.get(i).getPname();
+                    String pval = result.get(i).getPval();
+                    String pspace = String.valueOf(result.get(i).getPspace());
+                    String pplug = String.valueOf(result.get(i).getPplug());
+                    String ptable = String.valueOf(result.get(i).getPtable());
+                    String wifi = String.valueOf(result.get(i).getWifi());
+                    String wifi_break = String.valueOf(result.get(i).getWifiBreak());
+                    String pnoise = String.valueOf(result.get(i).getPnoise());
+                    String pmusic = String.valueOf(result.get(i).getPmusic());
+                    String pbright = String.valueOf(result.get(i).getPbright());
+                    String plight = String.valueOf(result.get(i).getPlight());
 
-                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/" + pimage1)
                             .into(iv_bg);
                     tv_pname.setText(pname);
                     tv_comment.setText(pval);
@@ -152,15 +144,16 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
                     tv_pmusic.setText(evalChanger(pmusic));
                     tv_pbright.setText(evalChanger(pbright));
                     tv_plight.setText(evalChanger2(plight));
-
-                    // 에디터 평가
-
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
-    };
+
+            @Override
+            public void onFailure(Call<List<ResponseGet_Review>> call, Throwable t) {
+
+            }
+        });
+    }
+
     //eval changer()
     public String evalChanger(String str){
         String eval_changed="";
@@ -210,7 +203,7 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
             if(Storage.USER.equals("")){
                 Toast.makeText(getActivity(), "로그인 후 이용 가능합니다 :(", Toast.LENGTH_SHORT).show();
             }else{
-                bkInsert();
+                rBkInsert();
                 Toast.makeText(getActivity(), "북마크에 추가! 마이페이지에서 확인하세요 :)", Toast.LENGTH_SHORT).show();
             }
         }else if(v.getId()==R.id.tv_info){ //매장정보
