@@ -106,7 +106,7 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
             Storage.USER = id;
             Log.d("chk", "onResponse: 로그인 success 아이디값 저장:" + id);
             //이동
-            Intent intent = new Intent((LoginActivity) getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         }
     };
