@@ -11,6 +11,7 @@
 > - ListView를 **RecyclerView**로 교체하였습니다 - Mar 25
 >
 > - 장소 출력시의 통신 라이브러리가 Volley에서 **Retrofit**로 교체됐습니다 (in ``SearchFrag.java``) - Apr 4
+> - 장소 디테일의 통신 라이브러리도 교체되었습니다. (in ``SearchDetailFrag1~4.java``) - Apr 13
 >
 > - **도메인** 중심으로 패키지를 정리하여 기능 구분이 쉽도록 하였습니다 - Apr4
 >
