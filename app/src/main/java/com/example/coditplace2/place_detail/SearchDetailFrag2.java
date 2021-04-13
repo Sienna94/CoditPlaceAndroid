@@ -131,7 +131,7 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
                     String pbright = String.valueOf(result.get(i).getPbright());
                     String plight = String.valueOf(result.get(i).getPlight());
 
-                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/" + pimage1)
+                    Glide.with(getActivity()).load(Storage.IMG_URL + pimage1)
                             .into(iv_bg);
                     tv_pname.setText(pname);
                     tv_comment.setText(pval);

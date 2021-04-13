@@ -274,7 +274,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
 
                     //response에 맞게 화면 변화시켜주기
                     //대표이미지
-                    Glide.with(getActivity()).load("http://172.20.10.4:8180/oop/img/place/"+pimage1)
+                    Glide.with(getActivity()).load(Storage.IMG_URL+pimage1)
                             .into(iv_bg);
                     tv_pname.setText(pname);
                     tv_visit.setText(pvisit);
@@ -338,7 +338,7 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
                 viewHolder = (ItemHolder) convertView.getTag();
             }
             Glide.with(getActivity())
-                    .load(Storage.HOME_URL+":8180/oop/img/place/"+arr.get(position).pImage)
+                    .load(Storage.IMG_URL+arr.get(position).pImage)
                     .into(viewHolder.ivHolder);
 
             Log.d("chk", "글라이드: 완료 "+position+",  size"+arr.size());

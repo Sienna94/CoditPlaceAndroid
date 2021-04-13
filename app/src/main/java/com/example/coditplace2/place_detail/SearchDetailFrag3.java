@@ -27,19 +27,26 @@ import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
 import com.example.coditplace2.dto.ReplyData;
+import com.example.coditplace2.retrofit.RetroClient;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_Review;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_bkinsert;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_replyDel;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_replyList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
     ArrayList<ReplyData> arr = new ArrayList<>();
     MyAdapter adapter;
-
-    Spinner spinner_score;
-
     //상단 basic
     ImageView iv_bg;
     ImageView iv_icon;
@@ -98,7 +105,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
         tv_review.setOnClickListener(this);
         tv_contact.setOnClickListener(this);
 
-        requestForData();
+        requestReply_list();
 
         return layout;
     }
@@ -112,150 +119,114 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
 
         }
     }
-
-    //해당 pidx 받아오기ㄷ
     String pidx;
 
-    //북마크 추가하기
-    private void bkInsert(){
-        Response.Listener<String> successListener = new Response.Listener<String>() {
+    //Retrofit
+    private void rBkInsert(){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        params2.put("mid", Storage.USER);
+        RetroClient.getRetroBaseApiService().rBk_insert(params2).enqueue(new Callback<List<ResponseGet_bkinsert>>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(Call<List<ResponseGet_bkinsert>> call, retrofit2.Response<List<ResponseGet_bkinsert>> response) {
                 Log.d("kkk", "북마크 추가 성공" + response);
             }
-        };
-        //좋아요 버튼 클릭시 북마크 등록하기
-        Log.d("chk", "북마크 등록 통신 start");
-        params.clear();
-        params.put("pidx", pidx);
-        params.put("mid", Storage.USER);
-        Log.d("bk", "bkInsert pidx: "+pidx);
-        Log.d("bk", "bkInsert mid: "+Storage.USER);
-        request("BkInsert.do", successListener);
-    }
 
-    //댓글 리스트 전체 출력
-    private void requestForData(){
-        Response.Listener<String> successListener = new Response.Listener<String>() {
-            //가져온 jsonArray 리스트뷰로 나타내기
             @Override
-            public void onResponse(String response) {
-                Log.d("reply", "onResponse: response" + response);
-                try {
-                    JSONArray proArr = new JSONArray(response);
-                    Log.d("proArr", "onResponse:" + response);
-                    arr.clear(); //기존에 있는 걸 날려야 중복되는 게 더해지지 않음.
-                    for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
-                        JSONObject proObj = proArr.getJSONObject(i);
-                        //댓글 리스트
-                        int ridx =Integer.parseInt(proObj.getString("ridx"));
-                        String rwriter = proObj.getString("rwriter");
-                        int rscore = Integer.parseInt(proObj.getString("rscore"));
-                        String rdate = proObj.getString("rdate");
-                        String rcontent = proObj.getString("rcontent");
-                        //장소 기본
-                        String pimage1 = proObj.getString("pimage1");
-                        String pname = proObj.getString("pname");
-                        String picon = proObj.getString("picon");
-
-                        //response에 맞게 화면 변화시켜주기
-                        //대표이미지
-                        Glide.with(getActivity()).load("http://172.20.10.4:8180/oop/img/place/"+pimage1)
-                                .into(iv_bg);
-                        tv_pname.setText(pname);
-
-                        //리스트에 보여줄 어레이에 추가
-                        arr.add(i, new ReplyData(ridx,rwriter,rscore,rdate,rcontent));
-                        Log.d("reply", arr.get(i).rwriter);
-                        Log.d("reply", arr.get(i).rcontent);
-                    }
-                    //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
-                    adapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onFailure(Call<List<ResponseGet_bkinsert>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: bkinsert failed");
             }
-        };
-        Log.d("chk", "장소 상세 리뷰");
-        params.clear();
-        params.put("pidx", pidx);
-        request("getReplyList.do", successListener);
+        });
+    }
+    private void requestReply_list(){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        RetroClient.getRetroBaseApiService().rReply_list(params2).enqueue(new Callback<List<ResponseGet_replyList>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet_replyList>> call, retrofit2.Response<List<ResponseGet_replyList>> response) {
+                List<ResponseGet_replyList> result = response.body();
+                arr.clear();
+                for (int i = 0; i < result.size(); i++) {
+                    int ridx =result.get(i).getRidx();
+                    String rwriter = result.get(i).getRwriter();
+                    int rscore = result.get(i).getRscore();
+                    String rdate = result.get(i).getRdate();
+                    String rcontent = result.get(i).getRcontent();
+                    String pimage1 = result.get(i).getPimage1();
+                    String pname = result.get(i).getPname();
+                    String picon = result.get(i).getPicon();
+
+                    Glide.with(getActivity()).load(Storage.IMG_URL+pimage1)
+                            .into(iv_bg);
+                    tv_pname.setText(pname);
+                    arr.add(i, new ReplyData(ridx,rwriter,rscore,rdate,rcontent));
+                }
+                //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<List<ResponseGet_replyList>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: reply list failed");
+            }
+        });
         adapter = new MyAdapter(getActivity());
         lv.setAdapter(adapter);
     }
-    //댓글 삭제
-    private void deleteReply(int ridx){
-        Response.Listener<String> successListener = new Response.Listener<String>() {
+    private void rDelReply(int ridx){
+        String num =  Integer.toString(ridx);    //스트링으로 파라미터에 넣어줘야 함
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("ridx", num);
+        RetroClient.getRetroBaseApiService().rReply_del(params2).enqueue(new Callback<List<ResponseGet_replyDel>>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(Call<List<ResponseGet_replyDel>> call, retrofit2.Response<List<ResponseGet_replyDel>> response) {
                 Log.d("kkk", "댓글 삭제 성공" + response);
                 arr.remove(position);
                 adapter.notifyDataSetChanged();
             }
-        };
-        //삭제 tv 클릭시 댓글 삭제하기 delete
-        Log.d("bbb", "onClick : 댓글 삭제 try");
-        String num =  Integer.toString(ridx);    //스트링으로 파라미터에 넣어줘야 함
-        params.clear();
-        params.put("ridx", num);
-        request("ReplyDelete.do", successListener);
-    }
-    //댓글 입력하기
-    private void insertReply(){
-        Response.Listener<String> successListener = new Response.Listener<String>() {
+
             @Override
-            public void onResponse(String response) {
-                Log.d("kkk", "댓글등록 성공" + response);
-                arr.clear();
-
-                try {
-                    JSONArray proArr = new JSONArray(response);
-
-                    for (int i = 0; i < proArr.length(); i++) {
-                        JSONObject proObj = proArr.getJSONObject(i);
-                        //댓글 리스트
-                        int ridx =Integer.parseInt(proObj.getString("ridx"));
-                        String rwriter = proObj.getString("rwriter");
-                        int rscore = Integer.parseInt(proObj.getString("rscore"));
-                        String rdate = proObj.getString("rdate");
-                        String rcontent = proObj.getString("rcontent");
-                        //장소 기본
-                        String pimage1 = proObj.getString("pimage1");
-                        String pname = proObj.getString("pname");
-                        String picon = proObj.getString("picon");
-
-                        //response에 맞게 화면 변화시켜주기
-                        //대표이미지
-                        Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
-                                .into(iv_bg);
-                        tv_pname.setText(pname);
-
-                        //리스트에 보여줄 어레이에 추가
-                        arr.add(i, new ReplyData(ridx,rwriter,rscore,rdate,rcontent));
-                        Log.d("reply", arr.get(i).rwriter);
-                        Log.d("reply", arr.get(i).rcontent);
-
-                    }
-                    //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
-                    adapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onFailure(Call<List<ResponseGet_replyDel>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: reply delete failed");
             }
-        };
-        //입력 버튼 클릭시 댓글 등록하기create
-        Log.d("chk", "댓글 등록 통신 start");
-        final String rcontent = et_reply.getText().toString().trim();
-        Log.d("rcontent", "insertReply: " + rcontent);
-        params.clear();
-        params.put("pidx", pidx);
-        params.put("rwriter", "tester");
-        params.put("rscore", String.valueOf(star));
-        params.put("rcontent", rcontent);
-        request("ReplyInsert.do", successListener);
-
+        });
     }
+    private void rInsertReply(){
+        final String rcontent = et_reply.getText().toString().trim();
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        params2.put("rwriter", Storage.USER);
+        params2.put("rscore", String.valueOf(star));
+        params2.put("rcontent", rcontent);
+        RetroClient.getRetroBaseApiService().rReply_list(params2).enqueue(new Callback<List<ResponseGet_replyList>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet_replyList>> call, retrofit2.Response<List<ResponseGet_replyList>> response) {
+                List<ResponseGet_replyList> result = response.body();
+                arr.clear();
+                for (int i = 0; i < result.size(); i++) {
+                    int ridx =result.get(i).getRidx();
+                    String rwriter = result.get(i).getRwriter();
+                    int rscore = result.get(i).getRscore();
+                    String rdate = result.get(i).getRdate();
+                    String rcontent = result.get(i).getRcontent();
+                    String pimage1 = result.get(i).getPimage1();
+                    String pname = result.get(i).getPname();
+                    String picon = result.get(i).getPicon();
 
+                    Glide.with(getActivity()).load(Storage.IMG_URL+pimage1)
+                            .into(iv_bg);
+                    tv_pname.setText(pname);
+                    arr.add(i, new ReplyData(ridx,rwriter,rscore,rdate,rcontent));
+                }
+                //데이터가 바꼈으니까 여기서 arr 변화를 notifychange해준다!
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseGet_replyList>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: reply insert failed");
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
@@ -264,7 +235,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
             if(Storage.USER.equals("")){
                 Toast.makeText(getActivity(), "로그인 후 이용 가능합니다 :(", Toast.LENGTH_SHORT).show();
             }else{
-                bkInsert();
+                rBkInsert();
                 Toast.makeText(getActivity(), "북마크에 추가! 마이페이지에서 확인하세요 :)", Toast.LENGTH_SHORT).show();
             }
         }else if(v.getId()==R.id.tv_info){ //매장정보
@@ -284,7 +255,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
 
         }else if(v.getId()==R.id.btn_submit){
             Log.d("chk", "onClick: 댓글달기 버튼 클릭됨");
-            insertReply();
+            rInsertReply();
         }
     }
     //리스트에 출력될 아이템들 (삭제 tv 포함)
@@ -353,7 +324,7 @@ public class SearchDetailFrag3 extends BaseFrag implements View.OnClickListener{
                         SearchDetailFrag3.this.position = position;
                         int ridx = arr.get(position).ridx;
                         Log.d("btndel", "btndel, ridx:" + ridx);
-                        deleteReply(ridx);
+                        rDelReply(ridx);
                     }else{
                         Toast.makeText(getActivity(), "자신이 작성한 글만 지울 수 있습니다 :(", Toast.LENGTH_SHORT).show();
                     }

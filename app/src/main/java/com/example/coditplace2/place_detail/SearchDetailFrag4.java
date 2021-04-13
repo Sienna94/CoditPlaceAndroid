@@ -18,10 +18,19 @@ import com.bumptech.glide.Glide;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
+import com.example.coditplace2.retrofit.RetroClient;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_bkinsert;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_detail1;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
 
@@ -60,62 +69,53 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
         tv_review.setOnClickListener(this);
         tv_contact.setOnClickListener(this);
 
-        requestForData();
+        requestR();
         return layout;
     }
-    //해당 pidx 받아오기
     String pidx;
-    //북마크 추가하기
-    private void bkInsert(){
-        Response.Listener<String> successListener = new Response.Listener<String>() {
+    //Retrofit
+    private void rBkInsert(){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        params2.put("mid", Storage.USER);
+        RetroClient.getRetroBaseApiService().rBk_insert(params2).enqueue(new Callback<List<ResponseGet_bkinsert>>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(Call<List<ResponseGet_bkinsert>> call, retrofit2.Response<List<ResponseGet_bkinsert>> response) {
                 Log.d("kkk", "북마크 추가 성공" + response);
             }
-        };
-        //좋아요 버튼 클릭시 북마크 등록하기
-        Log.d("chk", "북마크 등록 통신 start");
-        params.clear();
-        params.put("pidx", pidx);
-        params.put("mid", Storage.USER);
-        Log.d("bk", "bkInsert pidx: "+pidx);
-        Log.d("bk", "bkInsert mid: "+Storage.USER);
-        request("BkInsert.do", successListener);
+
+            @Override
+            public void onFailure(Call<List<ResponseGet_bkinsert>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: bkinsert failed");
+            }
+        });
     }
-    private void requestForData(){
-        Log.d("chk", "장소 상세 연락처");
-        params.clear();
-        params.put("pidx", pidx);
-        request("getPlacebasic.do", successListener);
-    }
-    Response.Listener<String> successListener = new Response.Listener<String>() {
-        //가져온 jsonArray 리스트뷰로 나타내기
-        @Override
-        public void onResponse(String response) {
-            Log.d("res11", "onResponse: response" + response);
-            try {
-                JSONArray proArr = new JSONArray(response);
-                Log.d("proArr", "onResponse:" + response);
-                for (int i = 0; i < proArr.length(); i++) { //10보다 작은데 <10 해놓으니까 오류나지 멍청이 똥멍청이야!!!
-                    JSONObject proObj = proArr.getJSONObject(i);
-                    //장소 기본
-                    String pimage1 = proObj.getString("pimage1");
-                    String pname = proObj.getString("pname");
-                    String picon = proObj.getString("picon");
-                    String pphone = proObj.getString("pphone");
+    private void requestR(){
+        HashMap<String, String> params2 = new HashMap<>();
+        params2.put("pidx", pidx);
+        RetroClient.getRetroBaseApiService().rPlace_basic(params2).enqueue(new Callback<List<ResponseGet_detail1>>() {
+            @Override
+            public void onResponse(Call<List<ResponseGet_detail1>> call, retrofit2.Response<List<ResponseGet_detail1>> response) {
+                List<ResponseGet_detail1> result = response.body();
+                for(int i = 0; i<result.size(); i++){
+                    String pimage1 = result.get(i).getPimage1();
+                    String pname = result.get(i).getPname();
+                    String pphone = result.get(i).getPphone();
 
                     //대표이미지
-                    Glide.with(getActivity()).load("http://192.168.7.31:8180/oop/img/place/"+pimage1)
+                    Glide.with(getActivity()).load(Storage.IMG_URL+pimage1)
                             .into(iv_bg);
                     tv_pname.setText(pname);
                     tv_phone.setText(pphone);
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
-    };
 
+            @Override
+            public void onFailure(Call<List<ResponseGet_detail1>> call, Throwable t) {
+                Log.d("retrofit", "onResponse: failed");
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn_like){//좋아요 버튼
@@ -123,7 +123,7 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
             if(Storage.USER.equals("")){
                 Toast.makeText(getActivity(), "로그인 후 이용 가능합니다 :(", Toast.LENGTH_SHORT).show();
             }else{
-                bkInsert();
+                rBkInsert();
                 Toast.makeText(getActivity(), "북마크에 추가! 마이페이지에서 확인하세요 :)", Toast.LENGTH_SHORT).show();
             }
         }else if(v.getId()==R.id.tv_info){ //매장정보

@@ -5,6 +5,8 @@ import com.example.coditplace2.retrofit.responseBody.ResponseGet;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_Review;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_bkinsert;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_detail1;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_replyDel;
+import com.example.coditplace2.retrofit.responseBody.ResponseGet_replyList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,4 +47,16 @@ public interface RetroBaseApiService {
     @FormUrlEncoded
     @POST("getPlaceDetailList.do")
     Call<List<ResponseGet_Review>> rPreview(@FieldMap HashMap<String, String> parameters);
+
+    @FormUrlEncoded
+    @POST("getReplyList.do")
+    Call<List<ResponseGet_replyList>> rReply_list(@FieldMap HashMap<String, String> parameters);
+
+    @FormUrlEncoded
+    @POST("ReplyDelete.do")
+    Call<List<ResponseGet_replyDel>> rReply_del(@FieldMap HashMap<String, String> parameters);
+
+    @FormUrlEncoded
+    @POST("ReplyInsert.do")
+    Call<List<ResponseGet_replyList>> rReply_insert(@FieldMap HashMap<String, String> parameters);
 }
