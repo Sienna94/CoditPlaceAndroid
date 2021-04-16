@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".place_list.SearchFrag">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_tit"
-        android:layout_centerHorizontal="true"
-        android:text="1개의 결과가 검색되었습니다"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/tv_tit"
+            android:layout_centerHorizontal="true"
+            android:text="1개의 결과가 검색되었습니다"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_below="@id/tv_tit"
@@ -21,4 +24,5 @@
             android:scrollbars="vertical">
         </androidx.recyclerview.widget.RecyclerView>
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>
