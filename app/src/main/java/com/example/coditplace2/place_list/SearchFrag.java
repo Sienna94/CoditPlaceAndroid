@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.adapter.MyAdapter;
+import com.example.coditplace2.databinding.FragSearchBinding;
 import com.example.coditplace2.dto.ItemData;
 import com.example.coditplace2.place_detail.SearchDetailActivity;
 import com.example.coditplace2.retrofit.RetroClient;
@@ -32,15 +33,12 @@ import retrofit2.Callback;
 
 public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     ArrayList<ItemData> arr = new ArrayList<>();
-
-    TextView tv_tit;
-    RecyclerView rv;
-    MyAdapter adapter; //전역에서 안쓰면 못 불러옴.
-
-    String search; //검색어
-    String type; //타입
+    MyAdapter adapter;
+    String search;
+    String type;
     int total;
-
+    //ViewBinding
+    private FragSearchBinding binding;
 
     public SearchFrag(String type, String search) {
         this.type = type;
@@ -50,17 +48,11 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_search, container, false);
-
-        tv_tit = layout.findViewById(R.id.tv_tit);
-        //recyclerView 초기화
-        rv = layout.findViewById(R.id.rv);
-        //Retrofit
+        binding = FragSearchBinding.inflate(inflater, container, false);
+        View layout = binding.getRoot();
         request();
         return layout;
     }
-
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -82,11 +74,11 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
     //recyclerview!
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(linearLayoutManager);
+        binding.rv.setLayoutManager(linearLayoutManager);
         ItemDecoration itemDecorator = new ItemDecoration(50); //리사이클러뷰 아이템 간격
-        rv.addItemDecoration(itemDecorator);
+        binding.rv.addItemDecoration(itemDecorator);
         adapter = new MyAdapter(arr, this);
-        rv.setAdapter(adapter);
+        binding.rv.setAdapter(adapter);
     }
     // 해당 장소 후기 페이지로 넘어가도록 pIDX 넘겨주기(position), 상세페이지
     @Override
@@ -125,7 +117,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 }
                 adapter.notifyDataSetChanged();
                 total=arr.size();
-                tv_tit.setText(total+"개의 결과가 있습니다");
+                binding.tvTit.setText(total+"개의 결과가 있습니다");
             }
             @Override
             public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
@@ -163,7 +155,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 }
                 adapter.notifyDataSetChanged();
                 total=arr.size();
-                tv_tit.setText(total+"개의 결과가 있습니다");
+                binding.tvTit.setText(total+"개의 결과가 있습니다");
             }
             @Override
             public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
@@ -201,7 +193,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 }
                 adapter.notifyDataSetChanged();
                 total=arr.size();
-                tv_tit.setText(total+"개의 결과가 있습니다");
+                binding.tvTit.setText(total+"개의 결과가 있습니다");
             }
             @Override
             public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
@@ -239,7 +231,7 @@ public class SearchFrag extends BaseFrag implements MyAdapter.MyListener {
                 }
                 adapter.notifyDataSetChanged();
                 total=arr.size();
-                tv_tit.setText(total+"개의 결과가 있습니다");
+                binding.tvTit.setText(total+"개의 결과가 있습니다");
             }
             @Override
             public void onFailure(Call<List<ResponseGet>>  call, Throwable t) {
