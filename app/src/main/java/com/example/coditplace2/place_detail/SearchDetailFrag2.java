@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
+import com.example.coditplace2.databinding.FragSearchdetail2Binding;
 import com.example.coditplace2.retrofit.RetroClient;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_Review;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_bkinsert;
@@ -34,25 +35,7 @@ import retrofit2.Callback;
 
 public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
 
-    ImageView iv_bg;
-    ImageView iv_icon;
-    TextView tv_pname;
-    Button btn_like;
-    TextView tv_info;
-    TextView tv_eval;
-    TextView tv_review;
-    TextView tv_contact;
-
-    TextView tv_comment;
-    TextView tv_pspace;
-    TextView tv_pplug;
-    TextView tv_ptable;
-    TextView tv_wifi;
-    TextView tv_wifibreak;
-    TextView tv_pnoise;
-    TextView tv_pmusic;
-    TextView tv_pbright;
-    TextView tv_plight;
+    private FragSearchdetail2Binding binding;
 
     public SearchDetailFrag2(String pidx) {
         this.pidx = pidx;
@@ -61,34 +44,14 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_searchdetail2, container, false);
-
-        iv_bg=layout.findViewById(R.id.iv_bg);
-        iv_icon=layout.findViewById(R.id.iv_icon);
-        tv_pname=layout.findViewById(R.id.tv_pname);
-        btn_like=layout.findViewById(R.id.btn_like);
-        tv_info=layout.findViewById(R.id.tv_info);//매장정보
-        tv_eval=layout.findViewById(R.id.tv_evaluation);//코더의 평가
-        tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
-        tv_contact=layout.findViewById(R.id.tv_contact);//연락처
-
-        tv_comment=layout.findViewById(R.id.tv_comment);
-        tv_pspace=layout.findViewById(R.id.tv_pspace);
-        tv_pplug=layout.findViewById(R.id.tv_pplug);
-        tv_ptable=layout.findViewById(R.id.tv_ptable);
-        tv_wifi=layout.findViewById(R.id.tv_wifi);
-        tv_wifibreak=layout.findViewById(R.id.tv_wifibreak);
-        tv_pnoise=layout.findViewById(R.id.tv_pnoise);
-        tv_pmusic=layout.findViewById(R.id.tv_pmusic);
-        tv_pbright=layout.findViewById(R.id.tv_pbright);
-        tv_plight=layout.findViewById(R.id.tv_plight);
-
-        btn_like.setOnClickListener(this);
-        tv_info.setOnClickListener(this);
-        tv_eval.setOnClickListener(this);
-        tv_review.setOnClickListener(this);
-        tv_contact.setOnClickListener(this);
-
+        //viewBinding
+        binding = FragSearchdetail2Binding.inflate(inflater, container, false);
+        View layout = binding.getRoot();
+        binding.btnLike.setOnClickListener(this);
+        binding.tvInfo.setOnClickListener(this);
+        binding.tvEvaluation.setOnClickListener(this);
+        binding.tvReview.setOnClickListener(this);
+        binding.tvContact.setOnClickListener(this);
         requestR();
         return layout;
     }
@@ -132,18 +95,18 @@ public class SearchDetailFrag2 extends BaseFrag implements View.OnClickListener{
                     String plight = String.valueOf(result.get(i).getPlight());
 
                     Glide.with(getActivity()).load(Storage.IMG_URL + pimage1)
-                            .into(iv_bg);
-                    tv_pname.setText(pname);
-                    tv_comment.setText(pval);
-                    tv_pspace.setText(evalChanger(pspace));
-                    tv_pplug.setText(evalChanger(pplug));
-                    tv_ptable.setText(evalChanger(ptable));
-                    tv_wifi.setText(evalChanger4(wifi));
-                    tv_wifibreak.setText(evalChanger3(wifi_break));
-                    tv_pnoise.setText(evalChanger(pnoise));
-                    tv_pmusic.setText(evalChanger(pmusic));
-                    tv_pbright.setText(evalChanger(pbright));
-                    tv_plight.setText(evalChanger2(plight));
+                            .into(binding.ivBg);
+                    binding.tvPname.setText(pname);
+                    binding.tvComment.setText(pval);
+                    binding.tvPspace.setText(evalChanger(pspace));
+                    binding.tvPplug.setText(evalChanger(pplug));
+                    binding.tvPtable.setText(evalChanger(ptable));
+                    binding.tvWifi.setText(evalChanger4(wifi));
+                    binding.tvWifibreak.setText(evalChanger3(wifi_break));
+                    binding.tvPnoise.setText(evalChanger(pnoise));
+                    binding.tvPmusic.setText(evalChanger(pmusic));
+                    binding.tvPbright.setText(evalChanger(pbright));
+                    binding.tvPlight.setText(evalChanger2(plight));
                 }
             }
 

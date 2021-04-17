@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
+import com.example.coditplace2.databinding.FragSearchdetail4Binding;
 import com.example.coditplace2.retrofit.RetroClient;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_bkinsert;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet_detail1;
@@ -34,15 +35,7 @@ import retrofit2.Callback;
 
 public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
 
-    ImageView iv_bg;
-    ImageView iv_icon;
-    TextView tv_pname;
-    Button btn_like;
-    TextView tv_info;
-    TextView tv_eval;
-    TextView tv_review;
-    TextView tv_contact;
-    TextView tv_phone;
+    private FragSearchdetail4Binding binding;
 
     public SearchDetailFrag4(String pidx) {
         this.pidx = pidx;
@@ -51,24 +44,13 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_searchdetail4, container, false);
-
-        iv_bg=layout.findViewById(R.id.iv_bg);
-        iv_icon=layout.findViewById(R.id.iv_icon);
-        tv_pname=layout.findViewById(R.id.tv_pname);
-        btn_like=layout.findViewById(R.id.btn_like);
-        tv_info=layout.findViewById(R.id.tv_info);//매장정보
-        tv_eval=layout.findViewById(R.id.tv_evaluation);//코더의 평가
-        tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
-        tv_contact=layout.findViewById(R.id.tv_contact);//연락처
-        tv_phone=layout.findViewById(R.id.tv_phone);//전화번호
-
-        btn_like.setOnClickListener(this);
-        tv_info.setOnClickListener(this);
-        tv_eval.setOnClickListener(this);
-        tv_review.setOnClickListener(this);
-        tv_contact.setOnClickListener(this);
-
+        binding = FragSearchdetail4Binding.inflate(inflater, container, false);
+        View layout = binding.getRoot();
+        binding.btnLike.setOnClickListener(this);
+        binding.tvInfo.setOnClickListener(this);
+        binding.tvEvaluation.setOnClickListener(this);
+        binding.tvReview.setOnClickListener(this);
+        binding.tvContact.setOnClickListener(this);
         requestR();
         return layout;
     }
@@ -104,9 +86,9 @@ public class SearchDetailFrag4 extends BaseFrag implements View.OnClickListener{
 
                     //대표이미지
                     Glide.with(getActivity()).load(Storage.IMG_URL+pimage1)
-                            .into(iv_bg);
-                    tv_pname.setText(pname);
-                    tv_phone.setText(pphone);
+                            .into(binding.ivBg);
+                    binding.tvPname.setText(pname);
+                    binding.tvPhone.setText(pphone);
                 }
             }
 
