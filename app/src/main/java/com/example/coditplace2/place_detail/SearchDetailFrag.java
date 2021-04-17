@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
+import com.example.coditplace2.databinding.FragSearchBinding;
+import com.example.coditplace2.databinding.FragSearchdetailBinding;
 import com.example.coditplace2.dto.ItemData;
 import com.example.coditplace2.retrofit.RetroClient;
 import com.example.coditplace2.retrofit.responseBody.ResponseGet;
@@ -53,25 +55,15 @@ import retrofit2.Callback;
 public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     //googleMap
     private MapView mapView = null;
+
     String address_changed;
     Double mLat_changed;
     Double mLng_changed;
     ArrayList<ImgArr> arr = new ArrayList<>();
-    ImageView iv_bg;
-    ImageView iv_icon;
-    TextView tv_pname;
-    Button btn_like;
-    TextView tv_info;
-    TextView tv_eval;
-    TextView tv_review;
-    TextView tv_contact;
-
-    TextView tv_visit;
-    TextView tv_comment;
-    TextView tv_paddress;
-
-    GridView gridView;
     MyAdapter adapter;
+
+    //viewBinding
+    private FragSearchdetailBinding binding;
 
     public SearchDetailFrag(String pidx) {
         this.pidx = pidx;
@@ -80,33 +72,15 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_searchdetail, null);
-
-        iv_bg=layout.findViewById(R.id.iv_bg);
-        iv_icon=layout.findViewById(R.id.iv_icon);
-        tv_pname=layout.findViewById(R.id.tv_pname);
-        btn_like=layout.findViewById(R.id.btn_like);
-        tv_info=layout.findViewById(R.id.tv_info);//매장정보
-        tv_eval=layout.findViewById(R.id.tv_evaluation);//코더의 평가
-        tv_review=layout.findViewById(R.id.tv_review);//리뷰(댓글)
-        tv_contact=layout.findViewById(R.id.tv_contact);//연락처
-
-        tv_visit=layout.findViewById(R.id.tv_visit); //방문 날짜
-        tv_comment=layout.findViewById(R.id.tv_comment); // 코멘트
-        tv_paddress=layout.findViewById(R.id.tv_paddress); // 주소
-        
-        btn_like.setOnClickListener(this);
-        tv_info.setOnClickListener(this);
-        tv_eval.setOnClickListener(this);
-        tv_review.setOnClickListener(this);
-        tv_contact.setOnClickListener(this);
-        Log.d("chk", "dfsdf");
-        gridView=layout.findViewById(R.id.grid); //그리드뷰
-
-
+        //viewBinding
+        binding = FragSearchdetailBinding.inflate(inflater, container, false);
+        View layout = binding.getRoot();
+        binding.btnLike.setOnClickListener(this);
+        binding.tvInfo.setOnClickListener(this);
+        binding.tvEvaluation.setOnClickListener(this);
+        binding.tvReview.setOnClickListener(this);
+        binding.tvContact.setOnClickListener(this);
         requestR(arr);
-        mapView = (MapView)layout.findViewById(R.id.map);
-
         return layout;
     }
     
@@ -262,24 +236,20 @@ public class SearchDetailFrag extends BaseFrag implements View.OnClickListener, 
                     String pvisit = result.get(i).getPvisit();
                     String pcontent = result.get(i).getPcontent();
                     String paddress = result.get(i).getPaddress();
-                    //response에 맞게 주소 바꿔주기
                     address_changed = paddress;
-                    //response에 맞게 이미지 바꿔주기 (그리드)
                     arr.add(new ImgArr(pimage1));
                     arr.add(new ImgArr(pimage2));
                     arr.add(new ImgArr(pimage3));
-
                     adapter = new MyAdapter(getActivity());
-                    gridView.setAdapter(adapter);
+                    binding.grid.setAdapter(adapter);
 
                     //response에 맞게 화면 변화시켜주기
-                    //대표이미지
                     Glide.with(getActivity()).load(Storage.IMG_URL+pimage1)
-                            .into(iv_bg);
-                    tv_pname.setText(pname);
-                    tv_visit.setText(pvisit);
-                    tv_comment.setText(pcontent);
-                    tv_paddress.setText(paddress);
+                            .into(binding.ivBg);
+                    binding.tvPname.setText(pname);
+                    binding.tvVisit.setText(pvisit);
+                    binding.tvComment.setText(pcontent);
+                    binding.tvPaddress.setText(paddress);
                 }
                 mapView.getMapAsync(SearchDetailFrag.this);
             }
