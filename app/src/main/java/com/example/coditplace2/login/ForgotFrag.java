@@ -14,15 +14,10 @@ import androidx.annotation.Nullable;
 
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
+import com.example.coditplace2.databinding.FragForgotBinding;
 
 public class ForgotFrag extends BaseFrag implements View.OnClickListener{
-    TextView tv_tit;
-    TextView tv_info;
-    TextView tv_info2;
-
-    EditText et_email;
-
-    Button btn;
+    FragForgotBinding binding;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
     public static ForgotFrag newInstance() {
@@ -35,15 +30,9 @@ public class ForgotFrag extends BaseFrag implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_forgot, container, false);
-        tv_tit=layout.findViewById(R.id.tv_tit);
-        tv_info=layout.findViewById(R.id.tv_forgotinfo);
-        tv_info2=layout.findViewById(R.id.tv_forgotemail);
-        et_email=layout.findViewById(R.id.et_email);
-        btn=layout.findViewById(R.id.btn_forgot);
-
-        //비밀번호 이메일보내기 버튼 리스너
-        btn.setOnClickListener(this);
+        binding = FragForgotBinding.inflate(inflater, container, false);
+        View layout = binding.getRoot();
+        binding.btnForgot.setOnClickListener(this);
 
         return layout;
     }

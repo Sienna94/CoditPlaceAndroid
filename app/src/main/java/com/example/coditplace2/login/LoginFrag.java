@@ -19,19 +19,13 @@ import com.android.volley.Response;
 import com.example.coditplace2.BaseFrag;
 import com.example.coditplace2.R;
 import com.example.coditplace2.Storage;
+import com.example.coditplace2.databinding.FragForgotBinding;
+import com.example.coditplace2.databinding.FragLoginBinding;
 import com.example.coditplace2.join.JoinFrag;
 import com.example.coditplace2.join.LoginActivity;
 import com.example.coditplace2.main.MainActivity;
 
 public class LoginFrag extends BaseFrag implements View.OnClickListener{
-    TextView tv_titLogin;
-    TextView tv_titJoin;
-    TextView tv_forgot;
-    EditText et_id;
-    EditText et_pw;
-    Button btn_login;
-    CheckBox chk;
-
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성합니다.
     public static LoginFrag newInstance() {
         return new LoginFrag();
@@ -40,39 +34,28 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
     public LoginFrag() {
     }
 
+    FragLoginBinding binding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_login, container, false);
-        tv_titLogin = layout.findViewById(R.id.tv_login);
-        tv_titJoin = layout.findViewById(R.id.tv_join);
-        tv_forgot = layout.findViewById(R.id.tv_forgot);
-        et_id = layout.findViewById(R.id.etv_id);
-        et_pw = layout.findViewById(R.id.etv_pw);
-        btn_login = layout.findViewById(R.id.btn_login);
-        chk = layout.findViewById(R.id.chkbox);
-
-        //가입하기 텍스트뷰에 클릭리스너 달기
-        tv_titJoin.setOnClickListener(this);
-        //버튼에 클릭리스너 달기
-        btn_login.setOnClickListener(this);
-        //비밀번호 찾기 텍스트뷰에 클릭리스너 달기
-        tv_forgot.setOnClickListener(this);
-
-//        //로그인 액티비티 위에 씌워짐
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+        binding = FragLoginBinding.inflate(inflater, container, false);
+        View layout = binding.getRoot();
+        binding.tvJoin.setOnClickListener(this);
+        binding.btnLogin.setOnClickListener(this);
+        binding.tvForgot.setOnClickListener(this);
 
         return layout;
     }
     private boolean isValid() {
         boolean isValid = true;
-        if (et_id.getText().toString().trim().length() < 1) {
+        if (binding.etvId.getText().toString().trim().length() < 1) {
             isValid = false;
-        } else if (et_id.getText().toString().trim().contains(" ")) {
+        } else if (binding.etvId.getText().toString().trim().contains(" ")) {
             isValid = false;
-        } else if (et_pw.getText().toString().trim().contains(" ")) {
+        } else if (binding.etvPw.getText().toString().trim().contains(" ")) {
             isValid = false;
-        } else if (et_pw.getText().toString().trim().length() < 1) {
+        } else if (binding.etvPw.getText().toString().trim().length() < 1) {
             isValid = false;
         }
         return isValid;
@@ -113,8 +96,8 @@ public class LoginFrag extends BaseFrag implements View.OnClickListener{
     private void requestForLogin(){
         //로그인 버튼 누르면 1. 통신 2. 값 받아오기 3. alert 띄우기 4. 리스트뷰로 이동
         //로그인 시도
-        id = et_id.getText().toString().trim();
-        pw = et_pw.getText().toString().trim();
+        id = binding.etvId.getText().toString().trim();
+        pw = binding.etvPw.getText().toString().trim();
 
         Log.d("chk", "로그인 통신: start");
         params.clear();
